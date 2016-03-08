@@ -2,21 +2,20 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>CS422 | Project 2</title>
+        <title>CS422 | Project 2 | Group 4</title>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
         <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/locale/fa.js"></script>-->
     </head>
     <body>
         <div style="position: absolute; top: 0px; left: 0px;">
-            <canvas id="notification-bar" width="388" height="700" style="color: blue"></canvas>
+            <canvas id="notification-bar" width="390" height="702"></canvas>
         </div>
         <div style="position: absolute; top: 0px; left: 0px;">
             <canvas id="inside-door" width="388" height="700" style="border:2px solid black;" ></canvas>
         </div>
         <div style="position: absolute; top: 0px; left: 400px">
-            <canvas id="outside-door" width="388" height="700" style="border:2px solid black;" ></canvas>
+            <canvas id="outside-door" width="386" height="700" style="border:2px solid black;" ></canvas>
         </div>
         
         <img src="img/doorClosed.png" id="doorClosed" style="display: none">
@@ -27,12 +26,10 @@
         <img src="img/childLock.png" id="childLock" style="display: none">
         <img src="img/houseAlarm.png" id="houseAlarm" style="display: none">
         
-        <!--<input id="step-in" type="button" value="Step In" onclick="drawUserScreen();" style="height:50px;width:200px;font-size: 48"/>
-        <input id="step-out" type="button" value="Step Out" onclick="switchOff(); overlay.setVisible(true); canvas.add(overlay); showerHead.bringToFront(); bathSpout.bringToFront();" style="height:50px;width:200px"/> -->
-        
-        <div>
-            <input type="button" value="Send Message" onclick="pushAlert('newMessage'); redrawNotificationBar();" style="position: absolute; top: 710px;"/>
-            <input type="button" value="Remove Message" onclick="popAlert('newMessage'); redrawNotificationBar();" style="position: absolute; left: 150px; top: 710px;"/>
+        <div style="position: absolute; top: 710px;">
+            <input type="button" value="Send Message" onclick="pushAlert('newMessage'); redrawNotificationBar();" />
+            <br/>
+            <input type="button" value="Remove Message" onclick="popAlert('newMessage'); redrawNotificationBar();" />
         </div>
 
         <script src="script.js"></script>
