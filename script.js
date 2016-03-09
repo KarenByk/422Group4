@@ -138,8 +138,8 @@ function redrawNotificationBar() {
     }
 }
 
-// Set lovely wood background
 canvas_notificationBar.setBackgroundColor({
+    // Set lovely wood background
     source: 'img/wood.jpg',
     repeat: 'repeat'
 }, canvas_notificationBar.renderAll.bind(canvas_notificationBar));
