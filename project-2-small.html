@@ -3,14 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>CS422 | Project 2 | Group 4</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
-        <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
     </head>
     <body>
-        <div style="position: absolute; top: 0px; left: 0px;">
-            <canvas id="notification-bar" width="390" height="702"></canvas>
-        </div>
         <div style="position: absolute; top: 0px; left: 0px;">
             <canvas id="inside-door" width="388" height="700" style="border:2px solid black;" ></canvas>
         </div>
@@ -18,20 +16,36 @@
             <canvas id="outside-door" width="388" height="700" style="border:2px solid black;" ></canvas>
         </div>
         
-        <img src="img/doorClosed.png" id="doorClosed" style="display: none">
-        <img src="img/doorOpen.png" id="doorOpen" style="display: none">
-        <img src="img/doorLocked.png" id="doorLocked" style="display: none">
-        <img src="img/doorUnlocked.png" id="doorUnlocked" style="display: none">
-        <img src="img/newMessage.png" id="newMessage" style="display: none">
-        <img src="img/childLock.png" id="childLock" style="display: none">
-        <img src="img/houseAlarm.png" id="houseAlarm" style="display: none">
+        <img src="img/deadbolt.svg" id="deadbolt" style="display: none">
+        <img src="img/doorbell.svg" id="doorbell" style="display: none">
+        <img src="img/keypad.svg" id="keypad" style="display: none">
         
-        <div style="position: absolute; top: 710px;">
-            <input type="button" value="Send Message" onclick="pushAlert('newMessage'); redrawNotificationBar();" />
-            <br/>
-            <input type="button" value="Remove Message" onclick="popAlert('newMessage'); redrawNotificationBar();" />
-        </div>
+        <img src="img/doorClosed.svg" id="doorClosed" style="display: none">
+        <img src="img/doorOpen.svg" id="doorOpen" style="display: none">
+        <img src="img/doorLocked.svg" id="doorLocked" style="display: none">
+        <img src="img/doorUnlocked.svg" id="doorUnlocked" style="display: none">
+        <img src="img/houseAlarm.svg" id="houseAlarm" style="display: none">
+        <img src="img/childLock.svg" id="childLock" style="display: none">
+        <img src="img/newMessage.svg" id="newMessage" style="display: none">
+        <img src="img/outsideLight.svg" id="outsideLight" style="display: none">
+        
+        <img src="img/user.svg" id="user" style="display: none">
+        <img src="img/emergency.svg" id="emergency" style="display: none">
+        <img src="img/help.svg" id="help" style="display: none">
+        <img src="img/note.svg" id="note" style="display: none">
+        <img src="img/mirror.svg" id="mirror" style="display: none">
+        <img src="img/traffic.svg" id="traffic" style="display: none">
+        <img src="img/weather.svg" id="weather" style="display: none">
+        <img src="img/calendar.svg" id="calendar" style="display: none">
+        <img src="img/log.svg" id="log" style="display: none">
+        <img src="img/settings.svg" id="settings" style="display: none">
+        
+        <img src="img/accept.svg" id="accept" style="display: none">
+        <img src="img/cancel.svg" id="cancel" style="display: none">
+        
+        <img src="img/weather/sunny.svg" id="sunny" style="display: none">
 
+        
         <script src="script.js"></script>
 
     </body>
