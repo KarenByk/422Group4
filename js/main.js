@@ -1,7 +1,4 @@
-require(
-    ['init', 'utils', 'gui', 'notification-bar', 'menu', 'wallpaper', 'time-date'], 
-    function(init, utils, gui, notificationBar, menu, wallpaper, timeDate){
-    
+
     // Instantiate classes
     var notificationBar = new NotificationBar();
     var gui = new GUI(notificationBar);
@@ -84,4 +81,3 @@ require(
         clearSelection();
         
     });
-});
