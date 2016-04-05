@@ -35,7 +35,7 @@ function MainMenu() {
                 left: x, top: y
             });
             close_btn.set({
-                width: background.width / 8,
+                width: background.width / 8, height: background.width / 8,
                 left: background.left + background.width, 
                 top: background.top
             });

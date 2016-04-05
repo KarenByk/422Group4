@@ -8,8 +8,7 @@ function TimeDate() {
     var date = new Text('', {
         originY: 'bottom',
         left: DOOR_WIDTH / 2, top: 175,
-        fontSize: 30,
-        fontFamily: 'comic sans'
+        fontSize: 30
     });
     
     var time = new Text('12:34 PM', {
@@ -28,11 +27,12 @@ function TimeDate() {
     icon.set({originY: 'top'});
     
     this.update = function() {
+        var timeObj = moment();
         var timeText, dateText;
         if (this.timeFormat === '24h') {
-            timeText = moment().format('H:mm');
+            timeText = timeObj.format('H:mm');
         } else {
-            timeText = moment().format('h:mm A');
+            timeText = timeObj.format('h:mm A');
         }
         
         var dateText = moment().format('MMMM Do, YYYY');
