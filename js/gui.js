@@ -82,9 +82,9 @@ function GUI(notificationObject) {
         knobOut.top + ICON_MARGIN + ICON_SIZE,
         {id: 'keypad'});
         
-    colorRed(unlock_btn);
+    /* colorRed(unlock_btn);
     colorRed(emergency_btn);
-    colorGreen(lock_btn);
+    colorGreen(lock_btn); */
     
     this.drawButtons = function() {
         if (this.isLocked) {inside.add(unlock_btn)}
