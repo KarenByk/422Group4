@@ -1,3 +1,11 @@
+canvas {
+    border: 2px solid black;
+}
+
+img {
+    display: none;
+}
+
 @font-face {
     font-family: droid-sans;
     src: url('fonts/DroidSans.ttf');

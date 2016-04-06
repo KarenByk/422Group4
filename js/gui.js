@@ -1,5 +1,6 @@
 function GUI(notificationObject) {
     
+    // Door starts closed and locked
     this.isClosed = true;
     this.isLocked = true;
     
@@ -87,6 +88,7 @@ function GUI(notificationObject) {
     colorGreen(lock_btn); */
     
     this.drawButtons = function() {
+        
         if (this.isLocked) {inside.add(unlock_btn)}
         else {inside.add(lock_btn)}
         if (this.isClosed) {inside.add(open_btn)}
@@ -97,60 +99,77 @@ function GUI(notificationObject) {
         outside.add(doorbell_btn,
                     noteFromOutside_btn,
                     keypad_btn);
+                    
     };
     
     this.drawKnobs = function() {
+        
         inside.add(knobIn);
         outside.add(knobOut);
+        
     };
     
     this.removeKnobs = function() {
+        
         inside.remove(knobIn);
         inside.remove(knobOut);
+        
     };
     
     this.drawAddress = function() {
+        
         outside.add(address);
+        
     };
     
     this.removeAddress = function() {
+        
         outside.remove(address);
+        
     };
     
     this.unlock = function() {
+        
         if (this.isLocked) {
             inside.add(lock_btn);
             inside.remove(unlock_btn);
             notificationBar.unlocked();
             this.isLocked = false;
         }
+        
     };
     
     this.lock = function() {
+        
         if (!this.isLocked) {
             inside.add(unlock_btn);
             inside.remove(lock_btn);
             notificationBar.locked();
             this.isLocked = true;
         }
+        
     };
     
     this.open_ = function() {
+        
         if (this.isClosed) {
             inside.add(close_btn);
             inside.remove(open_btn);
             notificationBar.doorOpened();
             this.isClosed = false;
         }
+        
     };
     
     this.close_ = function() {
+        
         if (!this.isClosed) {
             inside.add(open_btn);
             inside.remove(close_btn);
             notificationBar.doorClosed();
             this.isClosed = true;
         }
+        
     };
     
 }

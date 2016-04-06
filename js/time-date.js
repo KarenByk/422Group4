@@ -1,51 +1,133 @@
 function TimeDate() {
     
-    this.timeFormat = '24h';
+    this.timeFormat = '12h';
     this.dateFormat = 'us';
+    this.tempFormat = 'f';
     
-    var weatherURL = "http://api.wunderground.com/api/efbcf26a4deb3978/conditions/q/IL/Chicago.json";
+    // JSON current weather for zip code 60607
+    // Please don't call this more than once every 10 minutes
+    var weatherURL = 'http://api.openweathermap.org/data/2.5/weather?zip=60607,us&appid=50a85921cbac9b89ef1429c69070473f';
     
     var date = new Text('', {
         originY: 'bottom',
-        left: DOOR_WIDTH / 2, top: 175,
-        fontSize: 30
+        left: DOOR_WIDTH / 2, top: DOOR_HEIGHT / 4,
+        fontSize: 3 * DOOR_HEIGHT / 70
     });
     
-    var time = new Text('12:34 PM', {
-        originY: 'center',
-        left: DOOR_WIDTH / 3, top: date.top + 15,
-        fontSize: 24
+    var icon = new Button('01d', 0, 0, {originX: 'left'});
+    
+    var time = new Text('', {
+        originX: 'left', originY: 'top',
+        fontSize: DOOR_HEIGHT / 30
     });
     
-    var temp = new Text('99°', {
-        originY: 'center',
-        left: time.left + 150, top: time.top,
-        fontSize: 24
+    var temp = new Text('', {
+        originX: 'left', originY: 'top',
+        fontSize: time.fontSize
     });
     
-    var icon = new Button('sunny', date.left, date.top);
-    icon.set({originY: 'top'});
-    
-    this.update = function() {
+    this.updateTime = function() {
+        
+        // Get an object with current date and time
         var timeObj = moment();
         var timeText, dateText;
-        if (this.timeFormat === '24h') {
-            timeText = timeObj.format('H:mm');
-        } else {
+                
+        // Apply user-chosen formats
+        if (this.timeFormat === '12h') {
             timeText = timeObj.format('h:mm A');
+        } else {
+            timeText = timeObj.format('H:mm');
         }
-        
-        var dateText = moment().format('MMMM Do, YYYY');
+        switch (this.dateFormat) {
+            case 'us':
+                dateText = timeObj.format('MMMM D, YYYY');
+                break;
+            case 'eu':
+                dateText = timeObj.format('D MMMM, YYYY');
+                break;
+        }
+
+        // Update text of each element
         time.setText(timeText);
         date.setText(dateText);
+        
+        // Then redraw all the clock elements
+        updatePositions();
+        
+    };
+    
+    this.updateWeather = function() {
+        
+        var tempK, tempC, tempF;
+        var tempText;
+        var condition;
+        
+        // Pull and parse JSON weather asynchronously
+        $.ajax({
+            url: weatherURL,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                tempK = data['main']['temp'];
+                condition = data['weather'][0]['icon'];
+            }
+        });
+        
+        // Temp is pulled in Kelvin by default, so we have to convert
+        tempC = Math.round(tempK - 273.15);
+        tempF = Math.round(1.8 * tempC + 32);
+        
+        // Choose temp to display based on user preference
+        if (this.tempFormat == 'f') {
+            tempText = tempF.toString() + '°' + 'F';
+        } else {
+            tempText = tempC.toString() + '°' + 'C';
+        }
+        
+        // Then update text of temp element
+        temp.setText(tempText);
+        
+        // Also update the weather icon, resizing it afterward
+        icon.setElement(document.getElementById(condition), null, {width: ICON_SIZE, height: ICON_SIZE});
+        
+        // Then redraw all the clock elements
+        updatePositions();
+        
+    };
+    
+    var updatePositions = function() {
+        
+        // Get the total width of time, icon, and temp
+        var elementsWidth = time.width + icon.width + temp.width + 2 * ICON_MARGIN;
+        
+        // Then position them all centered on the door
+        time.set({
+            left: (DOOR_WIDTH - elementsWidth) / 2,
+            top: date.top + 5 
+        });
+        icon.set({
+            left: time.left + time.width + ICON_MARGIN,
+            top: time.top + time.height / 2
+        });
+        temp.set({
+            left: icon.left + icon.width + ICON_MARGIN,
+            top: time.top
+        });
+        
+        inside.renderAll();
+        
     };
     
     this.show = function() {
-        this.update();
-        inside.add(time, date, temp, icon);
+        
+        inside.add(date, time, icon, temp);
+        
     };
+    
+    this.hide = function() {
+        
+        inside.remove(date, time, icon, temp);
+        
+    };
+    
 }
-
-/* $.getJSON(weatherURL, function(data) {
-    data['current_observation']['feelslike_f'];
-}); */

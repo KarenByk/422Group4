@@ -12,7 +12,17 @@
     gui.drawButtons();
     notificationBar.update();
     
-    //inside.add(date);
+    // Pull time and weather, then set clock to update time every 10 sec 
+    // and weather every 10 min
+    clock.updateTime();
+    clock.updateWeather();
+    setInterval(function(){
+        clock.updateTime();
+    }, 10000);
+    setInterval(function(){
+        clock.updateWeather();
+    }, 600000);
+    // Then draw it
     clock.show();
     
     // Initialize inside and outside wallpapers
@@ -39,12 +49,9 @@
                 y = clickY;
             }
             
-            mainMenu.open_(x, y);
+            mainMenu.show(x, y);
         } 
-        // Close the main menu if user has clicked on the close button 
-        else if (event.target.id === 'closeMainMenu') {
-            mainMenu.close_();
-        }
+        
         // Unlock and open or close the door if inside knob is touched
         else if (event.target.id === 'knobIn') {
             if (gui.isClosed) { 
@@ -76,6 +83,11 @@
                 }
                 gui.open_();
             }
+        }
+        
+        // Close the main menu if user has clicked on the close button 
+        else if (event.target.id === 'closeMainMenu') {
+            mainMenu.hide();
         }
         
         clearSelection();
