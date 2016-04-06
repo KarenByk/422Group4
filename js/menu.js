@@ -10,7 +10,7 @@ function MainMenu() {
     });
 
     // ...and all app buttons
-    var close_btn = new Button('cancel', 0, 0, {id: 'closeMainMenu'});
+    var close_btn = new Button('cancel', 0, 0, {id: 'closeMainMenu', hasBorders: false});
     var houseAlarm_btn = new MenuButton('houseAlarm');
     var noteFromInside_btn = new MenuButton('note');
     var mirror_btn = new MenuButton('mirror');
@@ -27,7 +27,8 @@ function MainMenu() {
     
     this.isVisible = false;
      
-    this.open_ = function (x, y) {
+    this.show = function(x, y) {
+        
         // If not already onscreen
         if (!this.isVisible) {
             // Set all menu button positions relative to one another
@@ -88,13 +89,18 @@ function MainMenu() {
                        log_btn, 
                        settings_btn,
                        close_btn);
-                       
+                    
+            // The menu is now visible
             this.isVisible = true;
         }
+        
     };
 
-    this.close_ = function () {
+    this.hide = function() {
+        
+        // If already onscreen
         if (this.isVisible) {
+            // Remove all menu buttons
             inside.remove(background, 
                        houseAlarm_btn, 
                        noteFromInside_btn, 
@@ -106,9 +112,11 @@ function MainMenu() {
                        log_btn, 
                        settings_btn,
                        close_btn);
-                       
+                  
+            // The menu is now invisible
             this.isVisible = false;
         }
-    }
+        
+    };
     
 }

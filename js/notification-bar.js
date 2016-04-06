@@ -18,8 +18,8 @@ function NotificationBar() {
     var _outsideLight = new Notification('outsideLight');
     
     // Color the locked/closed and unlocked/open icons
-    colorRed(_locked);
-    colorGreen(_unlocked);
+    /* colorRed(_locked);
+    colorGreen(_unlocked); */
     
     // This is used when removing all notifications from the screen
     var allNBarElements = [background, _locked, _unlocked, _closed, _open, _houseAlarm, _childLock, _newMessage, _outsideLight];

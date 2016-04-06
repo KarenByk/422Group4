@@ -4,48 +4,57 @@
         <meta charset="UTF-8">
         <title>CS422 | Project 2 | Group 4</title>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
-        <!--<script src="js/fabric.require.min.js"></script>-->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/moment.min.js"></script>
-        <!--<script data-main="js/main" src="js/require.min.js"></script>-->
+        <script src="js/libs/fabric.min.js"></script>
+        <script src="js/libs/jquery.min.js"></script>
+        <script src="js/libs/moment.min.js"></script>
     </head>
     <body>
         <div style="position: absolute; top: 0px; left: 0px;">
-            <canvas id="inside-door" width="388" height="700" style="border:2px solid black;" ></canvas>
+            <canvas id="inside-door" width="388" height="700"></canvas>
         </div>
         <div style="position: absolute; top: 0px; left: 400px">
-            <canvas id="outside-door" width="388" height="700" style="border:2px solid black;" ></canvas>
+            <canvas id="outside-door" width="388" height="700"></canvas>
         </div>
         
-        <img src="img/deadbolt.svg" id="deadbolt" style="display: none">
-        <img src="img/doorbell.svg" id="doorbell" style="display: none">
-        <img src="img/keypad.svg" id="keypad" style="display: none">
+        <img src="img/deadbolt.svg" id="deadbolt">
+        <img src="img/doorbell.svg" id="doorbell">
+        <img src="img/keypad.svg" id="keypad">
         
-        <img src="img/closed.svg" id="closed" style="display: none">
-        <img src="img/open.svg" id="open" style="display: none">
-        <img src="img/locked.svg" id="locked" style="display: none">
-        <img src="img/unlocked.svg" id="unlocked" style="display: none">
-        <img src="img/houseAlarm.svg" id="houseAlarm" style="display: none">
-        <img src="img/childLock.svg" id="childLock" style="display: none">
-        <img src="img/newMessage.svg" id="newMessage" style="display: none">
-        <img src="img/outsideLight.svg" id="outsideLight" style="display: none">
+        <img src="img/closed.svg" id="closed">
+        <img src="img/open.svg" id="open">
+        <img src="img/locked.svg" id="locked">
+        <img src="img/unlocked.svg" id="unlocked">
+        <img src="img/houseAlarm.svg" id="houseAlarm">
+        <img src="img/childLock.svg" id="childLock">
+        <img src="img/newMessage.svg" id="newMessage">
+        <img src="img/outsideLight.svg" id="outsideLight">
         
-        <img src="img/user.svg" id="user" style="display: none">
-        <img src="img/emergency.svg" id="emergency" style="display: none">
-        <img src="img/help.svg" id="help" style="display: none">
-        <img src="img/note.svg" id="note" style="display: none">
-        <img src="img/mirror.svg" id="mirror" style="display: none">
-        <img src="img/traffic.svg" id="traffic" style="display: none">
-        <img src="img/weather.svg" id="weather" style="display: none">
-        <img src="img/calendar.svg" id="calendar" style="display: none">
-        <img src="img/log.svg" id="log" style="display: none">
-        <img src="img/settings.svg" id="settings" style="display: none">
+        <img src="img/user.svg" id="user">
+        <img src="img/emergency.svg" id="emergency">
+        <img src="img/help.svg" id="help">
+        <img src="img/note.svg" id="note">
+        <img src="img/mirror.svg" id="mirror">
+        <img src="img/traffic.svg" id="traffic">
+        <img src="img/weather.svg" id="weather">
+        <img src="img/calendar.svg" id="calendar">
+        <img src="img/log.svg" id="log">
+        <img src="img/settings.svg" id="settings">
         
-        <img src="img/accept.svg" id="accept" style="display: none">
-        <img src="img/cancel.svg" id="cancel" style="display: none">
+        <img src="img/accept.svg" id="accept">
+        <img src="img/cancel.svg" id="cancel">
         
-        <img src="img/weather/sunny.svg" id="sunny" style="display: none">
+        <img src="img/weather/01d.svg" id="01d">
+        <img src="img/weather/01n.svg" id="01n">
+        <img src="img/weather/02d.svg" id="02d">
+        <img src="img/weather/02n.svg" id="02n">
+        <img src="img/weather/03d.svg" id="03d">
+        <img src="img/weather/03d.svg" id="03n">
+        <img src="img/weather/04d.svg" id="04d">
+        <img src="img/weather/04d.svg" id="04n">
+        <img src="img/weather/09d.svg" id="09d">
+        <img src="img/weather/09d.svg" id="09n">
+        <img src="img/weather/09d.svg" id="10d">
+        <img src="img/weather/09d.svg" id="10n">
 
         <script src="js/init.js"></script>
         <script src="js/utils.js"></script>

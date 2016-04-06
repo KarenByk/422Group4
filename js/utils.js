@@ -29,6 +29,7 @@ var Button = fabric.util.createClass(fabric.Image, {
             originX: 'center', originY: 'center',
             shadow: 'rgba(0,0,0,1) 0px 0px 7px'
         });
+        this.set(options);
     }
 });
 
@@ -55,11 +56,13 @@ var Text = fabric.util.createClass(fabric.Text, {
     initialize: function(str, options) {
         this.callSuper('initialize', str, options);
         this.set({
+            selectable: false,
             originX: 'center',
             fill: 'white',
             fontFamily: 'droid-sans-bold',
             shadow: 'rgba(0,0,0,1) 0px 0px 5px'
-       });
+        });
+        this.set(options);
     }
 });
 
@@ -88,11 +91,6 @@ function colorGreen(img) {
 
 
 // Useful functions
-
-function exchangeObjects(canvas, toAdd, toRemove) {
-    canvas.add(toAdd);
-    canvas.remove(toRemove);
-}
 
 function clearSelection() {
     inside.deactivateAll();
