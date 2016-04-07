@@ -26,8 +26,8 @@
     clock.show();
     
     // Initialize inside and outside wallpapers
-    wallpaper.setInside('grass');
-    wallpaper.setOutside('wood4');
+    wallpaper.setInside('grass.jpg');
+    wallpaper.setOutside('wood4.jpg');
     
     // Listen for a click somewhere on the inside canvas
     inside.on('mouse:down', function(event) {
@@ -58,9 +58,9 @@
                 if (gui.isLocked) {
                     gui.unlock();
                 }
-                gui.open_();
+                gui.openDoor();
             } else {
-                gui.close_();
+                gui.closeDoor();
             }
         }
         // Lock the door when 'unlocked' icon is touched
@@ -73,7 +73,7 @@
         }
         // Close the door when 'open' icon is touched
         else if (event.target.id === 'close') {
-            gui.close_();
+            gui.closeDoor();
         }
         // Unlock and open the door when 'closed' icon is touched
         else if (event.target.id === 'open') {
@@ -81,7 +81,7 @@
                 if (gui.isLocked) {
                     gui.unlock();
                 }
-                gui.open_();
+                gui.openDoor();
             }
         }
         
@@ -92,4 +92,11 @@
         
         clearSelection();
         
+    });
+    
+    // Listen for a click somewhere on the inside canvas
+    outside.on('mouse:down', function(event) {
+        if (event.target.id === 'noteFromOutside') {
+
+        }
     });

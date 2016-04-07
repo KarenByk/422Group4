@@ -1,10 +1,37 @@
-function GUI(notificationObject) {
+/* 
+    Class: GUI
+    
+        This class handles the drawing, placement, and removing of GUI objects. It also handles (un)locking and opening/closing the door.
+    
+    Parameters:
+    
+        notificationBar (Object) - Instance of a <NotificationBar> object.
+*/
+function GUI(notificationBar) {
     
     // Door starts closed and locked
+    /*
+        Variable: isClosed
+        
+            Tracks whether the door is closed.
+        
+        Type:
+        
+            Boolean
+    */
     this.isClosed = true;
+    /*
+        Boolean: isLocked
+        
+            Tracks whether the door is locked.
+        
+        Type:
+        
+            Boolean
+    */
     this.isLocked = true;
     
-    var notificationBar = notificationObject;
+    var notificationBar = notificationBar;
     
     var knobIn = new fabric.Circle({
         radius: DOOR_WIDTH / 20, 
@@ -87,6 +114,11 @@ function GUI(notificationObject) {
     colorRed(emergency_btn);
     colorGreen(lock_btn); */
     
+    /*
+        Function: drawButtons
+        
+            Draws persistent buttons on screen.
+    */
     this.drawButtons = function() {
         
         if (this.isLocked) {inside.add(unlock_btn)}
@@ -102,6 +134,31 @@ function GUI(notificationObject) {
                     
     };
     
+    /*
+        Function: removeButtons
+        
+            Removes persistent buttons from screen.
+    */
+    this.removeButtons = function() {
+        
+        inside.remove(lock_btn,
+                      unlock_btn,
+                      close_btn,
+                      open_btn,
+                      user_btn,
+                      emergency_btn,
+                      help_btn);
+        outside.remove(doorbell_btn,
+                       noteFromOutside_btn,
+                       keypad_btn);
+                    
+    };
+    
+    /*
+        Function: drawKnobs
+            
+            Draws doorknobs on screen.
+    */
     this.drawKnobs = function() {
         
         inside.add(knobIn);
@@ -109,6 +166,11 @@ function GUI(notificationObject) {
         
     };
     
+    /*
+        Function: removeKnobs
+            
+            Removes doorknobs from screen.
+    */
     this.removeKnobs = function() {
         
         inside.remove(knobIn);
@@ -116,18 +178,33 @@ function GUI(notificationObject) {
         
     };
     
+    /*
+        Function: drawAddress
+            
+            Draws address on door outside.
+    */
     this.drawAddress = function() {
         
         outside.add(address);
         
     };
     
+    /*
+        Function: removeAddress
+            
+            Removes address from door outside.
+    */
     this.removeAddress = function() {
         
         outside.remove(address);
         
     };
     
+    /*
+        Function: unlock
+        
+            Unlocks the door and calls <NotificationBar.unlocked>.
+    */
     this.unlock = function() {
         
         if (this.isLocked) {
@@ -139,6 +216,11 @@ function GUI(notificationObject) {
         
     };
     
+    /*
+        Function: lock
+        
+            Locks the door and calls <NotificationBar.locked>.
+    */
     this.lock = function() {
         
         if (!this.isLocked) {
@@ -150,7 +232,12 @@ function GUI(notificationObject) {
         
     };
     
-    this.open_ = function() {
+    /*
+        Function: openDoor
+        
+            Opens the door and calls <NotificationBar.doorOpened>.
+    */
+    this.openDoor = function() {
         
         if (this.isClosed) {
             inside.add(close_btn);
@@ -161,7 +248,12 @@ function GUI(notificationObject) {
         
     };
     
-    this.close_ = function() {
+    /*
+        Function: closeDoor
+        
+            Closes the door and calls <NotificationBar.doorClosed>.
+    */
+    this.closeDoor = function() {
         
         if (!this.isClosed) {
             inside.add(open_btn);

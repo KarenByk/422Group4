@@ -1,7 +1,41 @@
+/*
+    Class: TimeDate
+    
+        This class handles updating and drawing the clock and current weather display.
+*/
 function TimeDate() {
     
+    /* 
+        Variable: timeFormat
+        
+            Either '12h' or '24h'. Formats time as either h:mm A or H:mm, respectively.
+            
+        Type: 
+        
+            String
+    */
     this.timeFormat = '12h';
+    
+    /*
+        Variable: dateFormat
+        
+            Either 'us' or 'eu'. Formats date as either MMMM D, YYYY or D MMMM, YYYY, respectively.
+            
+        Type:
+        
+            String
+    */
     this.dateFormat = 'us';
+    
+    /*
+        Variable: tempFormat
+        
+            Either 'f' or 'c'. Displays temperature in Fahrenheit or Celsius units, respectively.
+            
+        Type:
+            
+            String
+    */
     this.tempFormat = 'f';
     
     // JSON current weather for zip code 60607
@@ -26,6 +60,11 @@ function TimeDate() {
         fontSize: time.fontSize
     });
     
+    /*
+        Function: updateTime
+        
+            Parses and formats current time and date. Uses the <moment.js at http://momentjs.com/> library.
+    */
     this.updateTime = function() {
         
         // Get an object with current date and time
@@ -56,6 +95,11 @@ function TimeDate() {
         
     };
     
+    /*
+        Function: updateWeather
+        
+            Parses and formats current weather. Also updates weather icon.
+    */
     this.updateWeather = function() {
         
         var tempK, tempC, tempF;
@@ -95,6 +139,11 @@ function TimeDate() {
         
     };
     
+    /*
+        Function: updatePositions
+        
+            Properly spaces and centers clock elements.
+    */
     var updatePositions = function() {
         
         // Get the total width of time, icon, and temp
@@ -118,12 +167,22 @@ function TimeDate() {
         
     };
     
+    /*
+        Function: show
+        
+            Draws clock elements on screen.
+    */
     this.show = function() {
         
         inside.add(date, time, icon, temp);
         
     };
     
+    /*
+        Function: hide
+        
+            Removes clock elements from screen.
+    */
     this.hide = function() {
         
         inside.remove(date, time, icon, temp);

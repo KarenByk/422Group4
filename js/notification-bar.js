@@ -1,3 +1,8 @@
+/*
+    Class: NotificationBar
+    
+        This class handles drawing and removing of on screen notifications.
+*/
 function NotificationBar() {
     
     // Define the notification bar area...
@@ -27,30 +32,55 @@ function NotificationBar() {
     // Array of initial alerts
     var alerts = [_locked, _closed, _houseAlarm];
     
+    /*
+        Function: unlocked
+        
+        Alerts user that the door has been unlocked.
+    */
     this.unlocked = function() {
         pushAlert(_unlocked, 0);
         popAlert(_locked);
         this.update();
     };
     
+    /*
+        Function: locked
+        
+        Alerts user that the door has been locked.
+    */
     this.locked = function() {
         pushAlert(_locked, 0);
         popAlert(_unlocked);
         this.update();
     };
     
+    /*
+        Function: doorOpened
+        
+        Alerts user that the door has been opened.
+    */
     this.doorOpened = function() {
         pushAlert(_open, 1);
         popAlert(_closed);
         this.update();
     }
     
+    /*
+        Function: doorClosed
+        
+        Alerts user that the door has been closed.
+    */
     this.doorClosed = function() {
         pushAlert(_closed, 1);
         popAlert(_open);
         this.update();
     }
     
+    /*
+        Function: update
+        
+        Redraws the current alert queue. It is preferable to interact with the notification bar through the specific functions (<locked>, <unlocked>, etc.) as these call <update> when finished.
+    */
     this.update = function() {
         // Remove previous notifications if there are any
         for (var i in allNBarElements) {

@@ -1,3 +1,8 @@
+/*
+    Class: MainMenu
+    
+        This class handles drawing and removing the main menu elements.
+*/
 function MainMenu() {
     
     // Define the menu area...
@@ -21,15 +26,52 @@ function MainMenu() {
     var log_btn = new MenuButton('log');
     var settings_btn = new MenuButton('settings');
     
-    // Menu dimensions are accessible from outside the class
-    this.width = background.width;
-    this.height = background.height;
     
+    // Menu dimensions are accessible from outside the class
+    /* 
+        Variable: width
+        
+            Width of the main menu, in pixels.
+        
+        Type: 
+        
+            Integer
+    */
+    this.width = background.width;
+    /*
+        Variable: height
+        
+            Height of the main menu, in pixels.
+        
+        Type:
+        
+            Integer
+    */
+    this.height = background.height;
+    /*
+        Variable: isVisible
+        
+            Tracks whether the menu is on screen.
+        
+        Type:
+        
+            Boolean
+        
+    */
     this.isVisible = false;
-     
+    
+    /* 
+        Function: show
+        
+            Draws the menu if it's not already on screen
+        
+        Parameters:
+            x (Number) - Horizontal position of the menu's top-left corner, in pixels
+            y (Number) - Vertical position of the menu's top-left corner, in pixels
+    */
     this.show = function(x, y) {
         
-        // If not already onscreen
+        // If not already on screen
         if (!this.isVisible) {
             // Set all menu button positions relative to one another
             background.set({
@@ -96,6 +138,11 @@ function MainMenu() {
         
     };
 
+    /* 
+        Function: hide
+        
+            Hides the menu if it's already on screen
+    */
     this.hide = function() {
         
         // If already onscreen

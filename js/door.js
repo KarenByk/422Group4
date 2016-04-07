@@ -1,7 +1,0 @@
-function Door(notificationObject, guiObject) {
-    
-    
-    
-    
-    
-}
