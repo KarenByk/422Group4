@@ -5,6 +5,7 @@
     var mainMenu = new MainMenu();
     var wallpaper = new Wallpaper();
     var clock = new TimeDate();
+    var messaging = new Messaging();
     
     // Initialize interface buttons and alerts
     gui.drawKnobs();
@@ -15,19 +16,22 @@
     // Pull time and weather, then set clock to update time every 10 sec 
     // and weather every 10 min
     clock.updateTime();
-    clock.updateWeather();
+    //clock.updateWeather();
     setInterval(function(){
         clock.updateTime();
     }, 10000);
-    setInterval(function(){
+    // Commented out for the moment so testing doesn't put us over weather API limit
+    /* setInterval(function(){
         clock.updateWeather();
-    }, 600000);
+    }, 600000); */
     // Then draw it
     clock.show();
     
     // Initialize inside and outside wallpapers
     wallpaper.setInside('grass.jpg');
     wallpaper.setOutside('wood4.jpg');
+    
+    
     
     // Listen for a click somewhere on the inside canvas
     inside.on('mouse:down', function(event) {
@@ -94,9 +98,19 @@
         
     });
     
-    // Listen for a click somewhere on the inside canvas
+    // Listen for a click somewhere on the outside canvas
     outside.on('mouse:down', function(event) {
-        if (event.target.id === 'noteFromOutside') {
+        if (typeof event.target !== 'undefined') {
+            if (event.target.id === 'noteFromOutside') {
 
+            }
         }
+    });
+    outside.on('object:over', function(event) {
+        console.log(event);
+        /* if (event.target.id === 'writingArea') {
+            outside.isDrawingMode = true;
+        } else {
+            outside.isDrawingMode = false;
+        } */
     });

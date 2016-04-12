@@ -15,6 +15,7 @@ var Button = fabric.util.createClass(fabric.Image, {
     initialize: function(img, x, y, options) {
         this.callSuper('initialize', document.getElementById(img));
         this.set({
+            hasControls: false, hasBorders: false,
             lockMovementX: true, lockMovementY: true,
             width: ICON_SIZE, height: ICON_SIZE,
             left: x || 0, top: y || 0,

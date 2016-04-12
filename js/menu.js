@@ -10,12 +10,13 @@ function MainMenu() {
         selectable: false,
         width: 4 * ICON_MARGIN + 3 * ICON_SIZE,
         height: 4 * ICON_MARGIN + 3 * ICON_SIZE,
-        fill: '#000', opacity: 0.55,
+        fill: '#000', opacity: 0.5,
+        //shadow: 'rgba(0,0,0,1) 0px 0px 5px',
         rx: DOOR_HEIGHT / 70, ry: DOOR_HEIGHT / 70
     });
 
     // ...and all app buttons
-    var close_btn = new Button('cancel', 0, 0, {id: 'closeMainMenu', hasBorders: false});
+    var close_btn = new Button('cancel', 0, 0, {id: 'closeMainMenu', hasControls: false});
     var houseAlarm_btn = new MenuButton('houseAlarm');
     var noteFromInside_btn = new MenuButton('note');
     var mirror_btn = new MenuButton('mirror');

@@ -77,6 +77,26 @@ function NotificationBar() {
     }
     
     /*
+        Function: messageReceived
+        
+        Alerts user that a message has been received from outside.
+    */
+    this.messageReceived = function() {
+        pushAlert(_newMessage, 3);
+        this.update();
+    }
+    
+    /*
+        Function: messageRead
+        
+        Removes new message notification.
+    */
+    this.messageRead = function() {
+        popAlert(_newMessage);
+        this.update();
+    }
+    
+    /*
         Function: update
         
         Redraws the current alert queue. It is preferable to interact with the notification bar through the specific functions (<locked>, <unlocked>, etc.) as these call <update> when finished.
@@ -116,7 +136,7 @@ function NotificationBar() {
     // Adds alertName to current alerts at position i
     var pushAlert = function(alertName, i) {
         var index = alerts.indexOf(alertName);
-        // If it's not present, add given alert to the queue at the standard index
+        // If it's not present, add given alert to the queue at the specified index
         if (index < 0) {
             alerts.splice(i, 0, alertName);
         }
