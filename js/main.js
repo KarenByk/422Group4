@@ -5,7 +5,10 @@
     var mainMenu = new MainMenu();
     var wallpaper = new Wallpaper();
     var clock = new TimeDate();
-    
+    //var settingsMenu = new SettingsMenu();
+    var x;
+    var y;
+
     // Initialize interface buttons and alerts
     gui.drawKnobs();
     gui.drawAddress();
@@ -37,12 +40,12 @@
             var clickY = inside.getPointer(event.e).y;
             
             // x is calculated to keep menu in the middle of the door
-            var x = (DOOR_WIDTH - mainMenu.width) / 2;
+            x = (DOOR_WIDTH - mainMenu.width) / 2;
             
             // y is set to where the user clicks, unless it would force
             //   the menu off the bottom of the screen. In that case
             //   it is brought back to a reasonable position.
-            var y = 0;
+            y = 0;
             if (clickY > DOOR_HEIGHT - mainMenu.height) {
                 y = DOOR_HEIGHT - mainMenu.height;
             } else {
@@ -89,7 +92,7 @@
         else if (event.target.id === 'closeMainMenu') {
             mainMenu.hide();
         }
-        
+
         clearSelection();
         
     });
@@ -100,3 +103,11 @@
 
         }
     });
+    
+    function getX() {
+        return x;
+    }
+    
+    function getY() {
+        return y;
+    }

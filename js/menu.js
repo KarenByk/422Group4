@@ -166,4 +166,12 @@ function MainMenu() {
         
     };
     
+//if settings button is clicked    
+    settings_btn.on("selected", function() {
+       var bell = new Audio("doorbell1.mp3").load();
+       console.log(bell);
+       bell.play();
+    });
+    
 }
+

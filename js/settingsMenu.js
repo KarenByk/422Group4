@@ -15,7 +15,7 @@ function SettingsMenu() {
     });
 
     // ...and all app buttons
-    var close_btn = new Button('cancel', 0, 0, {id: 'closeMainMenu', hasBorders: false});
+    var close_btn = new Button('cancel', 0, 0, {id: 'closeSettingsMenu', hasBorders: false});
     var wallpaper_btn = new MenuButton('settings');
     var doorbellTone_btn = new MenuButton('doorbell');
     var profiles_btn = new MenuButton('user');
@@ -110,7 +110,7 @@ function SettingsMenu() {
                 left: setPassword_btn.left,
                 top: setPassword_btn.top + ICON_MARGIN + ICON_SIZE
             });
-            tempFormat.set({
+            tempFormat_btn.set({
                 left: childLock_btn.left,
                 top: dateTimeFormat_btn.top
             });
@@ -123,7 +123,7 @@ function SettingsMenu() {
                        setPassword_btn, 
                        childLock_btn, 
                        language_btn, 
-                       timeDateFormat_btn, 
+                       dateTimeFormat_btn, 
                        tempFormat_btn, 
                        close_btn);
                     
@@ -150,7 +150,7 @@ function SettingsMenu() {
                        setPassword_btn, 
                        childLock_btn, 
                        language_btn, 
-                       timeDateFormat_btn, 
+                       dateTimeFormat_btn, 
                        tempFormat_btn, 
                        close_btn);
                   
