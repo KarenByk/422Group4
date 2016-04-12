@@ -16,14 +16,14 @@ function SettingsMenu() {
 
     // ...and all app buttons
     var close_btn = new Button('cancel', 0, 0, {id: 'closeSettingsMenu', hasBorders: false});
-    var wallpaper_btn = new MenuButton('settings');
+    var wallpaper_btn = new MenuButton('scene');
     var doorbellTone_btn = new MenuButton('doorbell');
     var profiles_btn = new MenuButton('user');
     var setPassword_btn = new MenuButton('keypad');
     var childLock_btn = new MenuButton('childLock');
-    var language_btn = new MenuButton('settings');
-    var dateTimeFormat_btn = new MenuButton('settings');
-    var tempFormat_btn = new MenuButton('settings');
+    var language_btn = new MenuButton('language');
+    var dateTimeFormat_btn = new MenuButton('dateTime');
+    var tempFormat_btn = new MenuButton('tempFormat');
     
     
     
