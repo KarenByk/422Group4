@@ -70,7 +70,7 @@ function SettingsMenu() {
             y (Number) - Vertical position of the menu's top-left corner, in pixels
     */
     this.show = function(x, y) {
-        
+
         // If not already on screen
         if (!this.isVisible) {
             // Set all menu button positions relative to one another

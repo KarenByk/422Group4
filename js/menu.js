@@ -24,7 +24,7 @@ function MainMenu() {
     var calendar_btn = new MenuButton('calendar');
     var outsideLight_btn = new MenuButton('outsideLight');
     var log_btn = new MenuButton('log');
-    var settings_btn = new MenuButton('settings');
+    var settings_btn = new MenuButton('settings', 0, 0, {id: 'settingsButton', hasBorders: false});
     
     
     // Menu dimensions are accessible from outside the class
@@ -166,12 +166,13 @@ function MainMenu() {
         
     };
     
-//if settings button is clicked    
+//if settings button is clicked   
+/*
     settings_btn.on("selected", function() {
-       var bell = new Audio("doorbell1.mp3").load();
-       console.log(bell);
-       bell.play();
+       var setMenu = new SettingsMenu();
+       console.log("pressed");
+       setMenu.show();
     });
-    
+*/
 }
 

@@ -5,7 +5,7 @@
     var mainMenu = new MainMenu();
     var wallpaper = new Wallpaper();
     var clock = new TimeDate();
-    //var settingsMenu = new SettingsMenu();
+    var settMenu = new SettingsMenu();
     var x;
     var y;
 
@@ -92,7 +92,24 @@
         else if (event.target.id === 'closeMainMenu') {
             mainMenu.hide();
         }
-
+        
+        else if(event.target.id === 'settingsButton') {
+            mainMenu.hide();
+            settMenu.show(x,y);
+        }
+        
+        else if(event.target.id === 'closeSettingsMenu') {
+            settMenu.hide();
+            mainMenu.show(x, y);
+        }
+        
+/*  what should the id be????
+        else if(event.target.id === 'mainMenu.settings_btn') {
+            console.logt("pressed");
+            mainMenu.hide();
+            setMenu.show(x, y);
+        }
+*/        
         clearSelection();
         
     });
@@ -104,10 +121,4 @@
         }
     });
     
-    function getX() {
-        return x;
-    }
-    
-    function getY() {
-        return y;
-    }
+ 
