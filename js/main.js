@@ -5,8 +5,15 @@
     var mainMenu = new MainMenu();
     var wallpaper = new Wallpaper();
     var clock = new TimeDate();
+<<<<<<< HEAD
     var messaging = new Messaging();
     
+=======
+    var settMenu = new SettingsMenu();
+    var x;
+    var y;
+
+>>>>>>> refs/remotes/origin/master
     // Initialize interface buttons and alerts
     gui.drawKnobs();
     gui.drawAddress();
@@ -41,12 +48,12 @@
             var clickY = inside.getPointer(event.e).y;
             
             // x is calculated to keep menu in the middle of the door
-            var x = (DOOR_WIDTH - mainMenu.width) / 2;
+            x = (DOOR_WIDTH - mainMenu.width) / 2;
             
             // y is set to where the user clicks, unless it would force
             //   the menu off the bottom of the screen. In that case
             //   it is brought back to a reasonable position.
-            var y = 0;
+            y = 0;
             if (clickY > DOOR_HEIGHT - mainMenu.height) {
                 y = DOOR_HEIGHT - mainMenu.height;
             } else {
@@ -94,6 +101,23 @@
             mainMenu.hide();
         }
         
+        else if(event.target.id === 'settingsButton') {
+            mainMenu.hide();
+            settMenu.show(x,y);
+        }
+        
+        else if(event.target.id === 'closeSettingsMenu') {
+            settMenu.hide();
+            mainMenu.show(x, y);
+        }
+        
+/*  what should the id be????
+        else if(event.target.id === 'mainMenu.settings_btn') {
+            console.logt("pressed");
+            mainMenu.hide();
+            setMenu.show(x, y);
+        }
+*/        
         clearSelection();
         
     });
@@ -106,6 +130,7 @@
             }
         }
     });
+<<<<<<< HEAD
     outside.on('object:over', function(event) {
         console.log(event);
         /* if (event.target.id === 'writingArea') {
@@ -114,3 +139,7 @@
             outside.isDrawingMode = false;
         } */
     });
+=======
+    
+ 
+>>>>>>> refs/remotes/origin/master
