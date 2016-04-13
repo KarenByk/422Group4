@@ -23,7 +23,7 @@ function SettingsMenu() {
     var childLock_btn = new MenuButton('childLock');
     var language_btn = new MenuButton('language');
     var dateTimeFormat_btn = new MenuButton('dateTime');
-    var tempFormat_btn = new MenuButton('tempFormat');
+    var tempFormat_btn = new MenuButton('farenheit');
     
     
     
@@ -159,5 +159,22 @@ function SettingsMenu() {
         }
         
     };
+    
+    tempFormat_btn.on("selected", function() {
+        if(clock.tempFormat === 'c') {
+            inside.remove(tempFormat_btn);
+            clock.tempFormat = 'f';
+            tempFormat_btn = new MenuButton('farenheit');
+            inside.add(tempFormat_btn);
+        }
+        else {
+            inside.remove(tempFormat_btn);
+            clock.tempFormat = 'c';
+            tempFormat_btn.img = 'celsius';
+            tempFormat_btn = new MenuButton('celsius');
+            inside.add(tempFormat_btn);
+        }
+        clock.updateWeather();
+    });
     
 }

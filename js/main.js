@@ -104,14 +104,7 @@
             settMenu.hide();
             mainMenu.show(x, y);
         }
-        
-/*  what should the id be????
-        else if(event.target.id === 'mainMenu.settings_btn') {
-            console.logt("pressed");
-            mainMenu.hide();
-            setMenu.show(x, y);
-        }
-*/        
+           
         clearSelection();
         
     });
