@@ -17,7 +17,7 @@ function SettingsMenu() {
     });
 
     // ...and all app buttons
-    var close_btn = new Button('cancel', 0, 0, {id: 'closeSettingsMenu', hasBorders: false});
+    var close_btn = new Button('cancel');
     var wallpaper_btn = new MenuButton('scene');
     var doorbellTone_btn = new MenuButton('doorbell');
     var profiles_btn = new MenuButton('user');
