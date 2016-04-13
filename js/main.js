@@ -6,7 +6,7 @@
     var wallpaper = new Wallpaper();
     var clock = new TimeDate();
     var messaging = new Messaging();
-    var settMenu = new SettingsMenu();
+    var settingsMenu = new SettingsMenu();
     var x;
     var y;
 
@@ -97,11 +97,11 @@
         
         else if(event.target.id === 'settingsButton') {
             mainMenu.hide();
-            settMenu.show(x,y);
+            settingsMenu.show(x,y);
         }
         
         else if(event.target.id === 'closeSettingsMenu') {
-            settMenu.hide();
+            settingsMenu.hide();
             mainMenu.show(x, y);
         }
            

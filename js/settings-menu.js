@@ -23,9 +23,7 @@ function SettingsMenu() {
     var childLock_btn = new MenuButton('childLock');
     var language_btn = new MenuButton('language');
     var dateTimeFormat_btn = new MenuButton('dateTime');
-    var tempFormat_btn = new MenuButton('farenheit');
-    
-    
+    var tempFormat_btn = new MenuButton('fahrenheit');
     
     // Menu dimensions are accessible from outside the class
     /* 
@@ -160,20 +158,23 @@ function SettingsMenu() {
         
     };
     
-    tempFormat_btn.on("selected", function() {
+    // Update settings button and temp display when units are changed
+    tempFormat_btn.on('selected', function() {
         if(clock.tempFormat === 'c') {
-            inside.remove(tempFormat_btn);
             clock.tempFormat = 'f';
-            tempFormat_btn = new MenuButton('farenheit');
-            inside.add(tempFormat_btn);
+            tempFormat_btn.setElement(document.getElementById('fahrenheit'));
+            tempFormat_btn.scaleToWidth(ICON_SIZE);
+            tempFormat_btn.scaleToHeight(ICON_SIZE);
+            inside.renderAll();
         }
         else {
-            inside.remove(tempFormat_btn);
             clock.tempFormat = 'c';
-            tempFormat_btn.img = 'celsius';
-            tempFormat_btn = new MenuButton('celsius');
-            inside.add(tempFormat_btn);
+            tempFormat_btn.setElement(document.getElementById('celsius'));
+            tempFormat_btn.scaleToWidth(ICON_SIZE);
+            tempFormat_btn.scaleToHeight(ICON_SIZE);
+            inside.renderAll();
         }
+        clearSelection();
         clock.updateWeather();
     });
     
