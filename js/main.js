@@ -5,15 +5,11 @@
     var mainMenu = new MainMenu();
     var wallpaper = new Wallpaper();
     var clock = new TimeDate();
-<<<<<<< HEAD
     var messaging = new Messaging();
-    
-=======
     var settMenu = new SettingsMenu();
     var x;
     var y;
 
->>>>>>> refs/remotes/origin/master
     // Initialize interface buttons and alerts
     gui.drawKnobs();
     gui.drawAddress();
@@ -37,8 +33,6 @@
     // Initialize inside and outside wallpapers
     wallpaper.setInside('grass.jpg');
     wallpaper.setOutside('wood4.jpg');
-    
-    
     
     // Listen for a click somewhere on the inside canvas
     inside.on('mouse:down', function(event) {
@@ -130,7 +124,7 @@
             }
         }
     });
-<<<<<<< HEAD
+
     outside.on('object:over', function(event) {
         console.log(event);
         /* if (event.target.id === 'writingArea') {
@@ -139,7 +133,3 @@
             outside.isDrawingMode = false;
         } */
     });
-=======
-    
- 
->>>>>>> refs/remotes/origin/master
