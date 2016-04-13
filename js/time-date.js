@@ -36,8 +36,8 @@ function TimeDate() {
             
             String
     */
-    this.tempFormat = 'f';
-    
+   this.tempFormat = 'f';
+     
     // JSON current weather for zip code 60607
     // Please don't call this more than once every 10 minutes
     var weatherURL = 'http://api.openweathermap.org/data/2.5/weather?zip=60607,us&appid=50a85921cbac9b89ef1429c69070473f';
