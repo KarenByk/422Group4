@@ -5,6 +5,8 @@
 */
 function SettingsMenu() {
     
+    var _this = this;
+    
     // Define the menu area...
     var background = new fabric.Rect({
         selectable: false,
@@ -157,6 +159,12 @@ function SettingsMenu() {
         }
         
     };
+    
+    // Close the settings menu and return to the main menu if user has clicked the close button 
+    close_btn.on('selected', function() {
+        mainMenu.show(background.left, background.top);
+        _this.hide();
+    });
     
     // Update settings button and temp display when units are changed
     tempFormat_btn.on('selected', function() {
