@@ -9,6 +9,8 @@
 */
 function GUI(notificationBar) {
     
+    var _this = this;
+    
     // Door starts closed and locked
     /*
         Variable: isClosed
@@ -263,5 +265,62 @@ function GUI(notificationBar) {
         }
         
     };
+    
+    
+    ////
+    // Physical door behavior
+    ////
+    
+    // Lock the door when 'lock' button is touched
+    lock_btn.on('selected', function(){
+        _this.lock();
+        clearSelection();
+    });
+    
+    // Unlock the door when 'unlock' button is touched
+    unlock_btn.on('selected', function(){
+        _this.unlock();
+        clearSelection();
+    });
+    
+    // Unlock and open or close the door if inside knob is touched
+    knobIn.on('selected', function(){
+        if (_this.isClosed) { 
+            if (_this.isLocked) {
+                _this.unlock();
+            }
+            _this.openDoor();
+        } else {
+            _this.closeDoor();
+        }
+        clearSelection();
+    });
+    
+    // Close the door when 'close' button is touched
+    close_btn.on('selected', function(){
+        _this.closeDoor();
+        clearSelection();
+    });
+    
+    // Unlock and open the door when 'open' button is touched
+    open_btn.on('selected', function(){
+        if (_this.isClosed) { 
+                if (_this.isLocked) {
+                    _this.unlock();
+                }
+                _this.openDoor();
+            }
+        clearSelection();
+    });
+    
+    
+    ////
+    //  Button behavior
+    ////
+    
+    noteFromOutside_btn.on('selected', function(){
+        console.log('note');
+        clearSelection();
+    });
     
 }

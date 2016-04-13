@@ -5,18 +5,19 @@
 */
 function MainMenu() {
     
+    var _this = this;
+    
     // Define the menu area...
     var background = new fabric.Rect({
         selectable: false,
         width: 4 * ICON_MARGIN + 3 * ICON_SIZE,
         height: 4 * ICON_MARGIN + 3 * ICON_SIZE,
         fill: '#000', opacity: 0.5,
-        //shadow: 'rgba(0,0,0,1) 0px 0px 5px',
         rx: DOOR_HEIGHT / 70, ry: DOOR_HEIGHT / 70
     });
 
     // ...and all app buttons
-    var close_btn = new Button('cancel', 0, 0, {id: 'closeMainMenu', hasControls: false});
+    var close_btn = new Button('cancel');
     var houseAlarm_btn = new MenuButton('houseAlarm');
     var noteFromInside_btn = new MenuButton('note');
     var mirror_btn = new MenuButton('mirror');
@@ -25,7 +26,7 @@ function MainMenu() {
     var calendar_btn = new MenuButton('calendar');
     var outsideLight_btn = new MenuButton('outsideLight');
     var log_btn = new MenuButton('log');
-    var settings_btn = new MenuButton('settings', 0, 0, {id: 'settingsButton', hasBorders: false});
+    var settings_btn = new MenuButton('settings');
     
     
     // Menu dimensions are accessible from outside the class
@@ -167,13 +168,47 @@ function MainMenu() {
         
     };
     
-//if settings button is clicked   
-/*
-    settings_btn.on("selected", function() {
-       var setMenu = new SettingsMenu();
-       console.log("pressed");
-       setMenu.show();
+    
+    // Listens for a click somewhere on the inside canvas
+    inside.on('mouse:down', function(event) {
+        // If the user hasn't clicked on any object
+        if (typeof event.target === 'undefined') {
+            var y = 0;
+            var clickY = event.e.clientY;
+            
+            // x is calculated to keep menu in the middle of the door
+            var x = (DOOR_WIDTH - _this.width) / 2;
+            
+            // y is set to where the user clicks, unless it would force
+            //   the menu off the bottom of the screen. In that case
+            //   it is brought back to a reasonable position.
+            if (clickY > DOOR_HEIGHT - _this.height) {
+                y = DOOR_HEIGHT - _this.height;
+            } else {
+                y = clickY;
+            }
+            
+            // Draw the menu at (x,y)
+            _this.show(x, y);
+        }
+        clearSelection();
     });
-*/
+    
+    
+    ////
+    //  Button behavior
+    ////
+    
+    settings_btn.on('selected', function () {
+        settingsMenu.show(background.left, background.top);
+        _this.hide();
+    });
+    
+    // Close the main menu if user has clicked the close button 
+    close_btn.on('selected', function() {
+        _this.hide();
+        clearSelection();
+    });
+    
 }
 

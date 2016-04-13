@@ -5,6 +5,8 @@
 */
 function SettingsMenu() {
     
+    var _this = this;
+    
     // Define the menu area...
     var background = new fabric.Rect({
         selectable: false,
@@ -15,7 +17,7 @@ function SettingsMenu() {
     });
 
     // ...and all app buttons
-    var close_btn = new Button('cancel', 0, 0, {id: 'closeSettingsMenu', hasBorders: false});
+    var close_btn = new Button('cancel');
     var wallpaper_btn = new MenuButton('scene');
     var doorbellTone_btn = new MenuButton('doorbell');
     var profiles_btn = new MenuButton('user');
@@ -157,6 +159,12 @@ function SettingsMenu() {
         }
         
     };
+    
+    // Close the settings menu and return to the main menu if user has clicked the close button 
+    close_btn.on('selected', function() {
+        mainMenu.show(background.left, background.top);
+        _this.hide();
+    });
     
     // Update settings button and temp display when units are changed
     tempFormat_btn.on('selected', function() {
