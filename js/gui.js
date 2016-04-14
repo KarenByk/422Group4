@@ -112,6 +112,15 @@ function GUI(notificationBar) {
         knobOut.top + ICON_MARGIN + ICON_SIZE,
         {id: 'keypad'});
         
+    var password_btn = new Button('keypad',
+        knobIn.left - ICON_SIZE*2,
+        knobIn.top,
+        {id: 'password'});
+    password_btn.set({
+        width: ICON_SIZE * 2,
+        height: ICON_SIZE * 2,
+    });
+        
     /* colorRed(unlock_btn);
     colorRed(emergency_btn);
     colorGreen(lock_btn); */
@@ -206,6 +215,7 @@ function GUI(notificationBar) {
         Function: unlock
         
             Unlocks the door and calls <NotificationBar.unlocked>.
+            If child lock is on, require password before opening.
     */
     this.unlock = function() {
         
@@ -238,6 +248,7 @@ function GUI(notificationBar) {
         Function: openDoor
         
             Opens the door and calls <NotificationBar.doorOpened>.
+            If child lock is on, require password before opening.
     */
     this.openDoor = function() {
         
@@ -257,7 +268,7 @@ function GUI(notificationBar) {
     */
     this.closeDoor = function() {
         
-        if (!this.isClosed) {
+        if (!this.isClosed) {        
             inside.add(open_btn);
             inside.remove(close_btn);
             notificationBar.doorClosed();
@@ -279,7 +290,23 @@ function GUI(notificationBar) {
     
     // Unlock the door when 'unlock' button is touched
     unlock_btn.on('selected', function(){
-        _this.unlock();
+        var childLockStatus = settingsMenu.getChildLockStatus();
+        var passwordCorrect = true;
+        if(childLockStatus === true) {
+                passwordCorrect = false;
+                inside.add(password_btn);
+                settingsMenu.hide();
+                mainMenu.hide();
+                
+                password_btn.on('selected', function() {
+                    inside.remove(password_btn);        
+                    passwordCorrect = true;
+                    _this.unlock();
+                });
+        }
+        if(passwordCorrect) {
+            _this.unlock();
+        }
         clearSelection();
     });
     
@@ -304,12 +331,30 @@ function GUI(notificationBar) {
     
     // Unlock and open the door when 'open' button is touched
     open_btn.on('selected', function(){
+        var childLockStatus = settingsMenu.getChildLockStatus();
+        var passwordCorrect = true;
         if (_this.isClosed) { 
+                        
+            if(childLockStatus === true) {
+                passwordCorrect = false;
+                inside.add(password_btn);
+                settingsMenu.hide();
+                mainMenu.hide();
+                
+                password_btn.on('selected', function() {
+                    inside.remove(password_btn);
+                    passwordCorrect = true;
+                    _this.unlock();
+                    _this.openDoor();
+                });
+            }
+            if(passwordCorrect ) {
                 if (_this.isLocked) {
                     _this.unlock();
                 }
                 _this.openDoor();
             }
+        }
         clearSelection();
     });
     
@@ -323,4 +368,9 @@ function GUI(notificationBar) {
         clearSelection();
     });
     
+    /*
+    password_btn.on('selected', function() {
+        inside.remove(password_btn);        
+    });
+    */
 }

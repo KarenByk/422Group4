@@ -27,6 +27,8 @@ function SettingsMenu() {
     var dateTimeFormat_btn = new MenuButton('dateTime');
     var tempFormat_btn = new MenuButton('fahrenheit');
     
+    var isChildLockOn = false;
+    
     // Menu dimensions are accessible from outside the class
     /* 
         Variable: width
@@ -185,5 +187,21 @@ function SettingsMenu() {
         clearSelection();
         clock.updateWeather();
     });
+    
+    
+    childLock_btn.on('selected', function() {
+        if(!isChildLockOn){
+            notificationBar.childLockOn();
+            isChildLockOn = true;
+        }
+        else {
+            notificationBar.childLockOff();
+            isChildLockOn = false;
+        }
+    });
+    
+    this.getChildLockStatus = function() {
+        return isChildLockOn;
+    };
     
 }

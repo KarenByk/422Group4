@@ -97,6 +97,21 @@ function NotificationBar() {
     }
     
     /*
+        Function: childLockOn childLockOff
+    
+        Turns child lock on & off
+     */
+    this.childLockOn = function() {
+        pushAlert(_childLock, 4);
+        this.update();
+    }
+    
+    this.childLockOff = function() {
+        popAlert(_childLock);
+        this.update();
+    }
+    
+    /*
         Function: update
         
         Redraws the current alert queue. It is preferable to interact with the notification bar through the specific functions (<locked>, <unlocked>, etc.) as these call <update> when finished.
