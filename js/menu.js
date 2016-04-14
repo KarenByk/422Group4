@@ -7,6 +7,8 @@ function MainMenu() {
     
     var _this = this;
     
+    this.canBeShown = true;
+    
     // Define the menu area...
     var background = new fabric.Rect({
         selectable: false,
@@ -65,7 +67,7 @@ function MainMenu() {
     /* 
         Function: show
         
-            Draws the menu if it's not already on screen
+            Draws the menu if it's not already on screen.
         
         Parameters:
             x (Number) - Horizontal position of the menu's top-left corner, in pixels
@@ -143,7 +145,7 @@ function MainMenu() {
     /* 
         Function: hide
         
-            Hides the menu if it's already on screen
+            Hides the menu if it's already on screen.
     */
     this.hide = function() {
         
@@ -171,27 +173,29 @@ function MainMenu() {
     
     // Listens for a click somewhere on the inside canvas
     inside.on('mouse:down', function(event) {
-        // If the user hasn't clicked on any object
-        if (typeof event.target === 'undefined') {
-            var y = 0;
-            var clickY = event.e.clientY;
-            
-            // x is calculated to keep menu in the middle of the door
-            var x = (DOOR_WIDTH - _this.width) / 2;
-            
-            // y is set to where the user clicks, unless it would force
-            //   the menu off the bottom of the screen. In that case
-            //   it is brought back to a reasonable position.
-            if (clickY > DOOR_HEIGHT - _this.height) {
-                y = DOOR_HEIGHT - _this.height;
-            } else {
-                y = clickY;
+        if (_this.canBeShown) {
+            // If the user hasn't clicked on any object
+            if (typeof event.target === 'undefined') {
+                var y = 0;
+                var clickY = event.e.clientY;
+                
+                // x is calculated to keep menu in the middle of the door
+                var x = (DOOR_WIDTH - _this.width) / 2;
+                
+                // y is set to where the user clicks, unless it would force
+                //   the menu off the bottom of the screen. In that case
+                //   it is brought back to a reasonable position.
+                if (clickY > DOOR_HEIGHT - _this.height) {
+                    y = DOOR_HEIGHT - _this.height;
+                } else {
+                    y = clickY;
+                }
+                
+                // Draw the menu at (x,y)
+                _this.show(x, y);
             }
-            
-            // Draw the menu at (x,y)
-            _this.show(x, y);
+            clearSelection();
         }
-        clearSelection();
     });
     
     
@@ -199,9 +203,17 @@ function MainMenu() {
     //  Button behavior
     ////
     
+    noteFromInside_btn.on('selected', function () {
+        _this.canBeShown = false;
+        messaging.showInside();
+        _this.hide();
+        clearSelection();
+    });
+    
     settings_btn.on('selected', function () {
         settingsMenu.show(background.left, background.top);
         _this.hide();
+        clearSelection();
     });
     
     // Close the main menu if user has clicked the close button 

@@ -364,7 +364,7 @@ function GUI(notificationBar) {
     ////
     
     noteFromOutside_btn.on('selected', function(){
-        console.log('note');
+        messaging.showOutside();
         clearSelection();
     });
     
