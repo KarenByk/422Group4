@@ -72,6 +72,8 @@ function SettingsMenu() {
             y (Number) - Vertical position of the menu's top-left corner, in pixels
     */
     this.show = function(x, y) {
+        
+        mainMenu.canBeShown = false;
 
         // If not already on screen
         if (!this.isVisible) {
@@ -142,6 +144,8 @@ function SettingsMenu() {
     */
     this.hide = function() {
         
+        mainMenu.canBeShown = true;
+        
         // If already onscreen
         if (this.isVisible) {
             // Remove all menu buttons
@@ -164,8 +168,8 @@ function SettingsMenu() {
     
     // Close the settings menu and return to the main menu if user has clicked the close button 
     close_btn.on('selected', function() {
-        mainMenu.show(background.left, background.top);
         _this.hide();
+        mainMenu.show(background.left, background.top);
     });
     
     // Update settings button and temp display when units are changed
