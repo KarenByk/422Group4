@@ -7,11 +7,13 @@ function Messaging() {
     
     var _this = this;
     
+    var unreadMessage = [];
     var insidePaths = [];
     var outsidePaths = [];
     
     this.isInsideVisible = false;
     this.isOutsideVisible = false;
+    this.hasNewMessage = false;
     
     // Define the writing areas...
     var backgroundInside = new fabric.Rect({
@@ -31,7 +33,7 @@ function Messaging() {
         originX: 'center',
         width: 4 * ICON_MARGIN + 3 * ICON_SIZE,
         height: 4 * ICON_MARGIN + 2 * ICON_SIZE,
-        left: DOOR_WIDTH / 2, top: DOOR_HEIGHT / 4,
+        left: DOOR_WIDTH / 2, top: DOOR_HEIGHT / 3,
         fill: '#000', opacity: 0.5,
         //shadow: 'rgba(0,0,0,1) 0px 0px 5px',
         rx: DOOR_HEIGHT / 70, ry: DOOR_HEIGHT / 70,
@@ -64,13 +66,23 @@ function Messaging() {
         
             Draws the messaging area inside if it's not on screen.
     */
-    this.showInside = function() {
+    this.showInside = function(mode) {
+        
         if (!this.isInsideVisible) {
             inside.add(backgroundInside, 
-                        acceptInside_btn, 
                         cancelInside_btn);
+            if (mode === 'write') {
+                inside.add(acceptInside_btn);
+            }
+            if (mode === 'read') {
+                for (var i in unreadMessage) {
+                    inside.add(unreadMessage[i]);
+                }
+            }
             this.isInsideVisible = true;
+            mainMenu.canBeShown = false;
         }
+        
     };
     
     /*
@@ -78,13 +90,22 @@ function Messaging() {
         
             Draws the messaging area outside if it's not on screen.
     */
-    this.showOutside = function() {
+    this.showOutside = function(mode) {
+        
         if (!this.isOutsideVisible) {
             outside.add(backgroundOutside, 
-                        acceptOutside_btn, 
                         cancelOutside_btn);
+            if (mode === 'write') {
+                outside.add(acceptOutside_btn);
+            }
+            if (mode === 'read') {
+                for (var i in outsidePaths) {
+                    outside.add(outsidePaths[i]);
+                }
+            }
             this.isOutsideVisible = true;
         }
+        
     };
     
     /*
@@ -93,6 +114,7 @@ function Messaging() {
             Clears inside messaging area.
     */
     this.hideInside = function() {
+        
         if (this.isInsideVisible) {
             inside.remove(backgroundInside,
                            acceptInside_btn,
@@ -100,9 +122,15 @@ function Messaging() {
             for (var i in insidePaths) {
                 inside.remove(insidePaths[i]);
             }
+            for (var i in unreadMessage) {
+                inside.remove(unreadMessage[i]);
+            }
+            insidePaths = [];
+            unreadMessage = [];
             this.isInsideVisible = false;
             mainMenu.canBeShown = true;
         }
+        
     };
     
     /*
@@ -111,6 +139,7 @@ function Messaging() {
             Clears outside messaging area.
     */
     this.hideOutside = function() {
+        
         if (this.isOutsideVisible) {
             outside.remove(backgroundOutside,
                            acceptOutside_btn,
@@ -118,10 +147,13 @@ function Messaging() {
             for (var i in outsidePaths) {
                 outside.remove(outsidePaths[i]);
             }
+            outsidePaths = [];
             this.isOutsideVisible = false;
             mainMenu.canBeShown = true;
         }
+        
     };
+    
     
     // Set color and width of drawing brush
     inside.freeDrawingBrush.color = '#fff';
@@ -133,6 +165,22 @@ function Messaging() {
     ////
     //  Button behavior
     ////
+    
+    acceptInside_btn.on('selected', function() {
+        outsidePaths = insidePaths.slice();
+        _this.hideInside();
+        _this.showOutside('read');
+        clearSelection();
+    });
+    
+    acceptOutside_btn.on('selected', function() {
+        unreadMessage = outsidePaths.slice();
+        _this.hideOutside();
+        _this.hasNewMessage = true;
+        notificationBar.messageReceived();
+        gui.showUnreadNote();
+        clearSelection();
+    });
     
     cancelInside_btn.on('selected', function() {
         _this.hideInside();
@@ -162,6 +210,7 @@ function Messaging() {
     });
     
     inside.on('path:created', function(event) {
+        event.path.set({selectable: false});
         insidePaths.push(event.path);
     });
     
@@ -178,6 +227,7 @@ function Messaging() {
     });
     
     outside.on('path:created', function(event) {
+        event.path.set({selectable: false});
         outsidePaths.push(event.path);
     });
     

@@ -44,7 +44,7 @@ function TimeDate() {
     
     var date = new Text('', {
         originY: 'bottom',
-        left: DOOR_WIDTH / 2, top: DOOR_HEIGHT / 4,
+        left: DOOR_WIDTH / 2, top: DOOR_HEIGHT / 4.5,
         fontSize: 3 * DOOR_HEIGHT / 70
     });
     

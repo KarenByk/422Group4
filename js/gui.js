@@ -36,22 +36,22 @@ function GUI(notificationBar) {
     var notificationBar = notificationBar;
     
     var knobIn = new fabric.Circle({
-        radius: DOOR_WIDTH / 20, 
+        radius: DOOR_WIDTH / 26, 
         fill: 'black', stroke: 'white',
         originX: 'center', originY: 'center', 
         lockMovementX: true, lockMovementY: true,
         lockScalingX: true, lockScalingY: true,
-        left: 9 * DOOR_WIDTH / 10, top: DOOR_HEIGHT / 2,
+        left: 9 * DOOR_WIDTH / 10, top: 2 * DOOR_HEIGHT / 3,
         id: 'knobIn'
     });
 
     var knobOut = new fabric.Circle({
-        radius: DOOR_WIDTH / 20, 
+        radius: DOOR_WIDTH / 26, 
         fill: 'black', stroke: 'white',
         originX: 'center', originY: 'center', 
         lockMovementX: true, lockMovementY: true,
         lockScalingX: true, lockScalingY: true,
-        left: DOOR_WIDTH / 10, top: DOOR_HEIGHT / 2,
+        left: DOOR_WIDTH / 10, top: 2 * DOOR_HEIGHT / 3,
         id: 'knobOut'
     });
     
@@ -83,29 +83,35 @@ function GUI(notificationBar) {
         {id: 'close'});
         
     var user_btn = new Button('user', 
-        knobOut.left, 
-        DOOR_HEIGHT / 2 - ICON_MARGIN - ICON_SIZE,
+        knobIn.left - ICON_MARGIN - ICON_SIZE, 
+        //DOOR_HEIGHT / 2 - ICON_MARGIN - ICON_SIZE,
+        knobIn.top,
         {id: 'selectUser'});
+        
+    var help_btn = new Button('help', 
+        knobOut.left,
+        //DOOR_HEIGHT / 2 + ICON_MARGIN + ICON_SIZE,
+        lock_btn.top,
+        {id: 'help'});
         
     var emergency_btn = new Button('emergency', 
         knobOut.left, 
-        DOOR_HEIGHT / 2,
+        help_btn.top - ICON_MARGIN - ICON_SIZE,
         {id: 'emergency'});
-        
-    var help_btn = new Button('help', 
-        knobOut.left, 
-        DOOR_HEIGHT / 2 + ICON_MARGIN + ICON_SIZE,
-        {id: 'help'});
         
     var doorbell_btn = new Button('doorbell', 
         knobOut.left, 
         knobOut.top - ICON_MARGIN - ICON_SIZE,
         {id: 'doorbell'});
         
-    var noteFromOutside_btn = new Button('note', 
+    var noteFromOutside_btn = new Button('noteWrite', 
         knobOut.left + ICON_MARGIN + ICON_SIZE, 
         knobOut.top,
         {id: 'noteFromOutside'});
+        
+    var unreadNote = new Button('noteRead',
+        knobOut.left,
+        emergency_btn.top - ICON_MARGIN - 2 * ICON_SIZE);
         
     var keypad_btn = new Button('keypad', 
         knobOut.left, 
@@ -116,6 +122,7 @@ function GUI(notificationBar) {
         knobIn.left - ICON_SIZE*2,
         knobIn.top,
         {id: 'password'});
+        
     password_btn.set({
         width: ICON_SIZE * 2,
         height: ICON_SIZE * 2,
@@ -277,6 +284,27 @@ function GUI(notificationBar) {
         
     };
     
+    /*
+        Function: showUnreadNote
+        
+            Alerts user of an unread note from outside.
+    */
+    this.showUnreadNote = function() {
+        
+        inside.add(unreadNote);
+        
+    };
+    
+    /*
+        Function: hideUnreadNote
+        
+            Removes unread note icon.
+    */
+    this.hideUnreadNote = function() {
+        
+        inside.remove(unreadNote);
+        
+    };
     
     ////
     // Physical door behavior
@@ -364,7 +392,14 @@ function GUI(notificationBar) {
     ////
     
     noteFromOutside_btn.on('selected', function(){
-        messaging.showOutside();
+        messaging.showOutside('write');
+        clearSelection();
+    });
+    
+    unreadNote.on('selected', function(){
+        messaging.showInside('read');
+        inside.remove(unreadNote);
+        notificationBar.messageRead();
         clearSelection();
     });
     

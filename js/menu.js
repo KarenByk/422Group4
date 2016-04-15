@@ -21,7 +21,7 @@ function MainMenu() {
     // ...and all app buttons
     var close_btn = new Button('cancel');
     var houseAlarm_btn = new MenuButton('houseAlarm');
-    var noteFromInside_btn = new MenuButton('note');
+    var noteFromInside_btn = new MenuButton('noteWrite');
     var mirror_btn = new MenuButton('mirror');
     var traffic_btn = new MenuButton('traffic');
     var weather_btn = new MenuButton('weather');
@@ -205,7 +205,8 @@ function MainMenu() {
     
     noteFromInside_btn.on('selected', function () {
         _this.canBeShown = false;
-        messaging.showInside();
+        messaging.hideInside();
+        messaging.showInside('write');
         _this.hide();
         clearSelection();
     });

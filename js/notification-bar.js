@@ -19,7 +19,7 @@ function NotificationBar() {
     var _open = new Notification('open');
     var _houseAlarm = new Notification('houseAlarm');
     var _childLock = new Notification('childLock');
-    var _newMessage = new Notification('newMessage');
+    var _newMessage = new Notification('noteRead');
     var _outsideLight = new Notification('outsideLight');
     
     // Color the locked/closed and unlocked/open icons
@@ -125,7 +125,7 @@ function NotificationBar() {
         }
         
         var numberOfAlerts = alerts.length;
-        var nBarIconSize = background.height / 1.75;
+        var nBarIconSize = background.height / 2;
         
         // Resize icons if there are too many to fit in the bar width
         if (ICON_MARGIN * (numberOfAlerts + 1) + nBarIconSize * numberOfAlerts > DOOR_WIDTH) {
