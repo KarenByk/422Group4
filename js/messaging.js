@@ -11,9 +11,28 @@ function Messaging() {
     var insidePaths = [];
     var outsidePaths = [];
     
+    /*
+        Variable: isInsideVisible
+        
+            Tracks whether the inside writing area is visible.
+        
+        Type:
+        
+            Boolean
+    */
     this.isInsideVisible = false;
+    
+    /*
+        Variable: isOutsideVisible
+        
+            Tracks whether the outside writing area is visible.
+        
+        Type:
+        
+            Boolean
+    */
     this.isOutsideVisible = false;
-    this.hasNewMessage = false;
+    
     
     // Define the writing areas...
     var backgroundInside = new fabric.Rect({
@@ -65,6 +84,10 @@ function Messaging() {
         Function: showInside
         
             Draws the messaging area inside if it's not on screen.
+            
+        Parameters:
+        
+            mode (String) - The mode (either 'read' or 'write') of the inside drawing area.
     */
     this.showInside = function(mode) {
         
@@ -89,6 +112,10 @@ function Messaging() {
         Function: showOutside
         
             Draws the messaging area outside if it's not on screen.
+            
+        Parameters:
+        
+            mode (String) - The mode (either 'read' or 'write') of the outside drawing area.
     */
     this.showOutside = function(mode) {
         
@@ -176,7 +203,6 @@ function Messaging() {
     acceptOutside_btn.on('selected', function() {
         unreadMessage = outsidePaths.slice();
         _this.hideOutside();
-        _this.hasNewMessage = true;
         notificationBar.messageReceived();
         gui.showUnreadNote();
         clearSelection();

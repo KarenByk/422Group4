@@ -3,7 +3,7 @@ var notificationBar = new NotificationBar();
 var gui = new GUI(notificationBar);
 var mainMenu = new MainMenu();
 var settingsMenu = new SettingsMenu();
-var wallpaper = new Wallpaper();
+var wallpaperMenu = new WallpaperMenu();
 var clock = new TimeDate();
 var messaging = new Messaging();
 
@@ -28,5 +28,5 @@ setInterval(function(){
 clock.show();
 
 // Initialize inside and outside wallpapers
-wallpaper.setInside('grass.jpg');
-wallpaper.setOutside('wood4.jpg');
+wallpaperMenu.setInside('grass.jpg');
+wallpaperMenu.setOutside('wood4.jpg');

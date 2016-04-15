@@ -33,7 +33,7 @@ function SettingsMenu() {
     /* 
         Variable: width
         
-            Width of the main menu, in pixels.
+            Width of the settings menu, in pixels.
         
         Type: 
         
@@ -43,7 +43,7 @@ function SettingsMenu() {
     /*
         Variable: height
         
-            Height of the main menu, in pixels.
+            Height of the settings menu, in pixels.
         
         Type:
         
@@ -65,7 +65,7 @@ function SettingsMenu() {
     /* 
         Function: show
         
-            Draws the menu if it's not already on screen
+            Draws the menu if it's not already on screen.
         
         Parameters:
             x (Number) - Horizontal position of the menu's top-left corner, in pixels
@@ -140,7 +140,7 @@ function SettingsMenu() {
     /* 
         Function: hide
         
-            Hides the menu if it's already on screen
+            Hides the menu if it's already on screen.
     */
     this.hide = function() {
         
@@ -166,10 +166,20 @@ function SettingsMenu() {
         
     };
     
+    ////
+    //  Button behavior
+    ////
+    
     // Close the settings menu and return to the main menu if user has clicked the close button 
     close_btn.on('selected', function() {
         _this.hide();
         mainMenu.show(background.left, background.top);
+    });
+    
+    // Close the settings menu and open the wallpaper selection menu
+    wallpaper_btn.on('selected', function() {
+        _this.hide();
+        wallpaperMenu.show(background.left, background.top);
     });
     
     // Update settings button and temp display when units are changed
