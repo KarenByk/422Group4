@@ -64,6 +64,7 @@ function MainMenu() {
                 top: weather_btn.top
             });
             outsideLight_btn.set({
+                
                 left: traffic_btn.left,
                 top: traffic_btn.top + ICON_MARGIN + ICON_SIZE
             });
@@ -109,6 +110,140 @@ function MainMenu() {
                        
             this.isVisible = false;
         }
-    }
+    };
+    
+    var outsideLightBool = false;
+    
+    outsideLight_btn.on('selected', function() {
+        
+        if(outsideLightBool === false)
+        {
+           notificationBar.outsideLight();  
+           outsideLightBool = true;
+        }
+        else
+        {
+            notificationBar.outsideLightOff();
+            outsideLightBool = false;
+        }
+    });
+    
+    mirror_btn.on('selected', function() {
+      //  alert("hi");
+        
+        var mirrorBackgroundShape = new fabric.Rect({
+            width: 250,
+            height: 1100,
+            fill: 'white', stroke: 'black',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 190, top: 650,
+            id: 'mirrorBackground'
+        });    
+        
+        this.canvas.add(mirrorBackgroundShape);
+        
+        var closeMirror = new fabric.Text('X', { 
+            fontSize: 40, stroke: '#000000', left: 275, top: 350 });
+        
+        this.canvas.add(closeMirror);
+        
+        var userHead = new fabric.Circle({ 
+            radius: 50,
+            fill: 'white', 
+            stroke: 'black', 
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 200, top: 250,
+            id: 'userHeadId'
+        });
+        
+        this.canvas.add(userHead);
+        
+        var userBody = new fabric.Rect({
+           width: 1,
+            height: 250,
+            fill: 'white', stroke: 'black',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 200, top: 425,
+            id: 'userBodyId' 
+        });
+        
+        this.canvas.add(userBody);
+        
+        var userLeftHand = new fabric.Rect({
+           width: 1,
+            height: 75,
+            fill: 'white', stroke: 'black',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 180, top: 400,
+            angle: -30,
+            id: 'userBodyId' 
+        });
+        
+        this.canvas.add(userLeftHand);
+        
+        var userRightHand = new fabric.Rect({
+           width: 1,
+            height: 75,
+            fill: 'white', stroke: 'black',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 220, top: 400,
+            angle: 30,
+            id: 'userBodyId' 
+        });
+        
+        this.canvas.add(userRightHand);
+        
+        var userLeftLeg = new fabric.Rect({
+           width: 1,
+            height: 160,
+            fill: 'white', stroke: 'black',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 173, top: 620,
+            angle: -160,
+            id: 'userLeftLegId' 
+        });
+        
+        this.canvas.add(userLeftLeg);
+        
+        var userRightLeg = new fabric.Rect({
+           width: 1,
+            height: 160,
+            fill: 'white', stroke: 'black',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 228, top: 620,
+            angle: 160,
+            id: 'userRightLegId' 
+        });
+        
+        this.canvas.add(userRightLeg);
+        
+        closeMirror.on('selected', function() {
+            userHead.remove();
+            userBody.remove();
+            userLeftHand.remove();
+            userRightHand.remove();
+            userLeftLeg.remove();
+            userRightLeg.remove();
+            mirrorBackgroundShape.remove();
+            closeMirror.remove();
+        });
+        
+    });
+        
+        
     
 }

@@ -43,13 +43,23 @@ function NotificationBar() {
         pushAlert(_open, 1);
         popAlert(_closed);
         this.update();
-    }
+    };
     
     this.doorClosed = function() {
         pushAlert(_closed, 1);
         popAlert(_open);
         this.update();
-    }
+    };
+    
+    this.outsideLight = function() {
+        pushAlert(_outsideLight, 5);
+        this.update();
+    };
+    
+    this.outsideLightOff = function() {
+        popAlert(_outsideLight);
+        this.update();
+    };    
     
     this.update = function() {
         // Remove previous notifications if there are any
