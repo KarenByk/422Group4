@@ -27,7 +27,7 @@ function SettingsMenu() {
     var dateTimeFormat_btn = new MenuButton('dateTime');
     var tempFormat_btn = new MenuButton('fahrenheit');
     
-    var isChildLockOn = false;
+    this.isChildLockOn = false;
     
     // Menu dimensions are accessible from outside the class
     /* 
@@ -82,7 +82,7 @@ function SettingsMenu() {
                 left: x, top: y
             });
             close_btn.set({
-                width: background.width / 8, height: background.width / 8,
+                width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,
                 left: background.left + background.width, 
                 top: background.top
             });
@@ -182,9 +182,16 @@ function SettingsMenu() {
         wallpaperMenu.show(background.left, background.top);
     });
     
+    // Close the settings menu and open the password set keypad
+    setPassword_btn.on('selected', function() {
+        _this.hide();
+        keypad.mode = 'set';
+        keypad.showInside(200, 200);
+    });
+    
     // Update settings button and temp display when units are changed
     tempFormat_btn.on('selected', function() {
-        if(clock.tempFormat === 'c') {
+        if (clock.tempFormat === 'c') {
             clock.tempFormat = 'f';
             tempFormat_btn.setElement(document.getElementById('fahrenheit'));
             tempFormat_btn.scaleToWidth(ICON_SIZE);
@@ -204,18 +211,15 @@ function SettingsMenu() {
     
     
     childLock_btn.on('selected', function() {
-        if(!isChildLockOn){
+        if (!this.isChildLockOn) {
             notificationBar.childLockOn();
-            isChildLockOn = true;
+            _this.isChildLockOn = true;
         }
         else {
             notificationBar.childLockOff();
-            isChildLockOn = false;
+            _this.isChildLockOn = false;
         }
+        clearSelection();
     });
-    
-    this.getChildLockStatus = function() {
-        return isChildLockOn;
-    };
     
 }

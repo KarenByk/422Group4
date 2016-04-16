@@ -63,7 +63,7 @@ function NotificationBar() {
         pushAlert(_open, 1);
         popAlert(_closed);
         this.update();
-    }
+    };
     
     /*
         Function: doorClosed
@@ -74,7 +74,7 @@ function NotificationBar() {
         pushAlert(_closed, 1);
         popAlert(_open);
         this.update();
-    }
+    };
     
     /*
         Function: messageReceived
@@ -84,7 +84,7 @@ function NotificationBar() {
     this.messageReceived = function() {
         pushAlert(_newMessage, 3);
         this.update();
-    }
+    };
     
     /*
         Function: messageRead
@@ -94,7 +94,7 @@ function NotificationBar() {
     this.messageRead = function() {
         popAlert(_newMessage);
         this.update();
-    }
+    };
     
     /*
         Function: childLockOn childLockOff
@@ -104,12 +104,12 @@ function NotificationBar() {
     this.childLockOn = function() {
         pushAlert(_childLock, 4);
         this.update();
-    }
+    };
     
     this.childLockOff = function() {
         popAlert(_childLock);
         this.update();
-    }
+    };
     
     /*
         Function: update

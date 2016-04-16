@@ -63,22 +63,22 @@ function Messaging() {
     var acceptInside_btn = new Button('accept', 
         backgroundInside.left + backgroundInside.width / 2, 
         backgroundInside.top + backgroundInside.height,
-        {width: backgroundInside.width / 8, height: backgroundInside.width / 8});
+        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,});
         
     var cancelInside_btn = new Button('cancel', 
         backgroundInside.left + backgroundInside.width / 2, 
         backgroundInside.top,
-        {width: backgroundInside.width / 8, height: backgroundInside.width / 8});
+        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,});
         
     var acceptOutside_btn = new Button('accept', 
         backgroundOutside.left + backgroundOutside.width / 2, 
         backgroundOutside.top + backgroundOutside.height,
-        {width: backgroundOutside.width / 8, height: backgroundOutside.width / 8});
+        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,});
         
     var cancelOutside_btn = new Button('cancel', 
         backgroundOutside.left + backgroundOutside.width / 2, 
         backgroundOutside.top,
-        {width: backgroundOutside.width / 8, height: backgroundOutside.width / 8});
+        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,});
     
     /*
         Function: showInside

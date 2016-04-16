@@ -6,6 +6,7 @@ var settingsMenu = new SettingsMenu();
 var wallpaperMenu = new WallpaperMenu();
 var clock = new TimeDate();
 var messaging = new Messaging();
+var keypad = new Keypad();
 
 // Initialize interface buttons and alerts
 gui.drawKnobs();

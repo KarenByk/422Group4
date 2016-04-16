@@ -259,7 +259,7 @@ function GUI(notificationBar) {
     */
     this.openDoor = function() {
         
-        if (this.isClosed) {
+        if (this.isClosed && !this.isLocked) {
             inside.add(close_btn);
             inside.remove(open_btn);
             notificationBar.doorOpened();
@@ -341,9 +341,7 @@ function GUI(notificationBar) {
     // Unlock and open or close the door if inside knob is touched
     knobIn.on('selected', function(){
         if (_this.isClosed) { 
-            if (_this.isLocked) {
-                _this.unlock();
-            }
+            _this.unlock();
             _this.openDoor();
         } else {
             _this.closeDoor();
@@ -354,35 +352,20 @@ function GUI(notificationBar) {
     // Close the door when 'close' button is touched
     close_btn.on('selected', function(){
         _this.closeDoor();
+        if (settingsMenu.isChildLockOn) {
+            _this.lock();
+        }
         clearSelection();
     });
     
     // Unlock and open the door when 'open' button is touched
     open_btn.on('selected', function(){
-        var childLockStatus = settingsMenu.getChildLockStatus();
-        var passwordCorrect = true;
-        if (_this.isClosed) { 
-                        
-            if(childLockStatus === true) {
-                passwordCorrect = false;
-                inside.add(password_btn);
-                settingsMenu.hide();
-                mainMenu.hide();
-                
-                password_btn.on('selected', function() {
-                    inside.remove(password_btn);
-                    passwordCorrect = true;
-                    _this.unlock();
-                    _this.openDoor();
-                });
-            }
-            if(passwordCorrect ) {
-                if (_this.isLocked) {
-                    _this.unlock();
-                }
-                _this.openDoor();
-            }
+        if(settingsMenu.isChildLockOn) {
+            keypad.showInside(user_btn.left - ICON_SIZE - keypad.width, user_btn.top - keypad.height / 2);
+        } else {
+            _this.unlock();
         }
+        _this.openDoor();
         clearSelection();
     });
     
@@ -390,6 +373,11 @@ function GUI(notificationBar) {
     ////
     //  Button behavior
     ////
+    
+    keypad_btn.on('selected', function() {
+        keypad.showOutside(noteFromOutside_btn.left + ICON_SIZE, noteFromOutside_btn.top - keypad.height / 2);
+        clearSelection();
+    });
     
     noteFromOutside_btn.on('selected', function(){
         messaging.showOutside('write');

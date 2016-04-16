@@ -82,7 +82,7 @@ function MainMenu() {
                 left: x, top: y
             });
             close_btn.set({
-                width: background.width / 8, height: background.width / 8,
+                width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,
                 left: background.left + background.width, 
                 top: background.top
             });
@@ -177,7 +177,8 @@ function MainMenu() {
             // If the user hasn't clicked on any object
             if (typeof event.target === 'undefined') {
                 var y = 0;
-                var clickY = event.e.clientY;
+                var p = inside.getPointer(event.e);
+                var clickY = p.y;
                 
                 // x is calculated to keep menu in the middle of the door
                 var x = (DOOR_WIDTH - _this.width) / 2;
