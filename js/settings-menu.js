@@ -186,7 +186,7 @@ function SettingsMenu() {
     setPassword_btn.on('selected', function() {
         _this.hide();
         keypad.mode = 'set';
-        keypad.showInside(200, 200);
+        keypad.showInside();
     });
     
     // Update settings button and temp display when units are changed
@@ -211,13 +211,15 @@ function SettingsMenu() {
     
     
     childLock_btn.on('selected', function() {
-        if (!this.isChildLockOn) {
+        if (!_this.isChildLockOn) {
             notificationBar.childLockOn();
             _this.isChildLockOn = true;
+            gui.needsPassword = true;
         }
         else {
             notificationBar.childLockOff();
             _this.isChildLockOn = false;
+            gui.needsPassword = false;
         }
         clearSelection();
     });

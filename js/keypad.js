@@ -98,15 +98,17 @@ function Keypad() {
             
         Parameters:
         
-            x (Number) - Horizontal position of the keypad's top-left corner, in pixels
-            y (Number) - Vertical position of the keypad's top-left corner, in pixels
+            x (Number) - Optional horizontal position of the keypad's top-left corner, in pixels
+            y (Number) - Optional vertical position of the keypad's top-left corner, in pixels
     */
     this.showInside = function(x, y) {
         
         if (!this.isVisible) {
             this.isVisible = true;
             this.canSwipe = true;
-            positionElements(x, y);
+            positionElements(
+                x || gui.userBtnX - ICON_SIZE - background.width, 
+                y || gui.userBtnY - background.height / 2);
             inside.add(background, p1, p2, p3, p4, p5, p6, p7, p8, p9, close_btn);
         }
         
@@ -119,15 +121,17 @@ function Keypad() {
             
         Parameters:
         
-            x (Number) - Horizontal position of the keypad's top-left corner, in pixels
-            y (Number) - Vertical position of the keypad's top-left corner, in pixels
+            x (Number) - Optional horizontal position of the keypad's top-left corner, in pixels
+            y (Number) - Optional vertical position of the keypad's top-left corner, in pixels
     */
     this.showOutside = function(x, y) {
         
         if (!this.isVisible) {
             this.isVisible = true;
             this.canSwipe = true;
-            positionElements(x, y);
+            positionElements(
+                x || gui.noteBtnX + ICON_SIZE, 
+                y || gui.noteBtnY - keypad.height / 2);
             outside.add(background, p1, p2, p3, p4, p5, p6, p7, p8, p9, close_btn);
         }
         
@@ -194,14 +198,13 @@ function Keypad() {
                 if (_this.mode === 'set') {
                     correctSeq = seq.slice();
                     _this.mode = 'normal';
+                } else if (checkIfCorrect(seq)) {
+                    gui.needsPassword = false;
                 }
-                if (checkIfCorrect(seq)) {
-                    path.forEach(function(point) {
-                        point.setFill('green');
-                        inside.renderAll();
-                    });
-                    gui.unlock();
-                }
+                path.forEach(function(point) {
+                    point.setFill('green');
+                    inside.renderAll();
+                });
                 setTimeout(function() { _this.hide(); }, 2000);
                 _this.canSwipe = false;
             }
@@ -236,6 +239,7 @@ function Keypad() {
                         point.setFill('green');
                         outside.renderAll();
                     });
+                    //gui.needsPassword = false;
                     gui.unlock();
                 }
                 setTimeout(function() { _this.hide(); }, 2000);
