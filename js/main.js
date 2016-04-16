@@ -28,5 +28,5 @@ setInterval(function(){
 clock.show();
 
 // Initialize inside and outside wallpapers
-wallpaperMenu.setInside('grass.jpg');
-wallpaperMenu.setOutside('wood4.jpg');
+wallpaperMenu.set(inside, 'grass');
+wallpaperMenu.set(outside, 'wood');

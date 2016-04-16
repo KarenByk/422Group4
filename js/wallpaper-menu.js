@@ -5,11 +5,23 @@
 */
 function WallpaperMenu() {
     
+    var Thumbnail = fabric.util.createClass(fabric.Image, {
+        type: 'thumbnail',
+        initialize: function(img, options) {
+            this.callSuper('initialize', document.getElementById(img));
+            this.set({
+                hasControls: false,
+                lockMovementX: true, lockMovementY: true,
+                height: 1.5 * ICON_SIZE, width: ICON_SIZE,
+                shadow: 'rgba(0,0,0,1) 0px 0px 7px'
+            });
+            this.set(options);
+        }
+    });
+    
     var _this = this;
     
-    this.wallpapers = ['abstract', 'blue', 'grass', 'hex', 'smoky', 'wood2', 'wood3', 'wood4', 'halloween'];
-    
-    this.selectedSide = 'inside';
+    var selectedSide = inside;
     
     var background = new fabric.Rect({
         selectable: false,
@@ -21,6 +33,8 @@ function WallpaperMenu() {
     });
     
     var close_btn = new Button('cancel');
+    
+    var back_btn = new MenuButton('back');
         
     var selectionHighlight = new fabric.Rect({
         originX: 'center', originY: 'center',
@@ -45,7 +59,22 @@ function WallpaperMenu() {
     var holidays_btn = new MenuButton('holidays');
     var textures_btn = new MenuButton('textures');
     
+    var forest_thumb = new Thumbnail('forest');
+    var beach_thumb = new Thumbnail('beach');
+    var waterfall_thumb = new Thumbnail('waterfall');
+    var fireworks_thumb = new Thumbnail('fireworks');
+    var halloween_thumb = new Thumbnail('halloween');
+    var christmas_thumb = new Thumbnail('christmas');
+    var wood_thumb = new Thumbnail('wood');
+    var grass_thumb = new Thumbnail('grass');
+    var abstract_thumb = new Thumbnail('abstract');
+    
     var selectSide = function(obj) {
+        if (obj === insideText) {
+            selectedSide = inside;
+        } else {
+            selectedSide = outside;
+        }
         inside.remove(selectionHighlight, insideText, outsideText);
         selectionHighlight.set({
             width: 1.2 * obj.width, 
@@ -93,23 +122,63 @@ function WallpaperMenu() {
             left: holidays_btn.left + ICON_SIZE + ICON_MARGIN,
             top: holidays_btn.top
         });
+        forest_thumb.set({
+            left: background.left + ICON_MARGIN,
+            top: insideText.top + insideText.height + ICON_MARGIN
+        });
+        beach_thumb.set({
+            left: forest_thumb.left + forest_thumb.width + ICON_MARGIN,
+            top: forest_thumb.top
+        });
+        waterfall_thumb.set({
+            left: beach_thumb.left + beach_thumb.width + ICON_MARGIN,
+            top: beach_thumb.top
+        });
+        fireworks_thumb.set({
+            left: forest_thumb.left,
+            top: forest_thumb.top
+        });
+        halloween_thumb.set({
+            left: fireworks_thumb.left + fireworks_thumb.width + ICON_MARGIN,
+            top: fireworks_thumb.top
+        });
+        christmas_thumb.set({
+            left: halloween_thumb.left + halloween_thumb.width + ICON_MARGIN,
+            top: halloween_thumb.top
+        });
+        wood_thumb.set({
+            left: forest_thumb.left,
+            top: forest_thumb.top
+        });
+        grass_thumb.set({
+            left: wood_thumb.left + wood_thumb.width + ICON_MARGIN,
+            top: wood_thumb.top
+        });
+        abstract_thumb.set({
+            left: grass_thumb.left + grass_thumb.width + ICON_MARGIN,
+            top: grass_thumb.top
+        });
         close_btn.set({
             width: background.width / 8, height: background.width / 8,
             left: background.left + background.width, 
             top: background.top
         });
+        back_btn.set({
+            left: background.left + ICON_MARGIN, 
+            top: background.top + background.height - ICON_MARGIN - ICON_SIZE
+        });
+        
         
         // Then add all to the inside screen
         inside.add(background, 
                    insideText, 
                    outsideText,
-                   landscapes_btn,
-                   holidays_btn,
-                   textures_btn,
                    close_btn);
                    
         // Select inside by default
         selectSide(insideText);
+        
+        showCategories();
         
     };
     
@@ -125,27 +194,30 @@ function WallpaperMenu() {
         inside.remove(background, 
                       insideText, 
                       outsideText,
-                      landscapes_btn,
-                      holidays_btn,
-                      textures_btn,
                       selectionHighlight,
                       close_btn);
+                      
+        hideCategories();
+        hideLandscapes();
+        hideHolidays();
+        hideTextures();
         
     };
     
     /*
-        Function: setInside
+        Function: set
         
-            Sets the inside wallpaper.
+            Sets the wallpaper.
             
         Parameters:
         
+            c (Object) - Canvas to change the wallpaper of.
             img (String) - Filename of image, with extension.
     */
-    this.setInside = function(img) {
+    this.set = function(c, img) {
         
-        var url = 'img/wall/' + img;
-        inside.setBackgroundImage(url, inside.renderAll.bind(inside), {
+        var url = 'img/wall/' + img + '.jpg';
+        c.setBackgroundImage(url, c.renderAll.bind(c), {
             width: DOOR_WIDTH,
             height: DOOR_HEIGHT,
             // Needed to position backgroundImage at 0,0
@@ -155,49 +227,152 @@ function WallpaperMenu() {
         
     }
     
-    /*
-        Function: setOutside
+    var showCategories = function() {
+        inside.add(landscapes_btn,
+                   holidays_btn,
+                   textures_btn);
+    };
+    
+    var hideCategories = function() {
         
-            Sets the outside wallpaper.
-            
-        Parameters:
+        inside.remove(landscapes_btn,
+                      holidays_btn,
+                      textures_btn);
+                      
+    };
+    
+    var showLandscapes = function() {
         
-            img (String) - Filename of image, with extension.
-    */
-    this.setOutside = function(img) {
+        inside.add(forest_thumb,
+                   beach_thumb,
+                   waterfall_thumb,
+                   back_btn);
+                   
+    };
+    
+    var hideLandscapes = function() {
         
-        var url = 'img/wall/' + img;
-        outside.setBackgroundImage(url, outside.renderAll.bind(outside), {
-            width: DOOR_WIDTH,
-            height: DOOR_HEIGHT,
-            // Needed to position backgroundImage at 0,0
-            originX: 'left',
-            originY: 'top'
-        });
+        inside.remove(forest_thumb,
+                      beach_thumb,
+                      waterfall_thumb,
+                      back_btn);
+                      
+    };
+
+    var showHolidays = function() {
         
-    }
+        inside.add(fireworks_thumb,
+                   halloween_thumb,
+                   christmas_thumb,
+                   back_btn);
+                   
+    };
+
+    var hideHolidays = function() {
+        
+        inside.remove(fireworks_thumb,
+                      halloween_thumb,
+                      christmas_thumb,
+                      back_btn);
+                      
+    };
+    
+    var showTextures = function() {
+        
+        inside.add(wood_thumb,
+                   grass_thumb,
+                   abstract_thumb,
+                   back_btn);
+                   
+    };
+    
+    var hideTextures = function() {
+        
+        inside.remove(wood_thumb,
+                      grass_thumb,
+                      abstract_thumb,
+                      back_btn);
+                      
+    };
+
     
     ////
     //  Button behavior
     ////
     
     landscapes_btn.on('selected', function() {
-        inside.remove(landscapes_btn, holidays_btn, textures_btn);
+        hideCategories();
+        showLandscapes();
         clearSelection();
     });
     
     holidays_btn.on('selected', function() {
-        inside.remove(landscapes_btn, holidays_btn, textures_btn);
+        hideCategories();
+        showHolidays();
         clearSelection();
     });
     
     textures_btn.on('selected', function() {
-        inside.remove(landscapes_btn, holidays_btn, textures_btn);
+        hideCategories();
+        showTextures();
+        clearSelection();
+    });
+    
+    forest_thumb.on('selected', function() {
+        _this.set(selectedSide, 'forest');
+        clearSelection();
+    });
+    
+    beach_thumb.on('selected', function() {
+        _this.set(selectedSide, 'beach');
+        clearSelection();
+    });
+    
+    waterfall_thumb.on('selected', function() {
+        _this.set(selectedSide, 'waterfall');
+        clearSelection();
+    });
+    
+    fireworks_thumb.on('selected', function() {
+        _this.set(selectedSide, 'fireworks');
+        clearSelection();
+    });
+    
+    halloween_thumb.on('selected', function() {
+        _this.set(selectedSide, 'halloween');
+        clearSelection();
+    });
+    
+    christmas_thumb.on('selected', function() {
+        _this.set(selectedSide, 'christmas');
+        clearSelection();
+    });
+    
+    wood_thumb.on('selected', function() {
+        _this.set(selectedSide, 'wood');
+        clearSelection();
+    });
+    
+    grass_thumb.on('selected', function() {
+        _this.set(selectedSide, 'grass');
+        clearSelection();
+    });
+    
+    abstract_thumb.on('selected', function() {
+        _this.set(selectedSide, 'abstract');
         clearSelection();
     });
     
     close_btn.on('selected', function() {
         _this.hide();
+        clearSelection();
+    });
+    
+    back_btn.on('selected', function() {
+        hideLandscapes();
+        hideHolidays();
+        hideTextures();
+        showCategories();
         clearSelection();
     });
     
