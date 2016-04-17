@@ -24,7 +24,7 @@ function SettingsMenu() {
     var setPassword_btn = new MenuButton('keypad');
     var childLock_btn = new MenuButton('childLock');
     var language_btn = new MenuButton('language');
-    var dateTimeFormat_btn = new MenuButton('dateTime');
+    var timeDateFormat_btn = new MenuButton('timeDate');
     var tempFormat_btn = new MenuButton('fahrenheit');
     
     this.isChildLockOn = false;
@@ -110,13 +110,13 @@ function SettingsMenu() {
                 left: profiles_btn.left,
                 top: childLock_btn.top
             });
-            dateTimeFormat_btn.set({
+            timeDateFormat_btn.set({
                 left: setPassword_btn.left,
                 top: setPassword_btn.top + ICON_MARGIN + ICON_SIZE
             });
             tempFormat_btn.set({
                 left: childLock_btn.left,
-                top: dateTimeFormat_btn.top
+                top: timeDateFormat_btn.top
             });
             
             // Then add all to inside screen
@@ -127,7 +127,7 @@ function SettingsMenu() {
                        setPassword_btn, 
                        childLock_btn, 
                        language_btn, 
-                       dateTimeFormat_btn, 
+                       timeDateFormat_btn, 
                        tempFormat_btn, 
                        close_btn);
                     
@@ -156,7 +156,7 @@ function SettingsMenu() {
                        setPassword_btn, 
                        childLock_btn, 
                        language_btn, 
-                       dateTimeFormat_btn, 
+                       timeDateFormat_btn, 
                        tempFormat_btn, 
                        close_btn);
                   
@@ -187,6 +187,11 @@ function SettingsMenu() {
         _this.hide();
         keypad.mode = 'set';
         keypad.showInside();
+    });
+    
+    timeDateFormat_btn.on('selected', function() {
+        _this.hide();
+        clock.showSettings(background.left, background.top);
     });
     
     // Update settings button and temp display when units are changed

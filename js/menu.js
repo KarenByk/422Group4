@@ -235,8 +235,8 @@ function MainMenu() {
         clearSelection();
     });
     
-    //Click thesettings icon to open the settings menu
-    settings_btn.on('selected', function () {
+    //Click the settings icon to open the settings menu
+    settings_btn.on('selected', function() {
         settingsMenu.show(background.left, background.top);
         _this.hide();
         clearSelection();

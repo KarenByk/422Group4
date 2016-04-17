@@ -5,6 +5,8 @@
 */
 function TimeDate() {
     
+    var _this = this;
+    
     /* 
         Variable: timeFormat
         
@@ -37,6 +39,8 @@ function TimeDate() {
             String
     */
    this.tempFormat = 'f';
+   
+   this.areSettingsVisible = false;
      
     // JSON current weather for zip code 60607
     // Please don't call this more than once every 10 minutes
@@ -58,6 +62,42 @@ function TimeDate() {
     var temp = new Text('', {
         originX: 'left', originY: 'top',
         fontSize: time.fontSize
+    });
+    
+    var background = new fabric.Rect({
+        selectable: false,
+        width: 4 * ICON_MARGIN + 3 * ICON_SIZE,
+        height: 4 * ICON_MARGIN + 3 * ICON_SIZE,
+        fill: '#000', opacity: 0.5,
+        rx: DOOR_HEIGHT / 70, ry: DOOR_HEIGHT / 70
+    });
+    
+    var close_btn = new Button('cancel');
+    
+    this.showSettings = function(x, y) {
+        if (_this.areSettingsVisible == false) {
+            mainMenu.canBeShown = false;
+            background.set({
+                left: x, top: y
+            });
+            close_btn.set({
+                width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,
+                left: background.left + background.width, 
+                top: background.top
+            });
+            inside.add(background,close_btn);
+            _this.areSettingsVisible = true;
+        }
+    };
+    
+    this.hideSettings = function(x, y) {
+        inside.remove(background, close_btn);
+        _this.areSettingsVisible = false;
+        mainMenu.canBeShown = true;
+    };
+    
+    close_btn.on('selected', function() {
+        _this.hideSettings();
     });
     
     /*
