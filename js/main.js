@@ -3,10 +3,11 @@ var notificationBar = new NotificationBar();
 var gui = new GUI(notificationBar);
 var mainMenu = new MainMenu();
 var settingsMenu = new SettingsMenu();
-var wallpaperMenu = new WallpaperMenu();
+var wallpaper = new Wallpaper();
 var clock = new TimeDate();
 var messaging = new Messaging();
-var keypad = new Keypad();
+var emergency = new Emergency();
+var weather = new Weather();
 
 // Initialize interface buttons and alerts
 gui.drawKnobs();
@@ -29,5 +30,6 @@ setInterval(function(){
 clock.show();
 
 // Initialize inside and outside wallpapers
-wallpaperMenu.set(inside, 'grass');
-wallpaperMenu.set(outside, 'wood');
+wallpaper.setInside('grass.jpg');
+wallpaper.setOutside('wood4.jpg');
+
