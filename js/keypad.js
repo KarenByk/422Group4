@@ -256,6 +256,14 @@ function Keypad() {
                     if (functionsOnCorrect.indexOf('open') >= 0) {
                         gui.openDoor();
                     }
+                    if(functionsOnCorrect.indexOf('alarmOn') >= 0) {
+                        console.log('working on');
+                        mainMenu.turnAlarmOn();
+                    }
+                    if(functionsOnCorrect.indexOf('alarmOff') >= 0) {
+                        console.log('working off');
+                        mainMenu.turnAlarmOn();
+                    }
                     gui.needsPassword = false;
                 }
                 setTimeout(function() { _this.hide(); }, 2000);

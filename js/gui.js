@@ -327,6 +327,8 @@ function GUI(notificationBar) {
         if(!_this.needsPassword) {
             _this.unlock();
         } else {
+            mainMenu.hide();
+            settingsMenu.hide();
             keypad.showInside(['unlock']);
         }
         clearSelection();
@@ -371,6 +373,8 @@ function GUI(notificationBar) {
             _this.unlock();
             _this.openDoor();
         } else {
+            mainMenu.hide();
+            settingsMenu.hide();
             keypad.showInside(['unlock', 'open']);
         }
         clearSelection();
