@@ -32,6 +32,20 @@ function GUI(notificationBar) {
             Boolean
     */
     this.isLocked = true;
+     /*
+        Boolean: isAway
+        
+            Tracks whether the door is inactive or not. 
+            False: not active
+            True: active screen
+        
+        Type:
+        
+            Boolean
+    */
+    this.isAWay = true;
+     
+    
     
     this.needsPassword = false;
     
@@ -62,6 +76,14 @@ function GUI(notificationBar) {
         left: DOOR_WIDTH / 2, top: DOOR_HEIGHT / 70,
         fontSize: DOOR_HEIGHT / 10,
         id: 'address'
+    });
+    var awayScreen = new fabric.Rect({
+        selectable: true,
+        originX: 'center',
+        width: DOOR_WIDTH,
+        height: DOOR_HEIGHT,
+        left:0, top:0,
+        fill: '#000', opacity: 0.8
     });
     
     var lock_btn = new Button('unlocked', 
@@ -404,9 +426,27 @@ function GUI(notificationBar) {
         clearSelection();
     });
     
-    /*
-    password_btn.on('selected', function() {
-        inside.remove(password_btn);        
+    emergency_btn.on('selected', function()
+    {
+        emergency.showOutside();
+        emergency.showInside();
+        clearSelection();
     });
-    */
+    awayScreen.on('selected', function()
+    {
+        /*door is active*/
+        if(isAway)
+        {
+            inside.remove(awayScreen);
+            //means not that it is active
+            isAway = false;
+        }
+        else 
+        {
+            sleep(5000);
+            inside.add(awayScreen);
+            isAway= true;
+        }
+
+    });
 }
