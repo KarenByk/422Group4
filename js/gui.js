@@ -43,7 +43,7 @@ function GUI(notificationBar) {
         
             Boolean
     */
-    this.isAWay = true;
+    this.isAway = true;
      
     
     
