@@ -30,6 +30,29 @@ function MainMenu() {
     var log_btn = new MenuButton('log');
     var settings_btn = new MenuButton('settings');
     
+    var alarmPassword_btn = new Button('keypad');
+    alarmPassword_btn.set({
+        shadow: 'rgba(0,0,0,1) 0px 0px 7px',
+        left: background.left + background.width*1.4, 
+        top: DOOR_HEIGHT * .67,
+        width: ICON_SIZE * 2,
+        height: ICON_SIZE * 2,
+    });
+    
+    var alarmStatus = new Button('offAlarm');
+    alarmStatus.set({
+        hasControls: false,
+        lockMovementX: true, lockMovementY: true,
+        height: ICON_SIZE *1.5,
+        width: ICON_SIZE * 2,
+        shadow: 'rgba(0,0,0,1) 0px 0px 7px',
+        left: alarmPassword_btn.left,
+        top: alarmPassword_btn.top - (ICON_SIZE * 2)
+    });
+    
+    var isAlarmOn = false;
+    var pwCorrect = false;
+    
     
     // Menu dimensions are accessible from outside the class
     /* 
@@ -212,6 +235,7 @@ function MainMenu() {
         clearSelection();
     });
     
+    //Click thesettings icon to open the settings menu
     settings_btn.on('selected', function () {
         settingsMenu.show(background.left, background.top);
         _this.hide();
@@ -224,5 +248,38 @@ function MainMenu() {
         clearSelection();
     });
     
+    //Click the home alarm icon to turn alarm on/off
+    houseAlarm_btn.on('selected', function() {
+        _this.hide();
+        inside.add(alarmPassword_btn);
+        inside.add(alarmStatus);
+        clearSelection();
+    });
+            
+        alarmPassword_btn.on('selected', function() {
+           inside.remove(alarmPassword_btn);
+           inside.remove(alarmStatus);
+           
+           pwCorrect = true;          
+
+           if(!isAlarmOn) {
+              notificationBar.houseAlarmOn();
+               isAlarmOn = true;
+               alarmStatus.setElement(document.getElementById('onAlarm'));
+               alarmStatus.scaleToWidth(ICON_SIZE*2);
+               alarmStatus.scaleToHeight(ICON_SIZE*1.5);
+           }
+
+           else  {
+               
+              isAlarmOn = false;
+              notificationBar.houseAlarmOff();
+              alarmStatus.setElement(document.getElementById('offAlarm'));
+              alarmStatus.scaleToWidth(ICON_SIZE*2);
+              alarmStatus.scaleToHeight(ICON_SIZE*1.5);
+           }
+            clearSelection();
+        });
+
 }
 

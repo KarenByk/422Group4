@@ -57,7 +57,7 @@ function GUI(notificationBar) {
         id: 'knobOut'
     });
     
-    var address = new Text('123', {
+    var address = new Text('422', {
         selectable: false,
         left: DOOR_WIDTH / 2, top: DOOR_HEIGHT / 70,
         fontSize: DOOR_HEIGHT / 10,
@@ -121,8 +121,8 @@ function GUI(notificationBar) {
         {id: 'keypad'});
         
     var password_btn = new Button('keypad',
-        knobIn.left - ICON_SIZE*2,
-        knobIn.top,
+        knobIn.left - ICON_SIZE*4,
+        knobIn.top - ICON_SIZE,
         {id: 'password'});
         
     password_btn.set({

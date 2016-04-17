@@ -30,7 +30,7 @@ function NotificationBar() {
     var allNBarElements = [background, _locked, _unlocked, _closed, _open, _houseAlarm, _childLock, _newMessage, _outsideLight];
     
     // Array of initial alerts
-    var alerts = [_locked, _closed, _houseAlarm];
+    var alerts = [_locked, _closed];
     
     /*
         Function: unlocked
@@ -110,6 +110,21 @@ function NotificationBar() {
         popAlert(_childLock);
         this.update();
     };
+    
+    /*
+        Function houseAlarmOn/Off
+    
+        Shows or removes house alarm icon
+    */
+    this.houseAlarmOn = function() {
+        pushAlert(_houseAlarm, 3);
+        this.update();
+    }
+    
+    this.houseAlarmOff = function() {
+        popAlert(_houseAlarm);
+        this.update();
+    }
     
     /*
         Function: update
