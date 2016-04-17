@@ -280,6 +280,13 @@ function MainMenu() {
            }
             clearSelection();
         });
+    weather_btn.on('selected', function()
+    {
+        _this.canBeShown = false;
+        weather.showWeather();
+        _this.hide();
+        clearSelection();
+    });
 
 }
 
