@@ -247,6 +247,7 @@ function GUI(notificationBar) {
     this.lock = function() {
         
         if (!this.isLocked) {
+            if (settingsMenu.isChildLockOn) {this.needsPassword = true;}
             inside.add(unlock_btn);
             inside.remove(lock_btn);
             notificationBar.locked();
@@ -326,7 +327,7 @@ function GUI(notificationBar) {
         if(!_this.needsPassword) {
             _this.unlock();
         } else {
-            keypad.showInside();
+            keypad.showInside(['unlock']);
         }
         clearSelection();
     });
@@ -370,7 +371,7 @@ function GUI(notificationBar) {
             _this.unlock();
             _this.openDoor();
         } else {
-            keypad.showInside();
+            keypad.showInside(['unlock', 'open']);
         }
         clearSelection();
     });
@@ -381,7 +382,9 @@ function GUI(notificationBar) {
     ////
     
     keypad_btn.on('selected', function() {
-        if (_this.isLocked) {keypad.showOutside();}
+        if (_this.isLocked) {
+            keypad.showOutside(['unlock']);
+        }
         clearSelection();
     });
     

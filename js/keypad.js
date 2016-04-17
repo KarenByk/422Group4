@@ -14,6 +14,8 @@ function Keypad() {
     // Mode can be 'normal' or 'set' when setting pattern
     this.mode = 'normal';
     
+    var functionsOnCorrect = [];
+    
     var correctSeq = [1, 2, 3, 6, 9];
     var patternLength = correctSeq.length;
     var seq = [];
@@ -101,9 +103,10 @@ function Keypad() {
             x (Number) - Optional horizontal position of the keypad's top-left corner, in pixels
             y (Number) - Optional vertical position of the keypad's top-left corner, in pixels
     */
-    this.showInside = function(x, y) {
+    this.showInside = function(functions, x, y) {
         
         if (!this.isVisible) {
+            functionsOnCorrect = functions;
             this.isVisible = true;
             this.canSwipe = true;
             positionElements(
@@ -124,9 +127,10 @@ function Keypad() {
             x (Number) - Optional horizontal position of the keypad's top-left corner, in pixels
             y (Number) - Optional vertical position of the keypad's top-left corner, in pixels
     */
-    this.showOutside = function(x, y) {
+    this.showOutside = function(functions, x, y) {
         
         if (!this.isVisible) {
+            functionsOnCorrect = functions;
             this.isVisible = true;
             this.canSwipe = true;
             positionElements(
@@ -194,17 +198,24 @@ function Keypad() {
                     }
                 });
                 
-            } else {
+            } else { // this stuff happens after the pattern is entered
                 if (_this.mode === 'set') {
                     correctSeq = seq.slice();
                     _this.mode = 'normal';
                 } else if (checkIfCorrect(seq)) {
+                    path.forEach(function(point) {
+                        point.setFill('green');
+                        inside.renderAll();
+                    });
+                    if (functionsOnCorrect.indexOf('unlock') >= 0) {
+                        gui.unlock();
+                    }
+                    if (functionsOnCorrect.indexOf('open') >= 0) {
+                        gui.openDoor();
+                    }
                     gui.needsPassword = false;
                 }
-                path.forEach(function(point) {
-                    point.setFill('green');
-                    inside.renderAll();
-                });
+                
                 setTimeout(function() { _this.hide(); }, 2000);
                 _this.canSwipe = false;
             }
@@ -239,8 +250,13 @@ function Keypad() {
                         point.setFill('green');
                         outside.renderAll();
                     });
-                    //gui.needsPassword = false;
-                    gui.unlock();
+                    if (functionsOnCorrect.indexOf('unlock') >= 0) {
+                        gui.unlock();
+                    }
+                    if (functionsOnCorrect.indexOf('open') >= 0) {
+                        gui.openDoor();
+                    }
+                    gui.needsPassword = false;
                 }
                 setTimeout(function() { _this.hide(); }, 2000);
                 _this.canSwipe = false;

@@ -164,6 +164,7 @@ function WallpaperMenu() {
             top: background.top
         });
         back_btn.set({
+            width: 3 * ICON_SIZE / 4, height: 3 * ICON_SIZE / 4,
             left: background.left + ICON_MARGIN, 
             top: background.top + background.height - ICON_MARGIN - ICON_SIZE
         });
