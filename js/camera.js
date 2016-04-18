@@ -131,7 +131,7 @@ function Camera() {
         }
         
         //door answered?
-       timer = setTimeout(function() {logVisitor()}, 100);  //180000 = 3 min
+       timer = setTimeout(function() {logVisitor()}, 180000);  //180000 = 3 min
     };
     
     _this.showAvatarSelection = function() {
@@ -353,5 +353,9 @@ function Camera() {
 
     this.getMissed = function() {
         return missed;
+    }
+    
+    this.subMissed = function() {
+        missed = missed-1;
     }
 }
