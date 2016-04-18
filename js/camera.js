@@ -66,8 +66,8 @@ function Camera() {
     var missed = 0;
     
     var logVisitor = function() {
-        console.log("do stuff");
         missed++;
+        missedMenu.createLog(missed, clock.getDate(), clock.getTime());
         _this.hideOutsideView();
         clearSelection();
     }
@@ -131,7 +131,7 @@ function Camera() {
         }
         
         //door answered?
-       timer = setTimeout(function() {logVisitor()}, 180000);  //180000 = 3 min
+       timer = setTimeout(function() {logVisitor()}, 100);  //180000 = 3 min
     };
     
     _this.showAvatarSelection = function() {
@@ -351,4 +351,7 @@ function Camera() {
         clearSelection();
     });
 
+    this.getMissed = function() {
+        return missed;
+    }
 }

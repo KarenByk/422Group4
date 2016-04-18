@@ -340,7 +340,7 @@ function MainMenu() {
     };
   
   
-        var calendarPhone = false;
+    var calendarPhone = false;
     
     calendar_btn.on('selected', function() {
        alert("calendar clicked");
@@ -415,7 +415,12 @@ function MainMenu() {
                 notificationBubble.remove();
             });       
         }
+        clearSelection();
+    });
     
+    log_btn.on('selected', function() {
+       missedMenu.show(background.left, background.top);
+       clearSelection();
     });
 
 }
