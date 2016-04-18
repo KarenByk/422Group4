@@ -44,8 +44,6 @@ function GUI(notificationBar) {
             Boolean
     */
     this.isAway = true;
-     
-    
     
     this.needsPassword = false;
     
@@ -70,6 +68,13 @@ function GUI(notificationBar) {
         left: DOOR_WIDTH / 10, top: 2 * DOOR_HEIGHT / 3,
         id: 'knobOut'
     });
+    
+    // Implemented to prevent lock-in during emergency
+    this.bringKnobsToFront = function() {
+        notificationBar.update();
+        inside.bringToFront(knobIn);
+        outside.bringToFront(knobOut);
+    };
     
     var address = new Text('422', {
         selectable: false,
