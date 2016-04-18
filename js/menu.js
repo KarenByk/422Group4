@@ -129,8 +129,7 @@ function MainMenu() {
     });
     
     mirror_btn.on('selected', function() {
-      //  alert("hi");
-        
+      
         var mirrorBackgroundShape = new fabric.Rect({
             width: 250,
             height: 1100,
@@ -141,8 +140,9 @@ function MainMenu() {
             left: 190, top: 650,
             id: 'mirrorBackground'
         });    
-        
-        this.canvas.add(mirrorBackgroundShape);
+  
+       this.canvas.add(mirrorBackgroundShape);
+      
         
         var closeMirror = new fabric.Text('X', { 
             fontSize: 40, stroke: '#000000', left: 275, top: 350 });
@@ -244,6 +244,178 @@ function MainMenu() {
         
     });
         
+    
+    calendar_btn.on('selected', function() {
+       
+       
+       var calendarNotificationBackground = new fabric.Rect({
+            width: 225,
+            height: 225,
+            fill: 'white', stroke: 'white',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: calendar_btn.left-20, top: calendar_btn.top,
+            id: 'calendarNotificationBackgroundID'
+        });
+       
+        this.canvas.add(calendarNotificationBackground);
+       
+       
+        var titleCalendar = new fabric.Text('Calendar', { 
+            fontSize: 18, stroke: '#000000', left: calendarNotificationBackground.left-60 , 
+            top: calendarNotificationBackground.top-105});
         
+        this.canvas.add(titleCalendar);
+       
+        var closeCalendar = new fabric.Text('X', { 
+            fontSize: 22, stroke: '#000000', left: calendarNotificationBackground.left+85 , 
+            top: calendarNotificationBackground.top-110});
+        
+        this.canvas.add(closeCalendar);
+        
+        var dividorTitleCalendar = new fabric.Rect({
+           width: calendarNotificationBackground.width,
+            height: 1,
+            fill: 'white', stroke: 'black',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: calendarNotificationBackground.left, 
+            top: calendarNotificationBackground.top-75,
+            id: 'dividorTitleCalendarID' 
+        });
+        
+        this.canvas.add(dividorTitleCalendar);
+        
+        var dividorWeekTitleCalendar = new fabric.Rect({
+           width: calendarNotificationBackground.width,
+            height: 1,
+            fill: 'white', stroke: 'black',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: calendarNotificationBackground.left, 
+            top: calendarNotificationBackground.top-50,
+            id: 'dividorWeekTitleCalendarID' 
+        });
+        
+        this.canvas.add(dividorWeekTitleCalendar);
+        
+        var timeOneCalendar = new fabric.Text('9:00\n AM', { 
+            fontSize: 14, stroke: '#000000', 
+            left: calendarNotificationBackground.left-110, 
+            top: calendarNotificationBackground.top-45});
+        
+        this.canvas.add(timeOneCalendar);
+        
+        var timeTwoCalendar = new fabric.Text('10:00\n AM', { 
+            fontSize: 14, stroke: '#000000', 
+            left: calendarNotificationBackground.left-110, 
+            top: calendarNotificationBackground.top});
+        
+        this.canvas.add(timeTwoCalendar);
+        
+        var timeThreeCalendar = new fabric.Text('11:00\n AM', { 
+            fontSize: 14, stroke: '#000000', 
+            left: calendarNotificationBackground.left-110, 
+            top: calendarNotificationBackground.top+45});
+        
+        this.canvas.add(timeThreeCalendar);
+        
+        var dividorWeekdayCalendar = new fabric.Rect({
+           width: 1,
+            height: calendarNotificationBackground.height-65,
+            fill: 'white', stroke: 'black',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: calendarNotificationBackground.left-60, 
+            top: calendarNotificationBackground.top+30,
+            id: 'dividorWeekdayCalendarID' 
+        });
+        
+        this.canvas.add(dividorWeekdayCalendar);
+        
+        var titleMondayCalendar = new fabric.Text('Mon', { 
+            fontSize: 14, stroke: '#000000', 
+            left: calendarNotificationBackground.left-45, 
+            top: calendarNotificationBackground.top-70});
+        
+        this.canvas.add(titleMondayCalendar);
+        
+        var titleTuesdayCalendar = new fabric.Text('Tue', { 
+            fontSize: 14, stroke: '#000000', 
+            left: calendarNotificationBackground.left+10, 
+            top: calendarNotificationBackground.top-70});
+        
+        this.canvas.add(titleTuesdayCalendar);
+        
+        var titleWednesdayCalendar = new fabric.Text('Wed', { 
+            fontSize: 14, stroke: '#000000', 
+            left: calendarNotificationBackground.left+55, 
+            top: calendarNotificationBackground.top-70});
+        
+        this.canvas.add(titleWednesdayCalendar);
+        
+        var titleActivityOneCalendar = new fabric.Text('Drop off\n Kids', { 
+            fontSize: 12, stroke: '#000000', 
+            left: calendarNotificationBackground.left-50, 
+            top: calendarNotificationBackground.top-45});
+        
+        this.canvas.add(titleActivityOneCalendar);
+        
+        var titleActivityTwoCalendar = new fabric.Text('Drop\n Laundry', { 
+            fontSize: 12, stroke: '#000000', 
+            left: calendarNotificationBackground.left+5, 
+            top: calendarNotificationBackground.top+5});
+        
+        this.canvas.add(titleActivityTwoCalendar);
+        
+        var titleActivityThreeCalendar = new fabric.Text('Meet\n Tom Hanks', { 
+            fontSize: 12, stroke: '#000000', 
+            left: calendarNotificationBackground.left+50, 
+            top: calendarNotificationBackground.top-45});
+        
+        this.canvas.add(titleActivityThreeCalendar);
+    
+        closeCalendar.on('selected', function() {
+           closeCalendar.remove();
+           titleCalendar.remove();
+           dividorTitleCalendar.remove();
+           timeOneCalendar.remove();
+           timeTwoCalendar.remove();
+           timeThreeCalendar.remove();
+           dividorWeekTitleCalendar.remove();
+           timeOneCalendar.remove();
+           dividorWeekdayCalendar.remove();
+           titleMondayCalendar.remove();
+           titleTuesdayCalendar.remove();
+           titleWednesdayCalendar.remove();
+           titleActivityOneCalendar.remove();
+           titleActivityTwoCalendar.remove();
+           titleActivityThreeCalendar.remove();
+           calendarNotificationBackground.remove();
+        });
+        
+    });
+    
+    if(document.getElementById('withPhone').checked === true)
+    {
+      //  alert("with phone");
+        
+        var calendarNotificationBubble = new fabric.Rect({
+            width: 30,
+            height: 20,
+            fill: 'red', stroke: 'white',
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: Number(calendar_btn.left)+35, top: Number(calendar_btn.top),
+            id: 'calendarNotificationBubbleID'
+        });
+       
+       inside.add(calendarNotificationBubble);
+    }
     
 }

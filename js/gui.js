@@ -153,4 +153,433 @@ function GUI(notificationObject) {
         }
     };
     
+    
+    doorbell_btn.on('selected', function() {
+        var avatarOrUser = 0;
+        
+        var doorbellPromptBackground = new fabric.Rect({
+            width: 250,
+            height: 200,
+            fill: 'white', stroke: 'black',
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 70, top: 230,
+            id: 'doorbellPromptBackgroundID'
+        });   
+        
+        inside.add(doorbellPromptBackground);
+        
+        var doorbellDividorScreenOne = new fabric.Rect({
+            width: 250,
+            height: 1,
+            fill: 'white', stroke: 'black',
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 70, top: 375,
+            id: 'doorbellDividorScreenOneID'
+        });
+        
+        inside.add(doorbellDividorScreenOne);
+        
+        var doorbellDividorScreenTwo = new fabric.Rect({
+            width: 1,
+            height: 55,
+            fill: 'white', stroke: 'black',
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 200, top: 375,
+            id: 'doorbellDividorScreenTwoID'
+        });
+        
+        inside.add(doorbellDividorScreenTwo);
+        
+        var chatBubbleRectangle = new fabric.Rect({
+            width: 32,
+            height: 32,
+        //    fill: 'pink', stroke: 'black',
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 120, top: 385,
+            id: 'chatBubbleRectangleID'
+        });
+        
+        fabric.util.loadImage('img/chatBubble.png', function(img) {
+            chatBubbleRectangle.setPatternFill({
+              source: img
+            });
+            inside.renderAll();
+          });
+
+        inside.add(chatBubbleRectangle);
+
+        var cameraRectangle = new fabric.Rect({
+            width: 32,
+            height: 32,
+        //    fill: 'pink', stroke: 'black',
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 250, top: 385,
+            id: 'cameraRectangleID'
+        });
+        
+        fabric.util.loadImage('img/camera.png', function(img) {
+            cameraRectangle.setPatternFill({
+              source: img
+            });
+            inside.renderAll();
+          });
+          
+        inside.add(cameraRectangle);
+        
+        var userHeadChat = new fabric.Circle({ 
+            radius: 40,
+            fill: 'white', 
+            stroke: 'black', 
+            originX: 'center', originY: 'center', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 200, top: 285,
+            id: 'userHeadChatId'
+        });
+        
+        inside.add(userHeadChat);
+        
+        var userBodyChat = new fabric.Rect({
+            width: 1,
+            height: 50,
+        //    fill: 'pink', stroke: 'black',
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 200, top: 325,
+            id: 'userBodyChatID'
+        });
+        
+        inside.add(userBodyChat);
+        
+        var closeDoorbell = new fabric.Text('X', { 
+            fontSize: 32, stroke: '#000000', left: 280, top: 240 });
+        
+        inside.add(closeDoorbell);
+        
+        closeDoorbell.on('selected', function() {
+           closeDoorbell.remove();
+           cameraRectangle.remove();
+           chatBubbleRectangle.remove();
+           doorbellDividorScreenOne.remove();
+           doorbellDividorScreenTwo.remove();
+           doorbellPromptBackground.remove();
+           userHeadChat.remove();
+           userBodyChat.remove();
+        });
+        
+        // doorbell - answered by camera
+        cameraRectangle.on('selected', function() {
+            chatBubbleRectangle.remove();
+            cameraRectangle.remove();
+            closeDoorbell.remove();
+            
+            var noAvatarRectangle = new fabric.Rect({
+                width: 60,
+                height: 30,
+                lockMovementX: true, lockMovementY: true,
+                lockScalingX: true, lockScalingY: true,
+                left: 120, top: 385,
+                id: 'noAvatarRectangleID'
+             });
+
+            fabric.util.loadImage('img/noAvatar.PNG', function(img) {
+                noAvatarRectangle.setPatternFill({
+                  source: img
+                });
+                inside.renderAll();
+            });
+
+            inside.add(noAvatarRectangle);
+
+            var fullScreenRectangle = new fabric.Rect({
+              width: 32,
+              height: 32,
+          //    fill: 'pink', stroke: 'black',
+              lockMovementX: true, lockMovementY: true,
+              lockScalingX: true, lockScalingY: true,
+              left: 250, top: 385,
+              id: 'fullScreenRectangleID'
+            });
+
+            fabric.util.loadImage('img/fullscreen.png', function(img) {
+              fullScreenRectangle.setPatternFill({
+                source: img
+              });
+              inside.renderAll();
+            });
+
+            inside.add(fullScreenRectangle);
+            
+            var closeDoorbellTwo = new fabric.Text('X', { 
+            fontSize: 32, stroke: '#000000', left: 280, top: 240 });
+        
+            inside.add(closeDoorbellTwo);
+            
+            // avatar on/off
+            
+            var sideScreenRectangle = new fabric.Rect({
+              width: 65,
+              height: 55,
+              fill: 'white', stroke: 'black',
+              lockMovementX: true, lockMovementY: true,
+              lockScalingX: true, lockScalingY: true,
+              left: 320, top: 165,
+              id: 'sideScreenRectangleID'
+            });
+            
+            
+            var avatarSideScreenRectangle = new fabric.Rect({
+              width: 33,
+              height: 33,
+              lockMovementX: true, lockMovementY: true,
+              lockScalingX: true, lockScalingY: true,
+              left: 340, top: 180,
+              id: 'avatarSideScreenRectangleID'
+            });
+            
+            fabric.util.loadImage('img/ninja.png', function(img) {
+              avatarSideScreenRectangle.setPatternFill({
+                source: img
+              });
+              inside.renderAll();
+            });
+            
+            var outsideDoorbellScreenRectangle = new fabric.Rect({
+                width: 200,
+                height: 130,
+                fill: 'white', stroke: 'black',
+                lockMovementX: true, lockMovementY: true,
+                lockScalingX: true, lockScalingY: true,
+                left: 125, top: 185,
+                id: 'outsideDoorbellScreenRectangleID'
+            });
+            
+            var largeAvatarSideScreenRectangleOutside = new fabric.Rect({
+              width: 130,
+              height: 130,
+              lockMovementX: true, lockMovementY: true,
+              lockScalingX: true, lockScalingY: true,
+              left: 160, top: 185,
+              id: 'largeAvatarSideScreenRectangleOutsideID'
+            });
+            
+            fabric.util.loadImage('img/ninjaLarge.png', function(img) {
+              largeAvatarSideScreenRectangleOutside.setPatternFill({
+                source: img
+              });
+              outside.renderAll();
+            });
+            
+            
+            inside.add(sideScreenRectangle);
+            inside.add(avatarSideScreenRectangle);             
+            outside.add(outsideDoorbellScreenRectangle);
+            outside.add(largeAvatarSideScreenRectangleOutside);
+            
+            var toggleAvatar = true;
+            
+            
+            
+            
+            
+            fullScreenRectangle.on('selected', function() {
+               
+               var fullScreenExitBackground = new fabric.Rect({
+                width: 45,
+                height: 45,
+                fill: 'white', stroke: 'black', 
+                lockMovementX: true, lockMovementY: true,
+                lockScalingX: true, lockScalingY: true,
+                left: 333, top: 225,
+                id: 'fullScreenExitBackgroundID'
+              });
+
+              fabric.util.loadImage('img/fullScreenExit.png', function(img) {
+                fullScreenExitBackground.setPatternFill({
+                  source: img
+                });
+                outside.renderAll();
+              });
+               
+               inside.add(fullScreenExitBackground);
+               
+               var fullScreenView = new fabric.Rect({
+                width: 250,
+                height: 465,
+                fill: 'white', stroke: 'black',
+                lockMovementX: true, lockMovementY: true,
+                lockScalingX: true, lockScalingY: true,
+                left: 70, top: 230,
+                id: 'fullScreenExitViewID'
+              });
+              
+                fabric.util.loadImage('img/outsideUser.PNG', function(img) {
+                  fullScreenView.setPatternFill({
+                    source: img
+                  });
+                  inside.renderAll();
+                });
+              
+              inside.add(fullScreenView);
+              
+              
+              var outsideFullScreenView = new fabric.Rect({
+                width: 200,
+                height: 510,
+                fill: 'white', stroke: 'black',
+                lockMovementX: true, lockMovementY: true,
+                lockScalingX: true, lockScalingY: true,
+                left: 125, top: 185,
+                id: 'outsideFullScreenExitViewID'
+              });
+              
+            if(avatarOrUser === 0)
+            {
+                // avatar
+                
+                fabric.util.loadImage('img/insideUserAvatar.png', function(img) {
+                  outsideFullScreenView.setPatternFill({
+                    source: img
+                  });
+                  outside.renderAll();
+                });
+                
+                outside.add(outsideFullScreenView);
+            }
+            else
+            {
+                // user 
+                
+                fabric.util.loadImage('img/insideUser.PNG', function(img) {
+                  outsideFullScreenView.setPatternFill({
+                    source: img
+                  });
+                  outside.renderAll();
+                });
+                
+                outside.add(outsideFullScreenView);
+            }
+            
+            
+              // exit full screen
+              fullScreenExitBackground.on('selected', function() {
+                 fullScreenView.remove();
+                 fullScreenExitBackground.remove();
+                 outsideFullScreenView.remove();
+                 
+              });
+            });
+            
+            
+            
+            
+            
+            avatarOrUser = 0;
+            
+            noAvatarRectangle.on('selected', function() {
+
+                if(toggleAvatar === false)
+                {
+                    // show avatar
+                    
+                    avatarOrUser = 0;
+                    
+                    largeAvatarSideScreenRectangleOutside.remove();
+                    fabric.util.loadImage('img/ninjaLarge.png', function(img) {
+                        largeAvatarSideScreenRectangleOutside.setPatternFill({
+                          source: img
+                        });
+                        outside.renderAll();
+                      });
+                    outside.add(largeAvatarSideScreenRectangleOutside);
+                    
+                    inside.remove(noAvatarRectangle);
+                    fabric.util.loadImage('img/noAvatar.PNG', function(img) {
+                        noAvatarRectangle.setPatternFill({
+                          source: img
+                        });
+                        inside.renderAll();
+                    });
+                    inside.add(noAvatarRectangle);
+                    
+                    avatarSideScreenRectangle.remove();
+                    fabric.util.loadImage('img/ninja.png', function(img) {
+                        avatarSideScreenRectangle.setPatternFill({
+                          source: img
+                        });
+                        inside.renderAll();
+                      });
+                    inside.add(avatarSideScreenRectangle);
+             
+                    toggleAvatar = true;
+                }
+                else
+                {
+                    avatarOrUser = 1;
+                    
+                    largeAvatarSideScreenRectangleOutside.remove();
+                    fabric.util.loadImage('img/largeHead.png', function(img) {
+                        largeAvatarSideScreenRectangleOutside.setPatternFill({
+                          source: img
+                        });
+                        outside.renderAll();
+                      });
+                    outside.add(largeAvatarSideScreenRectangleOutside);
+                    
+                    inside.remove(noAvatarRectangle);
+                    fabric.util.loadImage('img/avatar.PNG', function(img) {
+                        noAvatarRectangle.setPatternFill({
+                          source: img
+                        });
+                        inside.renderAll();
+                    });
+                    inside.add(noAvatarRectangle);
+                    
+                    avatarSideScreenRectangle.remove();
+                    fabric.util.loadImage('img/sideNinja.png', function(img) {
+                        avatarSideScreenRectangle.setPatternFill({
+                          source: img
+                        });
+                        inside.renderAll();
+                      });
+                    inside.add(avatarSideScreenRectangle);
+                    
+                    
+                    toggleAvatar = false;
+                }
+                
+                
+                    
+            });
+            
+           
+            // to close the camera screen
+            closeDoorbellTwo.on('selected', function() {
+                
+                noAvatarRectangle.remove();
+                fullScreenRectangle.remove();
+                closeDoorbellTwo.remove();
+                doorbellDividorScreenOne.remove();
+                doorbellDividorScreenTwo.remove();
+                doorbellPromptBackground.remove();
+                userHeadChat.remove();
+                userBodyChat.remove();
+                
+                sideScreenRectangle.remove();
+                avatarSideScreenRectangle.remove();
+
+                largeAvatarSideScreenRectangleOutside.remove();
+                outsideDoorbellScreenRectangle.remove();
+            });
+        });
+        
+        
+        
+    });
+    
 }

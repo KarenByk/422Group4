@@ -17,13 +17,7 @@
         <div style="position: absolute; top: 0px; left: 400px">
             <canvas id="outside-door" width="388" height="700" style="border:2px solid black;" ></canvas>
         </div>
-        <div style="position: absolute; top: 0px; left: 800px">
-            <form action="">
-                <input type="radio" name="gender" value="male"> Male<br>
-                <input type="radio" name="gender" value="female"> Female<br>
-                <input type="radio" name="gender" value="other"> Other
-              </form>
-        </div>
+        
         
         <img src="img/deadbolt.svg" id="deadbolt" style="display: none">
         <img src="img/doorbell.svg" id="doorbell" style="display: none">
@@ -54,6 +48,38 @@
         
         <img src="img/weather/sunny.svg" id="sunny" style="display: none">
 
+        
+        <script>
+            var canvasPanel = new fabric.Canvas('sidepanel');
+            
+            var calendarTitle = new fabric.Text('Calendar: ', { 
+            fontSize: 20, stroke: '#000000', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 5, 
+            top: 5});
+        
+            var calendarWithPhone = new fabric.Text('- With Phone', { 
+            fontSize: 16, stroke: '#000000', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 15, 
+            top: 30});
+            
+            var calendarWithoutPhone = new fabric.Text('- Without Phone', { 
+            fontSize: 16, stroke: '#000000', 
+            lockMovementX: true, lockMovementY: true,
+            lockScalingX: true, lockScalingY: true,
+            left: 15, 
+            top: 50});
+        
+            canvasPanel.add(calendarTitle);
+            canvasPanel.add(calendarWithPhone);
+            canvasPanel.add(calendarWithoutPhone);
+            
+           
+        </script>
+        
         <script src="js/init.js"></script>
         <script src="js/utils.js"></script>
         <script src="js/gui.js"></script>
@@ -61,8 +87,9 @@
         <script src="js/menu.js"></script>
         <script src="js/wallpaper.js"></script>
         <script src="js/time-date.js"></script>
+        <script src="js/doorbell.js"></script>
         <script src="js/main.js"></script>
-
+        
     </body>
     
 </html>
