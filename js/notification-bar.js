@@ -21,7 +21,7 @@ function NotificationBar() {
     var _open = new Notification('open');
     var _houseAlarm = new Notification('houseAlarm');
     var _childLock = new Notification('childLock');
-    var _newMessage = new Notification('noteRead');
+    var _newMessage = new Notification('newMessage');
     var _outsideLight = new Notification('outsideLight');
     
     // Color the locked/closed and unlocked/open icons
