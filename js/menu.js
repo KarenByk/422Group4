@@ -14,7 +14,7 @@ function MainMenu() {
         selectable: false,
         width: 4 * ICON_MARGIN + 3 * ICON_SIZE,
         height: 4 * ICON_MARGIN + 3 * ICON_SIZE,
-        fill: '#000', opacity: 0.5,
+        fill: '#000', opacity: 0.55,
         rx: DOOR_HEIGHT / 70, ry: DOOR_HEIGHT / 70
     });
 

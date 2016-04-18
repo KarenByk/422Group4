@@ -7,27 +7,31 @@ function TimeDate() {
     
     var _this = this;
     
+    this.timeFormats = ['h:mm A', 'HH:mm'];
+    var numberOfTimeFormats = _this.timeFormats.length;
     /* 
         Variable: timeFormat
         
-            Either '12h' or '24h'. Formats time as either h:mm A or H:mm, respectively.
+            Time format string.
             
         Type: 
         
             String
     */
-    this.timeFormat = '12h';
+    this.currentTimeFormat = _this.timeFormats[0];
     
+    this.dateFormats = ['MMMM D, YYYY', 'MMMM Do, YYYY', 'D MMMM, YYYY', 'Do MMMM, YYYY', 'M/D/YY'];
+    var numberOfDateFormats = _this.dateFormats.length;
     /*
         Variable: dateFormat
         
-            Either 'us' or 'eu'. Formats date as either MMMM D, YYYY or D MMMM, YYYY, respectively.
+            Date format string.
             
         Type:
         
             String
     */
-    this.dateFormat = 'us';
+    this.currentDateFormat = _this.dateFormats[0];
     
     /*
         Variable: tempFormat
@@ -67,10 +71,18 @@ function TimeDate() {
     var background = new fabric.Rect({
         selectable: false,
         width: 4 * ICON_MARGIN + 3 * ICON_SIZE,
-        height: 4 * ICON_MARGIN + 3 * ICON_SIZE,
-        fill: '#000', opacity: 0.5,
+        height: 3 * ICON_MARGIN + 2 * ICON_SIZE,
+        fill: '#000', opacity: 0.55,
         rx: DOOR_HEIGHT / 70, ry: DOOR_HEIGHT / 70
+    
     });
+    var dateFormatText = new Text(_this.currentDateFormat, {fontSize: 12, originY: 'center'});
+    var timeFormatText = new Text(_this.currentTimeFormat, {fontSize: 12, originY: 'center'});
+    
+    var dateForward = new Button('right');
+    var dateBackward = new Button('left');
+    var timeForward = new Button('right');
+    var timeBackward = new Button('left');
     
     var close_btn = new Button('cancel');
     
@@ -85,16 +97,94 @@ function TimeDate() {
                 left: background.left + background.width, 
                 top: background.top
             });
-            inside.add(background,close_btn);
+            dateBackward.set({
+                originX: 'left', originY: 'top',
+                left: background.left, 
+                top: background.top + ICON_MARGIN
+            });
+            dateForward.set({
+                originX: 'right', originY: 'top',
+                left: background.left + background.width, 
+                top: dateBackward.top
+            });
+            timeBackward.set({
+                originX: 'left', originY: 'top',
+                left: dateBackward.left, 
+                top: dateBackward.top + dateBackward.height + ICON_MARGIN
+            });
+            timeForward.set({
+                originX: 'right', originY: 'top',
+                left: dateForward.left, 
+                top: timeBackward.top
+            });
+            dateFormatText.set({
+                left: background.left + background.width / 2,
+                top: dateBackward.top + dateBackward.height / 2
+            });
+            timeFormatText.set({
+                left: background.left + background.width / 2,
+                top: timeBackward.top + timeBackward.height / 2
+            });
+            inside.add(background,
+                       dateBackward,
+                       dateForward,
+                       timeBackward,
+                       timeForward,
+                       dateFormatText,
+                       timeFormatText,
+                       close_btn);
             _this.areSettingsVisible = true;
         }
     };
     
     this.hideSettings = function(x, y) {
-        inside.remove(background, close_btn);
+        inside.remove(background, 
+                      dateBackward,
+                      dateForward,
+                      timeBackward,
+                      timeForward,
+                      dateFormatText,
+                      timeFormatText,
+                      close_btn);
         _this.areSettingsVisible = false;
         mainMenu.canBeShown = true;
     };
+    
+    dateForward.on('selected', function() {
+        var indexOfCurrent = _this.dateFormats.indexOf(_this.currentDateFormat);
+        var nextIndex = (indexOfCurrent + 1) % numberOfDateFormats;
+        _this.currentDateFormat = _this.dateFormats[nextIndex];
+        dateFormatText.setText(_this.currentDateFormat);
+        _this.updateTime();
+        clearSelection();
+    });
+    
+    dateBackward.on('selected', function() {
+        var indexOfCurrent = _this.dateFormats.indexOf(_this.currentDateFormat);
+        var prevIndex = (indexOfCurrent - 1 + numberOfDateFormats) % numberOfDateFormats;
+        _this.currentDateFormat = _this.dateFormats[prevIndex];
+        dateFormatText.setText(_this.currentDateFormat);
+        _this.updateTime();
+        clearSelection();
+    });
+    
+    timeForward.on('selected', function() {
+        var indexOfCurrent = _this.timeFormats.indexOf(_this.currentTimeFormat);
+        var nextIndex = (indexOfCurrent + 1) % numberOfTimeFormats;
+        _this.currentTimeFormat = _this.timeFormats[nextIndex];
+        timeFormatText.setText(_this.currentTimeFormat);
+        _this.updateTime();
+        clearSelection();
+    });
+    
+    timeBackward.on('selected', function() {
+        var indexOfCurrent = _this.timeFormats.indexOf(_this.currentTimeFormat);
+        var prevIndex = (indexOfCurrent - 1 + numberOfTimeFormats) % numberOfTimeFormats;
+        _this.currentTimeFormat = _this.timeFormats[prevIndex];
+        timeFormatText.setText(_this.currentTimeFormat);
+        _this.updateTime();
+        clearSelection();
+    });
     
     close_btn.on('selected', function() {
         _this.hideSettings();
@@ -112,19 +202,8 @@ function TimeDate() {
         var timeText, dateText;
                 
         // Apply user-chosen formats
-        if (this.timeFormat === '12h') {
-            timeText = timeObj.format('h:mm A');
-        } else {
-            timeText = timeObj.format('H:mm');
-        }
-        switch (this.dateFormat) {
-            case 'us':
-                dateText = timeObj.format('MMMM D, YYYY');
-                break;
-            case 'eu':
-                dateText = timeObj.format('D MMMM, YYYY');
-                break;
-        }
+        timeText = timeObj.format(_this.currentTimeFormat);
+        dateText = timeObj.format(_this.currentDateFormat);
 
         // Update text of each element
         time.setText(timeText);

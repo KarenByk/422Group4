@@ -27,14 +27,13 @@ function WallpaperMenu() {
         selectable: false,
         width: 4 * ICON_MARGIN + 3 * ICON_SIZE,
         height: 4 * ICON_MARGIN + 3 * ICON_SIZE,
-        top: DOOR_HEIGHT / 2.5,
         fill: '#000', opacity: 0.55,
         rx: DOOR_HEIGHT / 70, ry: DOOR_HEIGHT / 70
     });
     
     var close_btn = new Button('cancel');
     
-    var back_btn = new MenuButton('back');
+    var back_btn = new MenuButton('left');
         
     var selectionHighlight = new fabric.Rect({
         originX: 'center', originY: 'center',
