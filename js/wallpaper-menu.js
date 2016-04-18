@@ -61,7 +61,7 @@ function WallpaperMenu() {
     var forest_thumb = new Thumbnail('forest');
     var beach_thumb = new Thumbnail('beach');
     var waterfall_thumb = new Thumbnail('waterfall');
-    var fireworks_thumb = new Thumbnail('fireworks');
+    var birthday_thumb = new Thumbnail('birthday');
     var halloween_thumb = new Thumbnail('halloween');
     var christmas_thumb = new Thumbnail('christmas');
     var wood_thumb = new Thumbnail('wood');
@@ -141,13 +141,13 @@ function WallpaperMenu() {
             left: beach_thumb.left + beach_thumb.width + ICON_MARGIN,
             top: beach_thumb.top
         });
-        fireworks_thumb.set({
+        birthday_thumb.set({
             left: forest_thumb.left,
             top: forest_thumb.top
         });
         halloween_thumb.set({
-            left: fireworks_thumb.left + fireworks_thumb.width + ICON_MARGIN,
-            top: fireworks_thumb.top
+            left: birthday_thumb.left + birthday_thumb.width + ICON_MARGIN,
+            top: birthday_thumb.top
         });
         christmas_thumb.set({
             left: halloween_thumb.left + halloween_thumb.width + ICON_MARGIN,
@@ -269,7 +269,7 @@ function WallpaperMenu() {
 
     var showHolidays = function() {
         
-        inside.add(fireworks_thumb,
+        inside.add(birthday_thumb,
                    halloween_thumb,
                    christmas_thumb,
                    back_btn);
@@ -278,7 +278,7 @@ function WallpaperMenu() {
 
     var hideHolidays = function() {
         
-        inside.remove(fireworks_thumb,
+        inside.remove(birthday_thumb,
                       halloween_thumb,
                       christmas_thumb,
                       back_btn);
@@ -341,8 +341,8 @@ function WallpaperMenu() {
         clearSelection();
     });
     
-    fireworks_thumb.on('selected', function() {
-        _this.set(selectedSide, 'fireworks');
+    birthday_thumb.on('selected', function() {
+        _this.set(selectedSide, 'birthday');
         clearSelection();
     });
     
