@@ -458,6 +458,13 @@ function GUI(notificationBar) {
     {
         emergency.showOutside();
         emergency.showInside();
+        inside.add(knobIn);
+        outside.add(knobOut);
+        clearSelection();
+    });
+    user_btn.on('selected', function()
+    {
+        profile.show();
         clearSelection();
     });
     awayScreen.on('selected', function()
