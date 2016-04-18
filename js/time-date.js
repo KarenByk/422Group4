@@ -202,8 +202,15 @@ function TimeDate() {
         var timeText, dateText;
                 
         // Apply user-chosen formats
-        timeText = timeObj.format(_this.currentTimeFormat);
-        dateText = timeObj.format(_this.currentDateFormat);
+        if(languageMenu.getLang() === 2)
+        {
+            timeText = timeObj.locale('fr').format(_this.currentTimeFormat);
+            dateText = timeObj.locale('fr').format(_this.currentDateFormat);
+        }
+        else {
+            timeText = timeObj.locale('en').format(_this.currentTimeFormat);
+            dateText = timeObj.locale('en').format(_this.currentDateFormat);
+        }
 
         // Update text of each element
         time.setText(timeText);

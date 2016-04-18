@@ -63,6 +63,12 @@ function Weather() {
                         hoodieImg, scarfImg, sunglassImg);
             this.isInsideVisible = true;
         }
+        if(languageMenu.getLang() === 2) {
+            title.setText("quoi porter");
+        }
+        else {
+            title.setText("What to Wear");
+        }
     };
     
     
