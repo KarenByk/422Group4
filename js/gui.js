@@ -439,6 +439,11 @@ function GUI(notificationBar) {
         outside.add(knobOut);
         clearSelection();
     });
+    user_btn.on('selected', function()
+    {
+        profile.show();
+        clearSelection();
+    });
     awayScreen.on('selected', function()
     {
         /*door is active*/
