@@ -236,8 +236,9 @@ function MainMenu() {
     });
     
     weather_btn.on('selected', function() {
-        _this.hide();
+        _this.canBeShown = false;
         weather.showWeather();
+        _this.hide();
         clearSelection();
     });
     
@@ -309,16 +310,26 @@ function MainMenu() {
         inside.remove(alarmStatus);
         notificationBar.houseAlarmOn();
         isAlarmOn = true;
-        alarmStatus.setElement(document.getElementById('onAlarm'));
-        alarmStatus.scaleToWidth(ICON_SIZE*1.5);
-        alarmStatus.scaleToHeight(ICON_SIZE);
+        if(languageMenu.getLang() === 2) {
+            alarmStatus.setElement(document.getElementById('onAlarmFr'));
+        }
+        else {
+            alarmStatus.setElement(document.getElementById('onAlarm'));
+        }
+            alarmStatus.scaleToWidth(ICON_SIZE*1.5);
+            alarmStatus.scaleToHeight(ICON_SIZE);
     };
     
     this.turnAlarmOff = function() {
         inside.remove(alarmStatus);
         notificationBar.houseAlarmOff();
         isAlarmOn = false;
-        alarmStatus.setElement(document.getElementById('offAlarm'));
+        if(languageMenu.getLang() === 2) {
+            alarmStatus.setElement(document.getElementById('offAlarmFr'));
+        }
+        else {
+            alarmStatus.setElement(document.getElementById('offAlarm'));
+        }
         alarmStatus.scaleToWidth(ICON_SIZE*1.5);
         alarmStatus.scaleToHeight(ICON_SIZE);
     };

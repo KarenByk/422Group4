@@ -194,6 +194,11 @@ function SettingsMenu() {
         clock.showSettings(background.left, background.top);
     });
     
+    doorbellTone_btn.on('selected', function() {
+        _this.hide();
+        doorbell.showSettings(background.left, background.top);
+    });
+    
     // Update settings button and temp display when units are changed
     tempFormat_btn.on('selected', function() {
         if (clock.tempFormat === 'c') {

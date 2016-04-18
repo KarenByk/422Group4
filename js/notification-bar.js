@@ -11,6 +11,8 @@ function NotificationBar() {
         width: DOOR_WIDTH, height: DOOR_HEIGHT / 9,
         opacity: 0.55
     });
+    
+    this.height = background.height;
 
     // ...and all notifications
     var _locked = new Notification('locked');

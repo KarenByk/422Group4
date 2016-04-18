@@ -6,6 +6,10 @@ img {
     display: none;
 }
 
+video {
+    display: none;
+}
+
 @font-face {
     font-family: droid-sans;
     src: url('fonts/DroidSans.ttf');

@@ -20,7 +20,7 @@ function TimeDate() {
     */
     this.currentTimeFormat = _this.timeFormats[0];
     
-    this.dateFormats = ['MMMM D, YYYY', 'MMMM Do, YYYY', 'D MMMM, YYYY', 'Do MMMM, YYYY', 'M/D/YY'];
+    this.dateFormats = ['MMMM D, YYYY', 'MMMM Do, YYYY', 'D MMMM, YYYY', 'Do MMMM, YYYY', 'M/D/YY', 'D/M/YY'];
     var numberOfDateFormats = _this.dateFormats.length;
     /*
         Variable: dateFormat
@@ -42,9 +42,11 @@ function TimeDate() {
             
             String
     */
-   this.tempFormat = 'f';
+    this.tempFormat = 'f';
    
-   this.areSettingsVisible = false;
+    this.isVisible = false;
+    this.areSettingsVisible = false;
+    this.isInline = false;
      
     // JSON current weather for zip code 60607
     // Please don't call this more than once every 10 minutes
@@ -137,7 +139,7 @@ function TimeDate() {
         }
     };
     
-    this.hideSettings = function(x, y) {
+    this.hideSettings = function() {
         inside.remove(background, 
                       dateBackward,
                       dateForward,
@@ -202,15 +204,26 @@ function TimeDate() {
         var timeText, dateText;
                 
         // Apply user-chosen formats
-        timeText = timeObj.format(_this.currentTimeFormat);
-        dateText = timeObj.format(_this.currentDateFormat);
+        if(languageMenu.getLang() === 2)
+        {
+            timeText = timeObj.locale('fr').format(_this.currentTimeFormat);
+            dateText = timeObj.locale('fr').format(_this.currentDateFormat);
+        }
+        else {
+            timeText = timeObj.locale('en').format(_this.currentTimeFormat);
+            dateText = timeObj.locale('en').format(_this.currentDateFormat);
+        }
 
         // Update text of each element
         time.setText(timeText);
         date.setText(dateText);
         
         // Then redraw all the clock elements
-        updatePositions();
+        if (_this.isInline) {
+            updateInlinePositions();
+        } else {
+            updatePositions();
+        }
         
     };
     
@@ -254,7 +267,11 @@ function TimeDate() {
         icon.setElement(document.getElementById(condition), null, {width: ICON_SIZE, height: ICON_SIZE});
         
         // Then redraw all the clock elements
-        updatePositions();
+        if (_this.isInline) {
+            updateInlinePositions();
+        } else {
+            updatePositions();
+        }
         
     };
     
@@ -269,6 +286,9 @@ function TimeDate() {
         var elementsWidth = time.width + icon.width + temp.width + 2 * ICON_MARGIN;
         
         // Then position them all centered on the door
+        date.set({
+            left: DOOR_WIDTH / 2, top: DOOR_HEIGHT / 4.5
+        });
         time.set({
             left: (DOOR_WIDTH - elementsWidth) / 2,
             top: date.top + 5 
@@ -286,6 +306,33 @@ function TimeDate() {
         
     };
     
+    var updateInlinePositions = function() {
+        
+        // Get the total width of date and time
+        var elementsWidth = date.width + time.width + ICON_MARGIN;
+        
+        // Then position them inline at the top of the door
+        date.set({
+            left: (DOOR_WIDTH - elementsWidth + date.width) / 2,
+            top: notificationBar.height + ICON_SIZE + ICON_MARGIN
+        });
+        time.set({
+            left: date.left + date.width / 2 + ICON_MARGIN,
+            top: date.top - 1.15 * time.height
+        });
+        icon.set({
+            left: 2 * DOOR_WIDTH,
+            top: 2 * DOOR_HEIGHT
+        });
+        temp.set({
+            left: 2 * DOOR_WIDTH,
+            top: 2 * DOOR_HEIGHT
+        });
+        
+        inside.renderAll();
+        
+    };
+    
     /*
         Function: show
         
@@ -293,7 +340,19 @@ function TimeDate() {
     */
     this.show = function() {
         
-        inside.add(date, time, icon, temp);
+        _this.isInline = false;
+        if (!_this.isVisible) {
+            inside.add(date, time, icon, temp);
+            _this.isVisible = true;
+        }
+        updatePositions();
+        
+    };
+    
+    this.showInline = function() {
+        
+        _this.isInline = true;
+        updateInlinePositions();
         
     };
     
@@ -304,6 +363,7 @@ function TimeDate() {
     */
     this.hide = function() {
         
+        _this.isVisible = false;
         inside.remove(date, time, icon, temp);
         
     };

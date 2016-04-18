@@ -7,26 +7,32 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <script src="js/libs/fabric.min.js"></script>
         <script src="js/libs/jquery.min.js"></script>
-        <script src="js/libs/moment.min.js"></script>
+        <script src="js/libs/moment-with-locales.min.js"></script>
         
     </head>
     
     <body>
     
         <div style="position: absolute; top: 0px; left: 0px;">
-            <canvas id="inside-door" width="388" height="700"></canvas>
+            <canvas id="inside-door" width="388" height="700"></canvas> <!--1350 2200  388 700 -->
         </div>
         <div style="position: absolute; top: 0px; left: 400px">
             <canvas id="outside-door" width="388" height="700"></canvas>
         </div>
-        <div style="position: absolute; top: 200px; left: 800px">
-         <form>
-          <select id="deviceDetect">
-            <option value="noPhone">No Phone</option>
-            <option value="phone">Device Near</option>
-          </select>
-          </form>  
-        </div>
+
+        
+        <fieldset style="position: absolute; top: 0px; left: 800px">
+            <legend>Events</legend>
+            <select>
+                <option value='Ishta'>Ishta</option>
+                <option value='James'>James</option>
+                <option value='Karen'>Karen</option>
+                <option value='Rinkal'>Rinkal</option>
+            </select>  
+            Has device <input type='checkbox' id='hasDevice' checked>
+            <input type='button' value='Approach door from inside' onclick="camera.hideOutsideView();">
+            <input type='button' value='Approach door from outside' onclick="gui.approachFromOutside();"><br/>
+        </fieldset>
         <img src="img/accept.svg" id="accept">
         <img src="img/cancel.svg" id="cancel">
         <img src="img/arrowLeft.svg" id="left">
@@ -43,6 +49,8 @@
         <img src="img/houseAlarm.svg" id="houseAlarm">
         <img src="img/childLock.svg" id="childLock">
         <img src="img/newMessage.svg" id="newMessage">
+        <img src="img/chat.svg" id="chat">
+        <img src="img/camera.svg" id="camera">
         <img src="img/outsideLight.svg" id="outsideLight">
         
         <img src="img/user.svg" id="user">
@@ -70,6 +78,8 @@
         
         <img src ="img/on.jpg" id="onAlarm">
         <img src ="img/off.png" id="offAlarm">
+        <img src ="img/sur.png" id="onAlarmFr">
+        <img src ="img/de.png" id="offAlarmFr">
         <img src ="img/allFlags.png" id ="allFlags">
         <img src ="img/usFlag.png" id ="usFlag">
         <img src ="img/frenchFlag.png" id="frenchFlag">
@@ -101,7 +111,7 @@
         <img src="img/wall/forest.jpg" id="forest">
         <img src="img/wall/beach.jpg" id="beach">
         <img src="img/wall/waterfall.jpg" id="waterfall">
-        <img src="img/wall/fireworks.jpg" id="fireworks">
+        <img src="img/wall/birthday.jpg" id="birthday">
         <img src="img/wall/halloween.jpg" id="halloween">
         <img src="img/wall/christmas.jpg" id="christmas">
         <img src="img/wall/wood.jpg" id="wood">
@@ -109,6 +119,17 @@
         <img src="img/wall/abstract.jpg" id="abstract">
         
         <img src="img/map.png" id="map">
+        
+        <!-- doorbells -->
+        <audio id="Descending"><source src="audio/Descending.mp3"></audio>
+        <audio id="Shimmering"><source src="audio/Shimmering.mp3"></audio>
+        <audio id="Melodic"><source src="audio/Melodic.mp3"></audio>
+        <audio id="Strange"><source src="audio/Strange.mp3"></audio>
+        
+        <!-- video -->
+        <video id="guest1" autoplay loop>
+            <source src="video/guest1.mp4"></source>
+        </video>
 
         <script src="js/init.js"></script>
         <script src="js/button.js"></script>
@@ -120,9 +141,9 @@
         <script src="js/menu-button.js"></script>
         <script src="js/settings-menu.js"></script>
         <script src="js/doorbell.js"></script>
+        <script src="js/camera.js"></script>
         <script src="js/wallpaper-menu.js"></script>
         <script src="js/language-menu.js"></script>
-        <script src="js/doorbell.js"></script>
         <script src="js/time-date.js"></script>
         <script src="js/messaging.js"></script>
         <script src="js/keypad.js"></script>
