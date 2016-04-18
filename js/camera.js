@@ -61,9 +61,20 @@ function Camera() {
     var avatarCancel_btn = new Button('cancel');
     var closeOutside_btn = new Button('cancel');
     var closeInside_btn = new Button('cancel',0,0,{width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40});
+
+    
+    var events = ['click', 'mouseover', 'keydown'];
+    var eLength = events.length;
+    var timer;
+    
+    var logVisitor = function() {
+        console.log("do stuff");
+        _this.hideOutsideView();
+        clearSelection();
+    }
     
     _this.showOutsideView = function() {
-    
+
         if (!_this.isVideoPlaying) {
             _this.isVideoPlaying = true;
             mainMenu.hide();
@@ -119,7 +130,9 @@ function Camera() {
                 fabric.util.requestAnimFrame(render);
             });
         }
-    
+        
+        //door answered?
+       timer = setTimeout(function() {logVisitor()}, 5000 );
     };
     
     _this.showAvatarSelection = function() {
@@ -160,7 +173,7 @@ function Camera() {
     };
     
     _this.showInsideView = function() {
-    
+
         if (true) {
             //_this.isVideoPlaying = true;
             mainMenu.hide();
@@ -287,18 +300,22 @@ function Camera() {
     
     camera_btn.on('selected', function() {
         _this.showAvatarSelection();
+        clearTimeout(timer); //don't log visitor
         clearSelection();
     });
     
     chat_btn.on('selected', function() {
         _this.hideOutsideView();
         messaging.showInside('write');
+        clearTimeout(timer); //don't log visitor
         clearSelection();
     });
     
     closeOutside_btn.on('selected', function() {
         _this.hideOutsideView();
         _this.hideInsideView();
+        _this.hideAvatarSelection();
+        clearTimeout(timer); //don't log visitor
         clearSelection();
     });
     
@@ -331,7 +348,7 @@ function Camera() {
     });
     
     avatarCancel_btn.on('selected', function() {
-        _this.hideAvatarSelection();
+        _this.hideAvatarSelection();        
         clearSelection();
     });
 
