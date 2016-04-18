@@ -426,6 +426,9 @@ function GUI(notificationBar) {
     {
         emergency.showOutside();
         emergency.showInside();
+        inside.add(knobIn);
+        outside.add(knobOut);
+
         clearSelection();
     });
     awayScreen.on('selected', function()
