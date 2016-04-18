@@ -484,4 +484,15 @@ function GUI(notificationBar) {
         }
 
     });
+    this.deviceFound = function() {
+        var e = document.getElementById("DeviceDetect");
+        var strUser = e.options[e.selectedIndex].value;
+        console.log(strUser);
+        if (document.getElementById("hasDevice").checked === true) {
+            fourPanel.showPanel(strUser);
+
+        }
+        camera.hideOutsideView();
+        
+    };
 }

@@ -23,14 +23,14 @@
         
         <fieldset style="position: absolute; top: 0px; left: 800px">
             <legend>Events</legend>
-            <select>
-                <option value='Ishta'>Ishta</option>
-                <option value='James'>James</option>
-                <option value='Karen'>Karen</option>
-                <option value='Rinkal'>Rinkal</option>
+            <select id="DeviceDetect">
+                <option value='0'>Ishta</option>
+                <option value='1'>James</option>
+                <option value='2'>Karen</option>
+                <option value='3'>Rinkal</option>
             </select>  
             Has device <input type='checkbox' id='hasDevice' checked>
-            <input type='button' value='Approach door from inside' onclick="camera.hideOutsideView();">
+            <input type='button' value='Approach door from inside' onclick="gui.deviceFound();">
             <input type='button' value='Approach door from outside' onclick="gui.approachFromOutside();"><br/>
         </fieldset>
         <img src="img/accept.svg" id="accept">
