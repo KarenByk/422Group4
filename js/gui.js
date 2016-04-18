@@ -139,7 +139,7 @@ function GUI(notificationBar) {
         knobOut.top,
         {id: 'noteFromOutside'});
         
-    var unreadNote = new Button('noteRead',
+    var unreadNote = new Button('newMessage',
         knobOut.left,
         emergency_btn.top - ICON_MARGIN - 2 * ICON_SIZE);
         
