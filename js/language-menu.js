@@ -20,6 +20,7 @@ function LanguageMenu() {
     });
     
     var _this = this;
+    var lang = "english";
 
     
     var background = new fabric.Rect({
@@ -42,10 +43,9 @@ function LanguageMenu() {
         rx: DOOR_HEIGHT / 200, ry: DOOR_HEIGHT / 200
     });
     
-
+    var allFlag_btn = new MenuButton('allFlags');
     var english_btn = new MenuButton('usFlag');
     var french_btn = new MenuButton('frenchFlag');
-    var allFlag_btn = new MenuButton('allFlags');
     allFlag_btn.set({
         wdith: background.width,
         height: background.height,
@@ -89,18 +89,24 @@ function LanguageMenu() {
             top: y
         });
         allFlag_btn.set({
-           left: x - (ICON_SIZE * 1.5),
-           top: y,
+           left: background.left,
+           top: background.top,
            width: background.width,
            height: background.height
         });
         english_btn.set({
-            left: background.left + ICON_MARGIN,
-            top: background.top * ICON_MARGIN + ICON_SIZE
+            left: background.left + ICON_MARGIN/8,
+            top: background.top + ICON_MARGIN/13,
+            width: ICON_SIZE * 1.8,
+            height: ICON_SIZE * 1.5,
+            shadow: 'rgba(0,0,0,1) 0px 0px 0px',
         });
         french_btn.set({
-            left: english_btn.left + ICON_SIZE + ICON_MARGIN,
-            top: english_btn.top
+            left: english_btn.left + ICON_SIZE + ICON_MARGIN*2,
+            top: english_btn.top,
+            width: ICON_SIZE * 1.5,
+            height: ICON_SIZE * 1.5,
+            shadow: 'rgba(0,0,0,1) 0px 0px 0px',
         });
         close_btn.set({
             width: background.width / 8, height: background.width / 8,
@@ -165,70 +171,16 @@ function LanguageMenu() {
     ////
     //  Button behavior
     ////
-    /*
-    landscapes_btn.on('selected', function() {
-        hideCategories();
-        showLandscapes();
+    english_btn.on('selected', function() {
+        console.log("english");
         clearSelection();
     });
     
-    holidays_btn.on('selected', function() {
-        hideCategories();
-        showHolidays();
+    french_btn.on('selected', function() {
+        console.log("french");
         clearSelection();
     });
     
-    textures_btn.on('selected', function() {
-        hideCategories();
-        showTextures();
-        clearSelection();
-    });
-    
-    forest_thumb.on('selected', function() {
-        _this.set(selectedSide, 'forest');
-        clearSelection();
-    });
-    
-    beach_thumb.on('selected', function() {
-        _this.set(selectedSide, 'beach');
-        clearSelection();
-    });
-    
-    waterfall_thumb.on('selected', function() {
-        _this.set(selectedSide, 'waterfall');
-        clearSelection();
-    });
-    
-    fireworks_thumb.on('selected', function() {
-        _this.set(selectedSide, 'fireworks');
-        clearSelection();
-    });
-    
-    halloween_thumb.on('selected', function() {
-        _this.set(selectedSide, 'halloween');
-        clearSelection();
-    });
-    
-    christmas_thumb.on('selected', function() {
-        _this.set(selectedSide, 'christmas');
-        clearSelection();
-    });
-    
-    wood_thumb.on('selected', function() {
-        _this.set(selectedSide, 'wood');
-        clearSelection();
-    });
-    
-    grass_thumb.on('selected', function() {
-        _this.set(selectedSide, 'grass');
-        clearSelection();
-    });
-    
-    abstract_thumb.on('selected', function() {
-        _this.set(selectedSide, 'abstract');
-        clearSelection();
-    });
-*/    
     close_btn.on('selected', function() {
         _this.hide();
         clearSelection();

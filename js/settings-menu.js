@@ -229,4 +229,9 @@ function SettingsMenu() {
         clearSelection();
     });
     
+    language_btn.on('selected', function() {
+        _this.hide();
+        languageMenu.show(background.left, background.top);
+    });
+    
 }
