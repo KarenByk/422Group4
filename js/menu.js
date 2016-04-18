@@ -273,7 +273,6 @@ function MainMenu() {
         clearSelection();
     });
             
-<<<<<<< HEAD
         alarmPassword_btn.on('selected', function() {
            inside.remove(alarmPassword_btn);
            inside.remove(alarmStatus);
@@ -306,7 +305,6 @@ function MainMenu() {
         clearSelection();
     });
 
-=======
     this.turnAlarmOn = function() {
         inside.remove(alarmStatus);
         notificationBar.houseAlarmOn();
@@ -329,7 +327,5 @@ function MainMenu() {
     this.hideAlarmStatus = function() {
         inside.remove(alarmStatus);
     };
-       
->>>>>>> refs/remotes/origin/master
 }
 
