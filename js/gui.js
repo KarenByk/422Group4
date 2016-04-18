@@ -484,4 +484,12 @@ function GUI(notificationBar) {
         }
 
     });
+    this.deviceFound = function() {
+        
+        if (document.getElementById("hasDevice").checked === true) {
+            fourPanel.showPanel();
+        }
+        camera.hideOutsideView();
+        
+    };
 }

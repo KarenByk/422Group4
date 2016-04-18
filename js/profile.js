@@ -70,9 +70,9 @@ function Profile()
         clearSelection();
     });
     // Unlock and open or close the door if inside knob is touched
-    back.on('selected', function(){
+    userPerson.on('selected', function(){
         fourPanel.showPanel();
-        this.hideInside();
+        _this.hideInside();
         clearSelection();
     });
     
