@@ -236,8 +236,9 @@ function MainMenu() {
     });
     
     weather_btn.on('selected', function() {
-        _this.hide();
+        _this.canBeShown = false;
         weather.showWeather();
+        _this.hide();
         clearSelection();
     });
     
