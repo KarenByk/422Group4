@@ -20,7 +20,7 @@ function LanguageMenu() {
     });
     
     var _this = this;
-    var lang = "english";
+    var lang = 1; //1 = English 2 = French
 
     
     var background = new fabric.Rect({
@@ -34,7 +34,7 @@ function LanguageMenu() {
     
     var close_btn = new Button('cancel');
     
-    var back_btn = new MenuButton('back');
+    var back_btn = new MenuButton('left');
         
     var selectionHighlight = new fabric.Rect({
         originX: 'center', originY: 'center',
@@ -115,8 +115,8 @@ function LanguageMenu() {
         });
         back_btn.set({
             width: 3 * ICON_SIZE / 4, height: 3 * ICON_SIZE / 4,
-            left: background.left + ICON_MARGIN, 
-            top: background.top + background.height - ICON_MARGIN - ICON_SIZE
+            left: background.left, 
+            top: background.top - ICON_MARGIN/2
         });
         
         
@@ -125,6 +125,7 @@ function LanguageMenu() {
                    allFlag_btn, 
                    english_btn,
                    french_btn,
+                   back_btn,
                    close_btn);
     };
     
@@ -144,40 +145,19 @@ function LanguageMenu() {
                       back_btn,
                       close_btn);       
     };
-    
-    /*
-        Function: set
         
-            Sets the wallpaper.
-            
-        Parameters:
-        
-            c (Object) - Canvas to change the wallpaper of.
-            img (String) - Filename of image, with extension.
-    */
-    this.set = function(c, img) {
-        
-        var url = 'img/wall/' + img + '.jpg';
-        c.setBackgroundImage(url, c.renderAll.bind(c), {
-            width: DOOR_WIDTH,
-            height: DOOR_HEIGHT,
-            // Needed to position backgroundImage at 0,0
-            originX: 'left',
-            originY: 'top'
-        });
-        
-    }
-    
     ////
     //  Button behavior
     ////
     english_btn.on('selected', function() {
-        console.log("english");
+        console.log("english"); ///////////DEBUG CODE
+        lang = 1; //English
         clearSelection();
     });
     
     french_btn.on('selected', function() {
-        console.log("french");
+        console.log("french");  /////////DEBUG CODE
+        lang = 2; //French
         clearSelection();
     });
     
@@ -187,12 +167,12 @@ function LanguageMenu() {
     });
     
     back_btn.on('selected', function() {
-        hideLandscapes();
-        hideHolidays();
-        hideTextures();
-        showCategories();
-        clearSelection();
+        _this.hide();
+        settingsMenu.show(background.left, background.top);
     });
     
+    this.getLang = function() {
+        return lang;
+    }
 
 }
