@@ -62,13 +62,12 @@ function Camera() {
     var closeOutside_btn = new Button('cancel');
     var closeInside_btn = new Button('cancel',0,0,{width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40});
 
-    
-    var events = ['click', 'mouseover', 'keydown'];
-    var eLength = events.length;
     var timer;
+    var missed = 0;
     
     var logVisitor = function() {
         console.log("do stuff");
+        missed++;
         _this.hideOutsideView();
         clearSelection();
     }
@@ -132,7 +131,7 @@ function Camera() {
         }
         
         //door answered?
-       timer = setTimeout(function() {logVisitor()}, 5000 );
+       timer = setTimeout(function() {logVisitor()}, 180000);  //180000 = 3 min
     };
     
     _this.showAvatarSelection = function() {
