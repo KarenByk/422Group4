@@ -20,7 +20,7 @@ function TimeDate() {
     */
     this.currentTimeFormat = _this.timeFormats[0];
     
-    this.dateFormats = ['MMMM D, YYYY', 'MMMM Do, YYYY', 'D MMMM, YYYY', 'Do MMMM, YYYY', 'M/D/YY'];
+    this.dateFormats = ['MMMM D, YYYY', 'MMMM Do, YYYY', 'D MMMM, YYYY', 'Do MMMM, YYYY', 'M/D/YY', 'D/M/YY'];
     var numberOfDateFormats = _this.dateFormats.length;
     /*
         Variable: dateFormat
