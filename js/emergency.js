@@ -60,6 +60,7 @@ function Emergency()
             inside.add(insideBackground,
                         cancelInside_btn, 
                         emerText, emerText2);
+            gui.bringKnobsToFront();
             this.isInsideVisibleEmer= true;
         }
     };

@@ -14,7 +14,7 @@ function MainMenu() {
         selectable: false,
         width: 4 * ICON_MARGIN + 3 * ICON_SIZE,
         height: 4 * ICON_MARGIN + 3 * ICON_SIZE,
-        fill: '#000', opacity: 0.5,
+        fill: '#000', opacity: 0.55,
         rx: DOOR_HEIGHT / 70, ry: DOOR_HEIGHT / 70
     });
 
@@ -235,8 +235,8 @@ function MainMenu() {
         clearSelection();
     });
     
-    //Click thesettings icon to open the settings menu
-    settings_btn.on('selected', function () {
+    //Click the settings icon to open the settings menu
+    settings_btn.on('selected', function() {
         settingsMenu.show(background.left, background.top);
         _this.hide();
         clearSelection();
@@ -251,13 +251,13 @@ function MainMenu() {
     //Click the home alarm icon to turn alarm on/off
     houseAlarm_btn.on('selected', function() {
         _this.hide();
+        inside.add(alarmStatus);
         if(isAlarmOn){ //alarm is on, turn it off
             keypad.showInside(['alarmOff']);
         }
         else { //alarm is off, turn it on
             keypad.showInside(['alarmOn']);
         }
-        inside.add(alarmStatus);
         clearSelection();
     });
             
@@ -268,16 +268,21 @@ function MainMenu() {
         alarmStatus.setElement(document.getElementById('onAlarm'));
         alarmStatus.scaleToWidth(ICON_SIZE*1.5);
         alarmStatus.scaleToHeight(ICON_SIZE);
-    }
+    };
     
     this.turnAlarmOff = function() {
         inside.remove(alarmStatus);
-        notificationBar.houseAlarmOn();
+        notificationBar.houseAlarmOff();
         isAlarmOn = false;
         alarmStatus.setElement(document.getElementById('offAlarm'));
         alarmStatus.scaleToWidth(ICON_SIZE*1.5);
         alarmStatus.scaleToHeight(ICON_SIZE);
-    }
+    };
+    
+    // Implemented to fix issue where calling keypad.hide() didn't remove status
+    this.hideAlarmStatus = function() {
+        inside.remove(alarmStatus);
+    };
     
 }
 
