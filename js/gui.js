@@ -43,9 +43,7 @@ function GUI(notificationBar) {
         
             Boolean
     */
-    this.isAWay = true;
-     
-    
+    this.isAway = true;
     
     this.needsPassword = false;
     
@@ -70,6 +68,13 @@ function GUI(notificationBar) {
         left: DOOR_WIDTH / 10, top: 2 * DOOR_HEIGHT / 3,
         id: 'knobOut'
     });
+    
+    // Implemented to prevent lock-in during emergency
+    this.bringKnobsToFront = function() {
+        notificationBar.update();
+        inside.bringToFront(knobIn);
+        outside.bringToFront(knobOut);
+    };
     
     var address = new Text('422', {
         selectable: false,
@@ -349,6 +354,8 @@ function GUI(notificationBar) {
         if(!_this.needsPassword) {
             _this.unlock();
         } else {
+            mainMenu.hide();
+            settingsMenu.hide();
             keypad.showInside(['unlock']);
         }
         clearSelection();
@@ -393,6 +400,8 @@ function GUI(notificationBar) {
             _this.unlock();
             _this.openDoor();
         } else {
+            mainMenu.hide();
+            settingsMenu.hide();
             keypad.showInside(['unlock', 'open']);
         }
         clearSelection();

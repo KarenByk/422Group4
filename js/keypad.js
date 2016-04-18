@@ -149,6 +149,7 @@ function Keypad() {
     this.hide = function() {
         
         inside.remove(background, p1, p2, p3, p4, p5, p6, p7, p8, p9, close_btn);
+        mainMenu.hideAlarmStatus();
         outside.remove(background, p1, p2, p3, p4, p5, p6, p7, p8, p9, close_btn);
         pointsList.forEach(function(point) {point.setFill('white')});
         seq = [];
@@ -213,10 +214,16 @@ function Keypad() {
                     if (functionsOnCorrect.indexOf('open') >= 0) {
                         gui.openDoor();
                     }
+                    if(functionsOnCorrect.indexOf('alarmOn') >= 0) {
+                        mainMenu.turnAlarmOn();
+                    }
+                    if(functionsOnCorrect.indexOf('alarmOff') >= 0) {
+                        mainMenu.turnAlarmOff();
+                    }
                     gui.needsPassword = false;
                 }
                 
-                setTimeout(function() { _this.hide(); }, 2000);
+                setTimeout(function() { _this.hide(); }, 1000);
                 _this.canSwipe = false;
             }
             
@@ -256,9 +263,15 @@ function Keypad() {
                     if (functionsOnCorrect.indexOf('open') >= 0) {
                         gui.openDoor();
                     }
+                    if(functionsOnCorrect.indexOf('alarmOn') >= 0) {
+                        mainMenu.turnAlarmOn();
+                    }
+                    if(functionsOnCorrect.indexOf('alarmOff') >= 0) {
+                        mainMenu.turnAlarmOff();
+                    }
                     gui.needsPassword = false;
                 }
-                setTimeout(function() { _this.hide(); }, 2000);
+                setTimeout(function() { _this.hide(); }, 1000);
                 _this.canSwipe = false;
             }
             
