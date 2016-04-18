@@ -9,6 +9,7 @@ var messaging = new Messaging();
 var keypad = new Keypad();
 var emergency = new Emergency();
 var weather = new Weather();
+var traffic = new Traffic();
 
 // Initialize interface buttons and alerts
 gui.drawKnobs();

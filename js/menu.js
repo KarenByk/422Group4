@@ -235,6 +235,18 @@ function MainMenu() {
         clearSelection();
     });
     
+    weather_btn.on('selected', function() {
+        _this.hide();
+        weather.showWeather();
+        clearSelection();
+    });
+    
+    traffic_btn.on('selected', function() {
+        _this.hide();
+        traffic.show();
+        clearSelection();
+    });
+    
     //Click the settings icon to open the settings menu
     settings_btn.on('selected', function() {
         settingsMenu.show(background.left, background.top);
@@ -248,7 +260,7 @@ function MainMenu() {
         clearSelection();
     });
     
-    //Click the home alarm icon to turn alarm on/off
+    // Click the home alarm icon to turn alarm on/off
     houseAlarm_btn.on('selected', function() {
         _this.hide();
         inside.add(alarmStatus);
@@ -283,6 +295,6 @@ function MainMenu() {
     this.hideAlarmStatus = function() {
         inside.remove(alarmStatus);
     };
-    
+       
 }
 
