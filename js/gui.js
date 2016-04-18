@@ -68,6 +68,7 @@ function GUI(notificationBar) {
         left: DOOR_WIDTH / 10, top: 2 * DOOR_HEIGHT / 3,
         id: 'knobOut'
     });
+    this.knobOutX = knobOut.left;
     
     // Implemented to prevent lock-in during emergency
     this.bringKnobsToFront = function() {
@@ -162,6 +163,22 @@ function GUI(notificationBar) {
     this.noteBtnY = noteFromOutside_btn.top;
     this.userBtnX = user_btn.left;
     this.userBtnY = user_btn.top;
+    
+    this.approachFromOutside = function() {
+        
+        if ($('#hasDevice').prop('checked')) {
+            _this.unlock();
+        } else {
+            camera.showOutsideView();
+        }
+        
+    };
+    
+    this.approachFromInside = function() {
+    
+        
+    
+    };
     
     /*
         Function: drawButtons
@@ -411,6 +428,12 @@ function GUI(notificationBar) {
     ////
     //  Button behavior
     ////
+    
+    doorbell_btn.on('selected', function() {
+        doorbell.chime();
+        camera.showOutsideView();
+        clearSelection();
+    });
     
     keypad_btn.on('selected', function() {
         if (_this.isLocked) {

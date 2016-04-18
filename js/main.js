@@ -1,6 +1,8 @@
 // Instantiate classes
 var notificationBar = new NotificationBar();
 var gui = new GUI(notificationBar);
+var doorbell = new Doorbell();
+var camera = new Camera();
 var mainMenu = new MainMenu();
 var settingsMenu = new SettingsMenu();
 var wallpaperMenu = new WallpaperMenu();

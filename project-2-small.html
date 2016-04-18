@@ -20,6 +20,17 @@
             <canvas id="outside-door" width="388" height="700"></canvas>
         </div>
         
+        <fieldset style="position: absolute; top: 0px; left: 800px">
+            <legend>Events</legend>
+            <select>
+                <option value='1'>1 person</option>
+                <option value='2'>2 people</option>
+            </select>  
+            Has device <input type='checkbox' id='hasDevice' checked>
+            <input type='button' value='Approach door from inside' onclick="camera.hideOutsideView();">
+            <input type='button' value='Approach door from outside' onclick="gui.approachFromOutside();"><br/>
+        </fieldset>
+        
         <img src="img/accept.svg" id="accept">
         <img src="img/cancel.svg" id="cancel">
         <img src="img/arrowLeft.svg" id="left">
@@ -36,6 +47,8 @@
         <img src="img/houseAlarm.svg" id="houseAlarm">
         <img src="img/childLock.svg" id="childLock">
         <img src="img/newMessage.svg" id="newMessage">
+        <img src="img/chat.svg" id="chat">
+        <img src="img/camera.svg" id="camera">
         <img src="img/outsideLight.svg" id="outsideLight">
         
         <img src="img/user.svg" id="user">
@@ -104,6 +117,17 @@
         <img src="img/wall/abstract.jpg" id="abstract">
         
         <img src="img/map.png" id="map">
+        
+        <!-- doorbells -->
+        <audio id="Descending"><source src="audio/Descending.mp3"></audio>
+        <audio id="Shimmering"><source src="audio/Shimmering.mp3"></audio>
+        <audio id="Melodic"><source src="audio/Melodic.mp3"></audio>
+        <audio id="Strange"><source src="audio/Strange.mp3"></audio>
+        
+        <!-- video -->
+        <video id="guest1" autoplay loop>
+            <source src="video/guest1.mp4"></source>
+        </video>
 
         <script src="js/init.js"></script>
         <script src="js/button.js"></script>
@@ -115,9 +139,9 @@
         <script src="js/menu-button.js"></script>
         <script src="js/settings-menu.js"></script>
         <script src="js/doorbell.js"></script>
+        <script src="js/camera.js"></script>
         <script src="js/wallpaper-menu.js"></script>
         <script src="js/language-menu.js"></script>
-        <script src="js/doorbell.js"></script>
         <script src="js/time-date.js"></script>
         <script src="js/messaging.js"></script>
         <script src="js/keypad.js"></script>
@@ -125,13 +149,6 @@
         <script src="js/weather.js"></script>
         <script src="js/traffic.js"></script>
         <script src="js/main.js"></script>
-        
-        <div style="position: absolute; top: 200px; left: 800px">
-            <select>
-                <option value="noPhone">No Phone</option>
-                <option value="phone">Device Near</option>
-            </select>  
-        </div>
 
     </body>
     
