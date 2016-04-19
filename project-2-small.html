@@ -28,12 +28,21 @@
                 <option value='1'>James</option>
                 <option value='2'>Karen</option>
                 <option value='3'>Rinkal</option>
+                <option value='4'>Stranger</option>
             </select>  
             Has device <input type='checkbox' id='hasDevice' checked>
-            <input type='button' value='Approach door from inside' onclick="gui.deviceFound();">
             <input type='button' value='Approach door from inside' onclick="gui.approachFromInside();">
-            <input type='button' value='Approach door from outside' onclick="gui.approachFromOutside();"><br/>
+            <input type='button' value='Approach door from outside' onclick="gui.approachFromOutside();"><br/><br/>
+            <input type='button' value='New door setup' onclick="gui.tutorial();">
         </fieldset>
+        
+        <select id="selectRecipient" style="position: absolute; top: 385px; left: 114px; display: none" onchange="messaging.selectRecipient();">
+            <option value='Ishta'>Ishta</option>
+            <option value='James'>James</option>
+            <option value='Karen'>Karen</option>
+            <option value='Rinkal'>Rinkal</option>
+        </select>  
+            
         <img src="img/accept.svg" id="accept">
         <img src="img/cancel.svg" id="cancel">
         <img src="img/arrowLeft.svg" id="left">
@@ -57,6 +66,7 @@
         <img src="img/outsideLight.svg" id="outsideLight">
         
         <img src="img/user.svg" id="user">
+        <img src="img/users.svg" id="users">
         <img src="img/emergency.svg" id="emergency">
         <img src="img/help.svg" id="help">
         <img src="img/noteRead.svg" id="noteRead">
@@ -133,6 +143,12 @@
         <audio id="Melodic"><source src="audio/Melodic.mp3"></audio>
         <audio id="Strange"><source src="audio/Strange.mp3"></audio>
         
+        <audio id="Descendant"><source src="audio/Descending.mp3"></audio>
+        <audio id="Chatoyant"><source src="audio/Shimmering.mp3"></audio>
+        <audio id="Melodique"><source src="audio/Melodic.mp3"></audio>
+        <audio id="Estrange"><source src="audio/Strange.mp3"></audio>
+        
+
         <!-- video -->
         <video id="grandma" autoplay loop>
             <source src="video/grandma.mp4"></source>
@@ -143,6 +159,10 @@
         <video id="inside" autoplay loop>
             <source src="video/inside.mp4"></source>
         </video>
+        <video id="tutorial" autoplay loop>
+            <source src="video/grandma.mp4"></source>
+        </video>
+        
 
         <script src="js/init.js"></script>
         <script src="js/button.js"></script>
@@ -152,12 +172,12 @@
         <script src="js/notification.js"></script>
         <script src="js/notification-bar.js"></script>
         <script src="js/menu-button.js"></script>
+        <script src="js/language-menu.js"></script>
         <script src="js/settings-menu.js"></script>
         <script src="js/doorbell.js"></script>
         <script src ="js/missedVisitor-menu.js"></script>        
         <script src="js/camera.js"></script>
         <script src="js/wallpaper-menu.js"></script>
-        <script src="js/language-menu.js"></script>
         <script src="js/time-date.js"></script>
         <script src="js/messaging.js"></script>
         <script src="js/keypad.js"></script>

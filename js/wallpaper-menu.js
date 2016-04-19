@@ -112,10 +112,18 @@ function WallpaperMenu() {
         if(languageMenu.getLang() === 2) {
             outsideText.setText("exterieur");
             insideText.setText("interieur");
+            outsideText.set({
+               top: insideText.top + insideText.height,
+               left: insideText.left
+            });
         }
         else {
             outsideText.setText("Outside");
             insideText.setText("Inside");
+            outsideText.set({
+            left: insideText.left + insideText.width + ICON_MARGIN, 
+            top: insideText.top,
+        });
         }
         landscapes_btn.set({
             left: background.left + ICON_MARGIN,
