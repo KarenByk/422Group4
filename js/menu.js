@@ -338,5 +338,90 @@ function MainMenu() {
     this.hideAlarmStatus = function() {
         inside.remove(alarmStatus);
     };
+  
+  
+    var calendarPhone = false;
+    
+    calendar_btn.on('selected', function() {
+       alert("calendar clicked");
+       if(calendarPhone === true)
+       {
+           //alert("calendarPhone is true");
+           var calendarAppRectancle = new fabric.Rect({
+                 width: 225,
+                 height: 225,
+                 fill: 'white', stroke: 'black', 
+                 lockMovementX: true, lockMovementY: true,
+                // lockScalingX: true, lockScalingY: true,
+                left: calendar_btn.left-120, top: calendar_btn.top-75,
+                 id: 'calendarAppRectangleID'
+            });
+            
+            fabric.util.loadImage('img/notificationCalendar.png', function(img) {
+              calendarAppRectancle.setPatternFill({
+                source: img
+              });
+              inside.renderAll();
+            });
+
+             inside.add(calendarAppRectancle);
+
+
+           
+            var closeCalendar = new fabric.Text('X', { 
+            fontSize: 22, stroke: '#000000', left: calendarAppRectancle.left+200, 
+            top: calendarAppRectancle.top+5});
+        
+            this.canvas.add(closeCalendar);
+            
+            closeCalendar.on('selected', function() {
+                closeCalendar.remove();
+                calendarAppRectancle.remove();
+                notificationBubble.remove();
+            });
+       }
+       else
+       {
+       var calendarAppRectancle = new fabric.Rect({
+                 width: 225,
+                 height: 225,
+                 fill: 'white', stroke: 'black', 
+                 lockMovementX: true, lockMovementY: true,
+                // lockScalingX: true, lockScalingY: true,
+                left: calendar_btn.left-120, top: calendar_btn.top-75,
+                 id: 'calendarAppRectangleID'
+            });
+            
+            fabric.util.loadImage('img/calendarAppOriginal.png', function(img) {
+              calendarAppRectancle.setPatternFill({
+                source: img
+              });
+              inside.renderAll();
+            });
+
+             inside.add(calendarAppRectancle);
+
+
+           
+            var closeCalendar = new fabric.Text('X', { 
+            fontSize: 22, stroke: '#000000', left: calendarAppRectancle.left+200, 
+            top: calendarAppRectancle.top+5});
+        
+            this.canvas.add(closeCalendar);
+            
+            closeCalendar.on('selected', function() {
+                closeCalendar.remove();
+                calendarAppRectancle.remove();
+                notificationBubble.remove();
+            });       
+        }
+        clearSelection();
+    });
+    
+    log_btn.on('selected', function() {
+       missedMenu.show(background.left, background.top);
+       clearSelection();
+    });
+
 }
 
