@@ -18,15 +18,11 @@ var languageMenu = new LanguageMenu();
 //this is directly from door symbol
 var profile = new Profile();
 //when device is near- above unction will call this later
-
 var fourPanel = new FourPanel();
 //creating and changing profile from settings- independant of others 
 var profileSettings = new ProfileSettings();
-<<<<<<< HEAD
 //part of profileSettings.js and 
 var createProf = new CreateProfile();
-=======
->>>>>>> refs/remotes/origin/ishtasChanges
 
 // Initialize interface buttons and alerts
 gui.drawKnobs();

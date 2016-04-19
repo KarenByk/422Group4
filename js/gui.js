@@ -168,6 +168,7 @@ function GUI(notificationBar) {
         
         if ($('#hasDevice').prop('checked')) {
             _this.unlock();
+            _this.openDoor();
             var strUser = e.options[e.selectedIndex].value;
 
         } else {
@@ -403,7 +404,10 @@ function GUI(notificationBar) {
     
     // Open or close the door if outside knob is touched
     knobOut.on('selected', function(){
-        if (!_this.isLocked && _this.isClosed) { 
+        if (_this.isLocked && $('#hasDevice').prop('checked')) {
+            _this.unlock();
+            _this.openDoor();
+        } else if (!_this.isLocked && _this.isClosed) { 
             _this.openDoor();
         } else if (!_this.isClosed) {
             _this.closeDoor();
@@ -428,6 +432,7 @@ function GUI(notificationBar) {
         } else {
             mainMenu.hide();
             settingsMenu.hide();
+            console.log('showing');
             keypad.showInside(['unlock', 'open']);
         }
         clearSelection();

@@ -239,16 +239,7 @@ function SettingsMenu() {
         languageMenu.show(background.left, background.top);
     });
     profiles_btn.on('selected', function(){
-<<<<<<< HEAD
-        profileSettings.show();
-        _this.hide();
-
-
-    });
-    
-=======
         _this.hide();
         profileSettings.show();
     });
->>>>>>> refs/remotes/origin/ishtasChanges
 }

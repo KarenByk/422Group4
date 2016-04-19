@@ -343,7 +343,6 @@ function MainMenu() {
     var calendarPhone = false;
     
     calendar_btn.on('selected', function() {
-       alert("calendar clicked");
        if(calendarPhone === true)
        {
            //alert("calendarPhone is true");

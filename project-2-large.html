@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    
+        <meta charset="UTF-8">
+        <title>CS422 | Project 2 | Group 4</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="js/libs/fabric.min.js"></script>
+        <script src="js/libs/jquery.min.js"></script>
+        <script src="js/libs/moment-with-locales.min.js"></script>
+        
+    </head>
+    
+    <body>
+    
+        <div style="position: absolute; top: 0px; left: 0px;">
+            <canvas id="inside-door" width="1350" height=2200"></canvas> <!--1350 2200  388 700 -->
+        </div>
+        <div style="position: absolute; top: 0px; left: 1360px">
+            <canvas id="outside-door" width="1350" height="2200"></canvas>
+        </div>
+
+        
+        <fieldset style="position: absolute; top: 0px; left: 2720px">
+            <legend>Events</legend>
+            <select id="DeviceDetect">
+                <option value='0'>Ishta</option>
+                <option value='1'>James</option>
+                <option value='2'>Karen</option>
+                <option value='3'>Rinkal</option>
+                <option value='4'>Stranger</option>
+            </select>  
+            Has device <input type='checkbox' id='hasDevice' checked>
+            <input type='button' value='Approach door from inside' onclick="gui.approachFromInside();">
+            <input type='button' value='Approach door from outside' onclick="gui.approachFromOutside();"><br/><br/>
+            <input type='button' value='New door setup' onclick="gui.tutorial();">
+        </fieldset>
+        
+        <select id="selectRecipient" style="position: absolute; top: 1210px; left: 397px; display: none" onchange="messaging.selectRecipient();">
+            <option value='Ishta'>Ishta</option>
+            <option value='James'>James</option>
+            <option value='Karen'>Karen</option>
+            <option value='Rinkal'>Rinkal</option>
+        </select>  
+            
+        <img src="img/accept.svg" id="accept">
+        <img src="img/cancel.svg" id="cancel">
+        <img src="img/arrowLeft.svg" id="left">
+        <img src="img/arrowRight.svg" id="right">
+        
+        <img src="img/deadbolt.svg" id="deadbolt">
+        <img src="img/doorbell.svg" id="doorbell">
+        <img src="img/keypad.svg" id="keypad">
+        
+        <img src="img/closed.svg" id="closed">
+        <img src="img/open.svg" id="open">
+        <img src="img/locked.svg" id="locked">
+        <img src="img/unlocked.svg" id="unlocked">
+        <img src="img/houseAlarm.svg" id="houseAlarm">
+        <img src="img/childLock.svg" id="childLock">
+        <img src="img/newMessage.svg" id="newMessage">
+        <img src="img/chat.svg" id="chat">
+        <img src="img/camera.svg" id="camera">
+        <img src="img/mask.svg" id="mask">
+        <img src="img/maskOff.svg" id="maskOff">
+        <img src="img/outsideLight.svg" id="outsideLight">
+        
+        <img src="img/user.svg" id="user">
+        <img src="img/users.svg" id="users">
+        <img src="img/emergency.svg" id="emergency">
+        <img src="img/help.svg" id="help">
+        <img src="img/noteRead.svg" id="noteRead">
+        <img src="img/noteWrite.svg" id="noteWrite">
+        <img src="img/mirror.svg" id="mirror">
+        <img src="img/traffic.svg" id="traffic">
+        <img src="img/weather.svg" id="weather">
+        <img src="img/calendar.svg" id="calendar">
+        <img src="img/log.svg" id="log">
+        <img src="img/settings.svg" id="settings">
+        
+        <!-- settings icons -->
+        <img src="img/language.svg" id="language">
+        <img src="img/scene.svg" id="scene">
+        <img src="img/timeDate.svg" id="timeDate">
+        <img src="img/tempFormat.svg" id="tempFormat">
+        <img src="img/fahrenheit.svg" id="fahrenheit">
+        <img src="img/celsius.svg" id="celsius">
+        <img src="img/landscapes.svg" id="landscapes">
+        <img src="img/holidays.svg" id="holidays">
+        <img src="img/textures.svg" id="textures">
+        <img src="img/new.png" id="newProfile">
+        <img src="img/takePicture.png" id="takePic">
+        <img src="img/phone.png" id="phone">
+        <img src="img/retinal.png" id="retinal">
+        <img src="img/sync.png" id="sync">
+        <img src="img/ok.png" id="ok">
+
+        
+        <img src ="img/on.jpg" id="onAlarm">
+        <img src ="img/off.png" id="offAlarm">
+        <img src ="img/sur.png" id="onAlarmFr">
+        <img src ="img/de.png" id="offAlarmFr">
+        <img src ="img/allFlags.png" id ="allFlags">
+        <img src ="img/usFlag.png" id ="usFlag">
+        <img src ="img/frenchFlag.png" id="frenchFlag">
+        <img src ="img/frenchFlag.png" id="frenchFlag">
+        <img src ="img/ok.png" id="ok">
+        <img src ="img/takePic.png" id="takePic">
+        <img src ="img/phone.png" id="phone">
+        <img src ="img/ok.png" id="frenchFlag">
+        <img src ="img/retinal.png" id="retinal">
+
+        
+        <!-- weather icons -->
+        <img src="img/weather/01d.svg" id="01d">
+        <img src="img/weather/01n.svg" id="01n">
+        <img src="img/weather/02d.svg" id="02d">
+        <img src="img/weather/02n.svg" id="02n">
+        <img src="img/weather/03d.svg" id="03d">
+        <img src="img/weather/03d.svg" id="03n">
+        <img src="img/weather/04d.svg" id="04d">
+        <img src="img/weather/04d.svg" id="04n">
+        <img src="img/weather/09d.svg" id="09d">
+        <img src="img/weather/09d.svg" id="09n">
+        <img src="img/weather/10d.svg" id="10d">
+        <img src="img/weather/10n.svg" id="10n">
+        <img src="img/weather/11d.svg" id="11d">
+        <img src="img/weather/11d.svg" id="11n">
+        <img src="img/weather/13d.svg" id="13d">
+        <img src="img/weather/13d.svg" id="13n">
+        <img src="img/weather/50d.svg" id="50d">
+        <img src="img/weather/50d.svg" id="50n">
+        <img src="img/weather/scarf.png" id="scarf">
+        <img src="img/weather/hoodie.png" id="hoodie">
+        <img src="img/weather/sunglass.png" id="sunglass">
+        
+        <!-- wallpapers -->
+        <img src="img/wall/forest.jpg" id="forest">
+        <img src="img/wall/beach.jpg" id="beach">
+        <img src="img/wall/waterfall.jpg" id="waterfall">
+        <img src="img/wall/birthday.jpg" id="birthday">
+        <img src="img/wall/halloween.jpg" id="halloween">
+        <img src="img/wall/christmas.jpg" id="christmas">
+        <img src="img/wall/wood.jpg" id="wood">
+        <img src="img/wall/grass.jpg" id="grass">
+        <img src="img/wall/abstract.jpg" id="abstract">
+        
+        <img src="img/map.png" id="map">
+        <img src="img/missedVisitor.jpg" id="missed">
+        <img src="img/notificationCalendar.jpg" id ="notificationCalendar">
+        <img src="img/notificationBubble.jpg" id ="notificationBubble">
+        <img src ="img/calendarAppOriginal.jpg" id="calendarAppOriginal">
+        
+        <!-- doorbells -->
+        <audio id="Descending"><source src="audio/Descending.mp3"></audio>
+        <audio id="Shimmering"><source src="audio/Shimmering.mp3"></audio>
+        <audio id="Melodic"><source src="audio/Melodic.mp3"></audio>
+        <audio id="Strange"><source src="audio/Strange.mp3"></audio>
+        
+        <audio id="Descendant"><source src="audio/Descending.mp3"></audio>
+        <audio id="Chatoyant"><source src="audio/Shimmering.mp3"></audio>
+        <audio id="Melodique"><source src="audio/Melodic.mp3"></audio>
+        <audio id="Estrange"><source src="audio/Strange.mp3"></audio>
+        
+
+        <!-- video -->
+        <video id="grandma" autoplay loop>
+            <source src="video/grandma.mp4"></source>
+        </video>
+        <video id="avatar" autoplay loop>
+            <source src="video/avatar.mp4"></source>
+        </video>
+        <video id="inside" autoplay loop>
+            <source src="video/inside.mp4"></source>
+        </video>
+        <video id="tutorial" autoplay loop>
+            <source src="video/grandma.mp4"></source>
+        </video>
+        
+
+        <script src="js/init.js"></script>
+        <script src="js/button.js"></script>
+        <script src="js/text.js"></script>
+        <script src="js/menu.js"></script>
+        <script src="js/gui.js"></script>
+        <script src="js/notification.js"></script>
+        <script src="js/notification-bar.js"></script>
+        <script src="js/menu-button.js"></script>
+        <script src="js/language-menu.js"></script>
+        <script src="js/settings-menu.js"></script>
+        <script src="js/doorbell.js"></script>
+        <script src ="js/missedVisitor-menu.js"></script>        
+        <script src="js/camera.js"></script>
+        <script src="js/wallpaper-menu.js"></script>
+        <script src="js/time-date.js"></script>
+        <script src="js/messaging.js"></script>
+        <script src="js/keypad.js"></script>
+        <script src="js/emergency.js"></script>
+        <script src="js/weather.js"></script>
+        <script src="js/traffic.js"></script>
+        <script src="js/profile.js"></script>
+        <script src="js/fourPanel.js"></script>
+        <script src="js/profileSettings.js"></script>
+        <script src="js/main.js"></script>
+        
+        
+
+    </body>
+    
+</html>
