@@ -28,7 +28,7 @@ function Keypad() {
             this.set({
                 hasControls: false,
                 lockMovementX: true, lockMovementY: true,
-                radius: 5,
+                radius: DOOR_HEIGHT * 5 / 388,
                 fill: '#fff',
                 shadow: 'rgba(0,0,0,1) 0px 0px 7px',
                 id: number
