@@ -196,10 +196,10 @@ function CreateProfile()
         {width: backOptions.width /3, height: backOptions.width / 3});
 
     phoneSync.on('selected', function(){
-        inside.add(cancelInside_btn, sync, approve);
-        clearSelection();
+        inside.add(sync, approve);
         this.isInsideVisible = true;
         mainMenu.canBeShown = true;
+        clearSelection();
     });
 
     var retinalText = new Text('Go Outside to set up scan', {
@@ -211,15 +211,17 @@ function CreateProfile()
     retinal.on('selected', function() {
         //CreateProfile.showOptions();
         //camera.showAvatar();
-        inside.add(retinalText, cancelInside_btn);
+        
+        inside.add(retinalText);
         outside.add(approve);
         this.isInsideVisible = true;
         mainMenu.canBeShown = true;
+        //_this.hideOptions();
         clearSelection();
     });
     this.hideOptions = function() {
         if (this.isInsideVisible) {
-            inside.remove(backOptions, cancelInside_btn, takePic, useIcon, phoneSync, retinal);
+            inside.remove(backOptions, takePic, useIcon, phoneSync, retinal);
             
             this.isInsideVisible = false;
             mainMenu.canBeShown = true;
