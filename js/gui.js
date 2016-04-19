@@ -520,4 +520,12 @@ function GUI(notificationBar) {
 
     });
     
+    this.tutorial = function() {
+      languageMenu.show(knobIn.left-250, knobIn.top - 150);  
+      //play video with controls. video = 'tutorial'
+    };
+    
+    help_btn.on('selected', function() {
+       //play video 'tutorial' 
+    });
 }
