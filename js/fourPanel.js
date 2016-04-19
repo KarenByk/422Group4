@@ -41,7 +41,7 @@ function FourPanel()
         left: DOOR_WIDTH/1.5,
         top: DOOR_HEIGHT/2.8
     });
-    var trafficTime = new Text('23 min', {
+    var trafficTime = new Text('23000 min', {
         originX: 'center', originY: 'center',
         fontSize: 14,
         left: DOOR_WIDTH/1.5,
@@ -111,4 +111,5 @@ function FourPanel()
         _this.hideInside();
         clearSelection();
     });
+
 }

@@ -183,4 +183,13 @@ function NotificationBar() {
         }
     };
     
+        this.outsideLight = function() {
+        pushAlert(_outsideLight, 5);
+        this.update();
+    };
+    
+    this.outsideLightOff = function() {
+        popAlert(_outsideLight);
+        this.update();
+    };  
 }

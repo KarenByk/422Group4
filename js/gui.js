@@ -169,7 +169,7 @@ function GUI(notificationBar) {
     this.userBtnY = user_btn.top;
     
     this.approachFromOutside = function() {
-    
+
         if ($('#DeviceDetect').prop('value') !== 'Stranger') {
             if (messaging.nameDict[$('#DeviceDetect').prop('value')] === messaging.outsidePaths.user &&
               messaging.outsidePaths.length != 0) {
@@ -178,6 +178,7 @@ function GUI(notificationBar) {
             }
             if ($('#hasDevice').prop('checked')) {
                 _this.unlock();
+                _this.openDoor();
             } 
         } else {
             camera.showOutsideView();
