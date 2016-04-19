@@ -3,6 +3,8 @@ var notificationBar = new NotificationBar();
 var gui = new GUI(notificationBar);
 var doorbell = new Doorbell();
 var camera = new Camera();
+var missedMenu = new MissedVisitorMenu();
+//var camera = new Camera();
 var mainMenu = new MainMenu();
 var settingsMenu = new SettingsMenu();
 var wallpaperMenu = new WallpaperMenu();
@@ -32,14 +34,13 @@ notificationBar.update();
 // Pull time and weather, then set clock to update time every 10 sec 
 // and weather every 10 min
 clock.updateTime();
-//clock.updateWeather();
+clock.updateWeather();
 setInterval(function(){
     clock.updateTime();
 }, 10000);
-// Commented out for the moment so testing doesn't put us over weather API limit
-/* setInterval(function(){
+setInterval(function(){
     clock.updateWeather();
-}, 600000); */
+}, 600000);
 // Then draw it
 clock.show();
 

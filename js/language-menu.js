@@ -150,13 +150,11 @@ function LanguageMenu() {
     //  Button behavior
     ////
     english_btn.on('selected', function() {
-        console.log("english"); ///////////DEBUG CODE
         lang = 1; //English
         clearSelection();
     });
     
     french_btn.on('selected', function() {
-        console.log("french");  /////////DEBUG CODE
         lang = 2; //French
         clearSelection();
     });

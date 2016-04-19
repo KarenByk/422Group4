@@ -197,11 +197,12 @@ function TimeDate() {
         
             Parses and formats current time and date. Uses the <moment.js at http://momentjs.com/> library.
     */
+    var timeText, dateText;
     this.updateTime = function() {
         
         // Get an object with current date and time
         var timeObj = moment();
-        var timeText, dateText;
+        //var timeText, dateText;
                 
         // Apply user-chosen formats
         if(languageMenu.getLang() === 2)
@@ -367,5 +368,12 @@ function TimeDate() {
         inside.remove(date, time, icon, temp);
         
     };
+    
+    this.getDate = function() {
+        return dateText;
+    }
+    this.getTime = function() {
+        return timeText;
+    }
     
 }

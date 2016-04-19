@@ -7,9 +7,12 @@ function Messaging() {
     
     var _this = this;
     
-    var unreadMessage = [];
+    this.nameDict = {'0':'Ishta', '1':'James', '2':'Karen', '3':'Rinkal'};
+    
+    var unreadMessageInside = [];
+    var unreadMessageOutside = [];
     var insidePaths = [];
-    var outsidePaths = [];
+    this.outsidePaths = {user: 'all', message: []};
     
     /*
         Variable: isInsideVisible
@@ -63,22 +66,32 @@ function Messaging() {
     var acceptInside_btn = new Button('accept', 
         backgroundInside.left + backgroundInside.width / 2, 
         backgroundInside.top + backgroundInside.height,
-        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,});
+        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40});
         
     var cancelInside_btn = new Button('cancel', 
         backgroundInside.left + backgroundInside.width / 2, 
         backgroundInside.top,
-        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,});
+        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40});
         
     var acceptOutside_btn = new Button('accept', 
         backgroundOutside.left + backgroundOutside.width / 2, 
         backgroundOutside.top + backgroundOutside.height,
-        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,});
+        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40});
         
     var cancelOutside_btn = new Button('cancel', 
         backgroundOutside.left + backgroundOutside.width / 2, 
         backgroundOutside.top,
-        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40,});
+        {width: DOOR_HEIGHT / 40, height: DOOR_HEIGHT / 40});
+        
+    var specificUser_btn = new Button('user', backgroundInside.left - (backgroundInside.width - ICON_SIZE) / 2, backgroundInside.top + backgroundInside.height);
+    var allUsers_btn = new Button('users', specificUser_btn.left + ICON_SIZE, backgroundInside.top + backgroundInside.height);
+    
+    this.selectRecipient = function() {
+        
+        _this.outsidePaths.user = $('#selectRecipient').prop('value');
+        console.log(_this.outsidePaths.user);
+        $('#selectRecipient').css('display', 'none');
+    };
     
     /*
         Function: showInside
@@ -95,11 +108,11 @@ function Messaging() {
             inside.add(backgroundInside, 
                         cancelInside_btn);
             if (mode === 'write') {
-                inside.add(acceptInside_btn);
+                inside.add(acceptInside_btn, specificUser_btn, allUsers_btn);
             }
             if (mode === 'read') {
-                for (var i in unreadMessage) {
-                    inside.add(unreadMessage[i]);
+                for (var i in unreadMessageInside) {
+                    inside.add(unreadMessageInside[i]);
                 }
             }
             this.isInsideVisible = true;
@@ -119,19 +132,19 @@ function Messaging() {
     */
     this.showOutside = function(mode) {
         
-        if (!this.isOutsideVisible) {
-            outside.add(backgroundOutside, 
-                        cancelOutside_btn);
-            if (mode === 'write') {
-                outside.add(acceptOutside_btn);
-            }
-            if (mode === 'read') {
-                for (var i in outsidePaths) {
-                    outside.add(outsidePaths[i]);
+            if (!this.isOutsideVisible) {
+                outside.add(backgroundOutside, 
+                            cancelOutside_btn);
+                if (mode === 'write') {
+                    outside.add(acceptOutside_btn);
                 }
+                if (mode === 'read') {
+                    for (var i in _this.outsidePaths.message) {
+                        outside.add(_this.outsidePaths.message[i]);
+                    }
+                }
+                this.isOutsideVisible = true;
             }
-            this.isOutsideVisible = true;
-        }
         
     };
     
@@ -145,15 +158,17 @@ function Messaging() {
         if (this.isInsideVisible) {
             inside.remove(backgroundInside,
                            acceptInside_btn,
-                           cancelInside_btn);
+                           cancelInside_btn,
+                           specificUser_btn,
+                           allUsers_btn);
             for (var i in insidePaths) {
                 inside.remove(insidePaths[i]);
             }
-            for (var i in unreadMessage) {
-                inside.remove(unreadMessage[i]);
+            for (var i in unreadMessageInside) {
+                inside.remove(unreadMessageInside[i]);
             }
             insidePaths = [];
-            unreadMessage = [];
+            unreadMessageInside = [];
             this.isInsideVisible = false;
             mainMenu.canBeShown = true;
         }
@@ -171,10 +186,11 @@ function Messaging() {
             outside.remove(backgroundOutside,
                            acceptOutside_btn,
                            cancelOutside_btn);
-            for (var i in outsidePaths) {
-                outside.remove(outsidePaths[i]);
+            for (var i in _this.outsidePaths.message) {
+                outside.remove(_this.outsidePaths.message[i]);
             }
-            outsidePaths = [];
+            _this.outsidePaths.user = 'all';
+            _this.outsidePaths.message = [];
             this.isOutsideVisible = false;
             mainMenu.canBeShown = true;
         }
@@ -194,17 +210,21 @@ function Messaging() {
     ////
     
     acceptInside_btn.on('selected', function() {
-        outsidePaths = insidePaths.slice();
+        _this.outsidePaths.message = insidePaths.slice();
         _this.hideInside();
-        _this.showOutside('read');
+        if (_this.outsidePaths.user === 'all') {
+            _this.showOutside('read');
+        } else {
+            gui.showUnreadNote('outside');
+        }
         clearSelection();
     });
     
     acceptOutside_btn.on('selected', function() {
-        unreadMessage = outsidePaths.slice();
+        unreadMessageInside = _this.outsidePaths.message.slice();
         _this.hideOutside();
         notificationBar.messageReceived();
-        gui.showUnreadNote();
+        gui.showUnreadNote('inside');
         clearSelection();
     });
     
@@ -215,6 +235,16 @@ function Messaging() {
     
     cancelOutside_btn.on('selected', function() {
         _this.hideOutside();
+        clearSelection();
+    });
+    
+    specificUser_btn.on('selected', function() {
+        $('#selectRecipient').css("display", "initial");
+        clearSelection();
+    });
+    
+    allUsers_btn.on('selected', function() {
+        _this.outsidePaths.user = 'all';
         clearSelection();
     });
     
@@ -254,7 +284,7 @@ function Messaging() {
     
     outside.on('path:created', function(event) {
         event.path.set({selectable: false});
-        outsidePaths.push(event.path);
+        _this.outsidePaths.message.push(event.path);
     });
     
 }
