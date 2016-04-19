@@ -87,9 +87,7 @@ function Messaging() {
     var allUsers_btn = new Button('users', specificUser_btn.left + ICON_SIZE, backgroundInside.top + backgroundInside.height);
     
     this.selectRecipient = function() {
-        
         _this.outsidePaths.user = $('#selectRecipient').prop('value');
-        console.log(_this.outsidePaths.user);
         $('#selectRecipient').css('display', 'none');
     };
     
@@ -156,6 +154,7 @@ function Messaging() {
     this.hideInside = function() {
         
         if (this.isInsideVisible) {
+            $('#selectRecipient').css("display", "none");
             inside.remove(backgroundInside,
                            acceptInside_btn,
                            cancelInside_btn,
