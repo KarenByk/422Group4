@@ -19,7 +19,9 @@ var profile = new Profile();
 
 var fourPanel = new FourPanel();
 //creating and changing profile from settings- independant of others 
-//var profileSettings = new ProfileSettings();
+var profileSettings = new ProfileSettings();
+//part of profileSettings.js and 
+var createProf = new CreateProfile();
 
 // Initialize interface buttons and alerts
 gui.drawKnobs();
