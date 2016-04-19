@@ -169,8 +169,6 @@ function GUI(notificationBar) {
     this.userBtnY = user_btn.top;
     
     this.approachFromOutside = function() {
-        
-        this.approachFromOutside = function() {
     
         if ($('#DeviceDetect').prop('value') !== 'Stranger') {
             if (messaging.nameDict[$('#DeviceDetect').prop('value')] === messaging.outsidePaths.user &&
@@ -524,5 +522,4 @@ function GUI(notificationBar) {
         }
 
     });
-}
 }
