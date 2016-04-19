@@ -3,7 +3,6 @@ function Doorbell() {
     var _this = this;
     
     var tones = ['Descending', 'Shimmering', 'Melodic', 'Strange'];
-    
     _this.currentTone = tones[0];
     
     _this.areSettingsVisible = false;
@@ -30,6 +29,12 @@ function Doorbell() {
     };
     
     this.showSettings = function(x, y) {
+        if(languageMenu.getLang() === 2) {
+            tones = ['Descendant', 'Chatoyant', 'Melodique', 'Estrange'];
+        }
+        else{
+            tones = ['Descending', 'Shimmering', 'Melodic', 'Strange'];
+        }
         if (_this.areSettingsVisible == false) {
             mainMenu.canBeShown = false;
             background.set({
