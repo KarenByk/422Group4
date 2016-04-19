@@ -347,16 +347,18 @@ function MainMenu() {
        {
            //alert("calendarPhone is true");
            var calendarAppRectancle = new fabric.Rect({
-                 width: 225,
-                 height: 225,
-                 fill: 'white', stroke: 'black', 
-                 lockMovementX: true, lockMovementY: true,
-                // lockScalingX: true, lockScalingY: true,
-                left: calendar_btn.left-120, top: calendar_btn.top-75,
-                 id: 'calendarAppRectangleID'
-            });
+                width: _this.width, height: _this.height,
+                  //  width: 225, height: 225, 
+                    fill: 'white', stroke: 'black', 
+                     lockMovementX: true, lockMovementY: true,
+                    // lockScalingX: true, lockScalingY: true,
+                    left: DOOR_WIDTH/4, top: DOOR_HEIGHT/2,
+                   // left: calendar_btn.left-120, top: calendar_btn.top-75,
+                    id: 'calendarAppRectangleID'
+                });
             
-            fabric.util.loadImage('img/notificationCalendar.png', function(img) {
+            
+            fabric.util.loadImage('img/notificationCalendar2.png', function(img) {
               calendarAppRectancle.setPatternFill({
                 source: img
               });
@@ -367,8 +369,8 @@ function MainMenu() {
 
 
            
-            var closeCalendar = new fabric.Text('X', { 
-            fontSize: 22, stroke: '#000000', left: calendarAppRectancle.left+200, 
+            var closeCalendar = new fabric.Text('X', {  
+            fontSize: 64, stroke: '#000000', left: calendarAppRectancle.left+500,
             top: calendarAppRectancle.top+5});
         
             this.canvas.add(closeCalendar);
@@ -382,16 +384,17 @@ function MainMenu() {
        else
        {
        var calendarAppRectancle = new fabric.Rect({
-                 width: 225,
-                 height: 225,
-                 fill: 'white', stroke: 'black', 
+                 width: _this.width, height: _this.height,
+              //  width: 225, height: 225, 
+                fill: 'white', stroke: 'black', 
                  lockMovementX: true, lockMovementY: true,
                 // lockScalingX: true, lockScalingY: true,
-                left: calendar_btn.left-120, top: calendar_btn.top-75,
-                 id: 'calendarAppRectangleID'
+                left: DOOR_WIDTH/4, top: DOOR_HEIGHT/2,
+               // left: calendar_btn.left-120, top: calendar_btn.top-75,
+                id: 'calendarAppRectangleID'
             });
             
-            fabric.util.loadImage('img/calendarAppOriginal.png', function(img) {
+            fabric.util.loadImage('img/calendarAppOriginal2.png', function(img) {
               calendarAppRectancle.setPatternFill({
                 source: img
               });
@@ -403,7 +406,7 @@ function MainMenu() {
 
            
             var closeCalendar = new fabric.Text('X', { 
-            fontSize: 22, stroke: '#000000', left: calendarAppRectancle.left+200, 
+            fontSize: 64, stroke: '#000000', left: calendarAppRectancle.left+500, 
             top: calendarAppRectancle.top+5});
         
             this.canvas.add(closeCalendar);
@@ -425,13 +428,12 @@ function MainMenu() {
     mirror_btn.on('selected', function() {
       
         var mirrorBackgroundShape = new fabric.Rect({
-            width: 250,
-            height: 1100,
+            width: _this.width+50, height: 1600,
             fill: 'white', stroke: 'black',
             originX: 'center', originY: 'center', 
             lockMovementX: true, lockMovementY: true,
             lockScalingX: true, lockScalingY: true,
-            left: 190, top: 650,
+            left: DOOR_WIDTH/2, top: 1390,
             id: 'mirrorBackground'
         });    
   
@@ -439,18 +441,18 @@ function MainMenu() {
       
         
         var closeMirror = new fabric.Text('X', { 
-            fontSize: 40, stroke: '#000000', left: 275, top: 350 });
+            fontSize: 90, stroke: '#000000', left: DOOR_WIDTH/1.5, top: DOOR_HEIGHT/2 });
         
         this.canvas.add(closeMirror);
         
         var userHead = new fabric.Circle({ 
-            radius: 50,
+            radius: 100,
             fill: 'white', 
             stroke: 'black', 
             originX: 'center', originY: 'center', 
             lockMovementX: true, lockMovementY: true,
             lockScalingX: true, lockScalingY: true,
-            left: 200, top: 250,
+            left: DOOR_WIDTH/2, top: 800,
             id: 'userHeadId'
         });
         
@@ -458,12 +460,12 @@ function MainMenu() {
         
         var userBody = new fabric.Rect({
            width: 1,
-            height: 250,
+            height: 700,
             fill: 'white', stroke: 'black',
             originX: 'center', originY: 'center', 
             lockMovementX: true, lockMovementY: true,
             lockScalingX: true, lockScalingY: true,
-            left: 200, top: 425,
+            left: userHead.left, top: userHead.top+(this.height*4),
             id: 'userBodyId' 
         });
         
@@ -471,12 +473,12 @@ function MainMenu() {
         
         var userLeftHand = new fabric.Rect({
            width: 1,
-            height: 75,
+            height: 250,
             fill: 'white', stroke: 'black',
             originX: 'center', originY: 'center', 
             lockMovementX: true, lockMovementY: true,
             lockScalingX: true, lockScalingY: true,
-            left: 180, top: 400,
+            left: userHead.left-60, top: userHead.top+(this.height*4),
             angle: -30,
             id: 'userBodyId' 
         });
@@ -485,12 +487,12 @@ function MainMenu() {
         
         var userRightHand = new fabric.Rect({
            width: 1,
-            height: 75,
+            height: 250,
             fill: 'white', stroke: 'black',
             originX: 'center', originY: 'center', 
             lockMovementX: true, lockMovementY: true,
             lockScalingX: true, lockScalingY: true,
-            left: 220, top: 400,
+            left: userHead.left+60, top: userHead.top+(this.height*4),
             angle: 30,
             id: 'userBodyId' 
         });
@@ -499,12 +501,12 @@ function MainMenu() {
         
         var userLeftLeg = new fabric.Rect({
            width: 1,
-            height: 160,
+            height: 450,
             fill: 'white', stroke: 'black',
             originX: 'center', originY: 'center', 
             lockMovementX: true, lockMovementY: true,
             lockScalingX: true, lockScalingY: true,
-            left: 173, top: 620,
+            left: userHead.left-75, top: userHead.top+(this.height*8.90),
             angle: -160,
             id: 'userLeftLegId' 
         });
@@ -513,12 +515,12 @@ function MainMenu() {
         
         var userRightLeg = new fabric.Rect({
            width: 1,
-            height: 160,
+            height: 450,
             fill: 'white', stroke: 'black',
             originX: 'center', originY: 'center', 
             lockMovementX: true, lockMovementY: true,
             lockScalingX: true, lockScalingY: true,
-            left: 228, top: 620,
+            left: userHead.left+75, top: userHead.top+(this.height*8.90),
             angle: 160,
             id: 'userRightLegId' 
         });
