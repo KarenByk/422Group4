@@ -238,5 +238,11 @@ function SettingsMenu() {
         _this.hide();
         languageMenu.show(background.left, background.top);
     });
+    profiles_btn.on('selected', function(){
+        profileSettings.show();
+        _this.hide();
+
+
+    });
     
 }
