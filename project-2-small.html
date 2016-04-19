@@ -28,12 +28,20 @@
                 <option value='1'>James</option>
                 <option value='2'>Karen</option>
                 <option value='3'>Rinkal</option>
+                <option value='4'>Stranger</option>
             </select>  
             Has device <input type='checkbox' id='hasDevice' checked>
-            <input type='button' value='Approach door from inside' onclick="gui.deviceFound();">
             <input type='button' value='Approach door from inside' onclick="gui.approachFromInside();">
             <input type='button' value='Approach door from outside' onclick="gui.approachFromOutside();"><br/>
         </fieldset>
+        
+        <select id="selectRecipient" style="position: absolute; top: 385px; left: 114px; display: none" onchange="messaging.selectRecipient();">
+            <option value='Ishta'>Ishta</option>
+            <option value='James'>James</option>
+            <option value='Karen'>Karen</option>
+            <option value='Rinkal'>Rinkal</option>
+        </select>  
+            
         <img src="img/accept.svg" id="accept">
         <img src="img/cancel.svg" id="cancel">
         <img src="img/arrowLeft.svg" id="left">
@@ -57,6 +65,7 @@
         <img src="img/outsideLight.svg" id="outsideLight">
         
         <img src="img/user.svg" id="user">
+        <img src="img/users.svg" id="users">
         <img src="img/emergency.svg" id="emergency">
         <img src="img/help.svg" id="help">
         <img src="img/noteRead.svg" id="noteRead">

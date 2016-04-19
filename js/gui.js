@@ -139,8 +139,12 @@ function GUI(notificationBar) {
         knobOut.top,
         {id: 'noteFromOutside'});
         
-    var unreadNote = new Button('newMessage',
+    var unreadNoteInside = new Button('newMessage',
         knobOut.left,
+        emergency_btn.top - ICON_MARGIN - 2 * ICON_SIZE);
+        
+    var unreadNoteOutside = new Button('newMessage',
+        knobIn.left,
         emergency_btn.top - ICON_MARGIN - 2 * ICON_SIZE);
         
     var keypad_btn = new Button('keypad', 
@@ -165,9 +169,16 @@ function GUI(notificationBar) {
     this.userBtnY = user_btn.top;
     
     this.approachFromOutside = function() {
-        
-        if ($('#hasDevice').prop('checked')) {
-            _this.unlock();
+    
+        if ($('#DeviceDetect').prop('value') !== 'Stranger') {
+            if (messaging.nameDict[$('#DeviceDetect').prop('value')] === messaging.outsidePaths.user &&
+              messaging.outsidePaths.length != 0) {
+                messaging.showOutside('read');
+                gui.hideUnreadNote('outside');
+            }
+            if ($('#hasDevice').prop('checked')) {
+                _this.unlock();
+            } 
         } else {
             camera.showOutsideView();
         }
@@ -176,7 +187,14 @@ function GUI(notificationBar) {
     
     this.approachFromInside = function() {
     
-        
+        var e = document.getElementById("DeviceDetect");
+        var strUser = e.options[e.selectedIndex].value;
+        console.log(strUser);
+        if (document.getElementById("hasDevice").checked === true) {
+            fourPanel.showPanel(strUser);
+
+        }
+        camera.hideOutsideView();
     
     };
     
@@ -339,9 +357,13 @@ function GUI(notificationBar) {
         
             Alerts user of an unread note from outside.
     */
-    this.showUnreadNote = function() {
+    this.showUnreadNote = function(location) {
         
-        inside.add(unreadNote);
+        if (location === 'inside') {
+            inside.add(unreadNoteInside);
+        } else {
+            outside.add(unreadNoteOutside);
+        }
         
     };
     
@@ -350,9 +372,13 @@ function GUI(notificationBar) {
         
             Removes unread note icon.
     */
-    this.hideUnreadNote = function() {
+    this.hideUnreadNote = function(location) {
         
-        inside.remove(unreadNote);
+        if (location === 'inside') {
+            inside.remove(unreadNoteInside);
+        } else {
+            outside.remove(unreadNoteOutside);
+        }
         
     };
     
@@ -447,10 +473,18 @@ function GUI(notificationBar) {
         clearSelection();
     });
     
-    unreadNote.on('selected', function(){
+    unreadNoteInside.on('selected', function(){
         messaging.showInside('read');
-        inside.remove(unreadNote);
+        _this.hideUnreadNote('inside');
         notificationBar.messageRead();
+        clearSelection();
+    });
+    
+    unreadNoteOutside.on('selected', function() {
+        if (messaging.outsidePaths.user === 'all' || messaging.nameDict[$('#DeviceDetect').prop('value')] === messaging.outsidePaths.user) {
+            messaging.showOutside('read');
+            outside.remove(unreadNoteOutside);
+        }
         clearSelection();
     });
     
@@ -484,15 +518,5 @@ function GUI(notificationBar) {
         }
 
     });
-    this.deviceFound = function() {
-        var e = document.getElementById("DeviceDetect");
-        var strUser = e.options[e.selectedIndex].value;
-        console.log(strUser);
-        if (document.getElementById("hasDevice").checked === true) {
-            fourPanel.showPanel(strUser);
-
-        }
-        camera.hideOutsideView();
-        
-    };
+    
 }
