@@ -554,7 +554,5 @@ function MainMenu() {
         }
     });
 
-
-
 }
 
