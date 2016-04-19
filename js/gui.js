@@ -168,6 +168,7 @@ function GUI(notificationBar) {
         
         if ($('#hasDevice').prop('checked')) {
             _this.unlock();
+            _this.openDoor();
         } else {
             camera.showOutsideView();
         }
