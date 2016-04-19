@@ -22,8 +22,11 @@ var profile = new Profile();
 var fourPanel = new FourPanel();
 //creating and changing profile from settings- independant of others 
 var profileSettings = new ProfileSettings();
+<<<<<<< HEAD
 //part of profileSettings.js and 
 var createProf = new CreateProfile();
+=======
+>>>>>>> refs/remotes/origin/ishtasChanges
 
 // Initialize interface buttons and alerts
 gui.drawKnobs();
