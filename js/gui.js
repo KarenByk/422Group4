@@ -168,6 +168,8 @@ function GUI(notificationBar) {
         
         if ($('#hasDevice').prop('checked')) {
             _this.unlock();
+            var strUser = e.options[e.selectedIndex].value;
+
         } else {
             camera.showOutsideView();
         }
@@ -176,7 +178,14 @@ function GUI(notificationBar) {
     
     this.approachFromInside = function() {
     
-        
+        var e = document.getElementById("DeviceDetect");
+        var strUser = e.options[e.selectedIndex].value;
+        console.log(strUser);
+        if (document.getElementById("hasDevice").checked === true) {
+            fourPanel.showPanel(strUser);
+
+        }
+        camera.hideOutsideView();
     
     };
     
@@ -484,15 +493,4 @@ function GUI(notificationBar) {
         }
 
     });
-    this.deviceFound = function() {
-        var e = document.getElementById("DeviceDetect");
-        var strUser = e.options[e.selectedIndex].value;
-        console.log(strUser);
-        if (document.getElementById("hasDevice").checked === true) {
-            fourPanel.showPanel(strUser);
-
-        }
-        camera.hideOutsideView();
-        
-    };
 }

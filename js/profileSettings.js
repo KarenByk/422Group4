@@ -173,14 +173,12 @@ function CreateProfile()
     });
     //creating a new profile
     takePic.on('selected', function() {
-        _this.hideAll();
         //CreateProfile.showOptions();
         camera.showOutsideView();
         _this.hideOptions();
         clearSelection();
     });
     useIcon.on('selected', function() {
-        _this.hideAll();
         //CreateProfile.showOptions();
         camera.showAvatarSmall();
         _this.hideOptions();
@@ -197,8 +195,7 @@ function CreateProfile()
         backOptions.top + backOptions.height*(1/4),
         {width: backOptions.width /3, height: backOptions.width / 3});
 
-    phoneSync.on('selected', function() {
-        _this.hideAll();
+    phoneSync.on('selected', function(){
         inside.add(cancelInside_btn, sync, approve);
         clearSelection();
         this.isInsideVisible = true;
@@ -213,7 +210,6 @@ function CreateProfile()
     });
     retinal.on('selected', function() {
         //CreateProfile.showOptions();
-        _this.hideAll();
         //camera.showAvatar();
         inside.add(retinalText, cancelInside_btn);
         outside.add(approve);
